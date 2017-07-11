@@ -121,8 +121,12 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 
 - (void) commonBindingForbindingBlock:(CellBindBlock)block{
     self.dy_agent = [[DYTableViewAgent alloc] init];
-    self.dataSource = self.dy_agent;
-    self.delegate = self.dy_agent;
+    if (!self.dataSource) {
+        self.dataSource = self.dy_agent;
+    }
+    if (!self.delegate) {
+        self.delegate = self.dy_agent;
+    }
     self.dy_agent.cellBindBlock = block;
     [self registerClass:[UITableViewCell class] forCellReuseIdentifier:DY_DEFAULT_ID];
     @weakify(self)
