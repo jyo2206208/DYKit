@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DYKit"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "DYKit easyUse UITableView block reactiveCocoa"
   s.description  = <<-DESC
   eazy use UItableView
