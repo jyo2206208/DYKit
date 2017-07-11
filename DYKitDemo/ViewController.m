@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "UITableView+DYTableViewBinder.h"
+#import "DYKit.h"
 #import "OneTypeCellByNibViewController.h"
 #import "OneTypeCellByClassTableViewController.h"
 #import "MultipleTypeCellByNibViewController.h"
