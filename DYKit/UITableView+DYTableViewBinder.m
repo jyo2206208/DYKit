@@ -142,16 +142,10 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 
 #pragma delegate方法
 - (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)];
 }
 - (RACSignal*)didEndDisplayingCellSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,UITableViewCell *cell,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,cell,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)];
 }
 - (RACSignal*)didEndDisplayingHeaderViewSignal{
     return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndDisplayingHeaderView:forSection:)];
@@ -160,28 +154,16 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndDisplayingFooterView:forSection:)];
 }
 - (RACSignal*)didHighlightRowAtIndexPathSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:didHighlightRowAtIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,UITableViewCell *cell,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,cell,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:didHighlightRowAtIndexPath:)];
 }
 - (RACSignal*)didUnhighlightRowAtIndexPathSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:didUnhighlightRowAtIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,UITableViewCell *cell,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,cell,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:didUnhighlightRowAtIndexPath:)];
 }
 - (RACSignal*)didSelectRowAtIndexPathSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)];
 }
 - (RACSignal*)didDeselectRowAtIndexPathSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:didDeselectRowAtIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,UITableViewCell *cell,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,cell,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:didDeselectRowAtIndexPath:)];
 }
 - (RACSignal*)didEndEditingRowAtIndexPathSignal{
     return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndEditingRowAtIndexPath:)];
@@ -193,28 +175,16 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     return [self.dy_agent rac_signalForSelector:@selector(tableView:performAction:forRowAtIndexPath:withSender:)];
 }
 - (RACSignal*)willBeginEditingRowAtIndexPathSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:willBeginEditingRowAtIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:willBeginEditingRowAtIndexPath:)];
 }
 - (RACSignal*)willDisplayCellSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,UITableViewCell *cell,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,cell,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)];
 }
 - (RACSignal*)willDisplayHeaderViewSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayHeaderView:forSection:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,UIView *view,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,view,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayHeaderView:forSection:)];
 }
 - (RACSignal*)willDisplayFooterViewSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayFooterView:forSection:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,UIView *view,NSIndexPath *indexPath) = value;
-        return RACTuplePack(tableView,view,indexPath,self.dy_data[indexPath.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayFooterView:forSection:)];
 }
 
 #pragma DataSource方法
@@ -222,10 +192,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     return [self.dy_agent rac_signalForSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)];
 }
 - (RACSignal*)moveRowAtIndexPathSignal{
-    return [[self.dy_agent rac_signalForSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)] map:^id _Nullable(RACTuple * _Nullable value) {
-        RACTupleUnpack(UITableView *tableView,NSIndexPath *indexPathFrom,NSIndexPath *indexPathTo) = value;
-        return RACTuplePack(tableView,indexPathFrom,indexPathTo,self.dy_data[indexPathFrom.row]);
-    }];
+    return [self.dy_agent rac_signalForSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)];
 }
 
 @end
