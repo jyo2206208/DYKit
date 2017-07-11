@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.version      = "0.0.3"
   s.summary      = "DYKit easyUse UITableView block reactiveCocoa"
   s.description  = <<-DESC
-  eazy use UItableView
+  DYKit easyUse UITableView block reactiveCocoa reactiveObjC
                    DESC
   s.homepage     = "https://github.com/jyo2206208/DYKit"
   s.license      = { :type => "MIT", :file => "LICENSE" }
