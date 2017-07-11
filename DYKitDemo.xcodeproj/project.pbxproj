@@ -17,6 +17,7 @@
 		E3518EB11F106B86008534B1 /* DYKitDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3518EB01F106B86008534B1 /* DYKitDemoTests.m */; };
 		E374C2991F149D74002D53B5 /* DYTableViewAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2951F149D74002D53B5 /* DYTableViewAgent.m */; };
 		E374C29A1F149D74002D53B5 /* UITableView+DYTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2981F149D74002D53B5 /* UITableView+DYTableViewBinder.m */; };
+		E374C2A01F14AEA7002D53B5 /* DYKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E374C29F1F14AEA7002D53B5 /* DYKit.podspec */; };
 		E3C0248F1F11812D0043DD8F /* OneTypeCellByNibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C0248D1F11812D0043DD8F /* OneTypeCellByNibViewController.m */; };
 		E3C024901F11812D0043DD8F /* OneTypeCellByNibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C0248E1F11812D0043DD8F /* OneTypeCellByNibViewController.xib */; };
 		E3C024941F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024921F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m */; };
@@ -76,6 +77,7 @@
 		E374C2971F149D74002D53B5 /* UITableView+DYTableViewBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DYTableViewBinder.h"; sourceTree = "<group>"; };
 		E374C2981F149D74002D53B5 /* UITableView+DYTableViewBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+DYTableViewBinder.m"; sourceTree = "<group>"; };
 		E374C29E1F14AE05002D53B5 /* DYKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYKit.h; sourceTree = "<group>"; };
+		E374C29F1F14AEA7002D53B5 /* DYKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DYKit.podspec; sourceTree = "<group>"; };
 		E3C0248C1F11812D0043DD8F /* OneTypeCellByNibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTypeCellByNibViewController.h; sourceTree = "<group>"; };
 		E3C0248D1F11812D0043DD8F /* OneTypeCellByNibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneTypeCellByNibViewController.m; sourceTree = "<group>"; };
 		E3C0248E1F11812D0043DD8F /* OneTypeCellByNibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneTypeCellByNibViewController.xib; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		E3518E951F106B86008534B1 /* DYKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E374C29F1F14AEA7002D53B5 /* DYKit.podspec */,
 				E374C2931F149D74002D53B5 /* DYKit */,
 				E3C024871F1180B20043DD8F /* module */,
 				E3518E991F106B86008534B1 /* AppDelegate.h */,
@@ -385,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3C024A31F11E07C0043DD8F /* OneTypeCellByClassTableViewController.xib in Resources */,
+				E374C2A01F14AEA7002D53B5 /* DYKit.podspec in Resources */,
 				E3C024BA1F1273070043DD8F /* MultipleTypeCellByClassViewController.xib in Resources */,
 				E3C024AD1F1205E90043DD8F /* MultipleTypeCellByNibViewController.xib in Resources */,
 				E3518EA61F106B86008534B1 /* LaunchScreen.storyboard in Resources */,
