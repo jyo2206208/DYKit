@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="OneTypeCellByNibTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dM7-Yd-1Vy">
+                        <rect key="frame" x="8" y="8" width="36" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="dM7-Yd-1Vy" secondAttribute="height" multiplier="1:1" id="3kb-vk-daE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pinkman" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-Kc-uNy">
+                        <rect key="frame" x="53" y="16" width="66" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Parter of the world's biggest drug dealer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-gx-3eg">
+                        <rect key="frame" x="8" y="52" width="254.5" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="age:28" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwx-en-UPa">
+                        <rect key="frame" x="333" y="8" width="33.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ahu-gx-3eg" firstAttribute="leading" secondItem="dM7-Yd-1Vy" secondAttribute="leading" id="3se-5L-6pA"/>
+                    <constraint firstAttribute="topMargin" secondItem="dM7-Yd-1Vy" secondAttribute="top" id="65L-Wn-hhh"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Ahu-gx-3eg" secondAttribute="bottom" constant="5" id="E6S-oJ-Lrd"/>
+                    <constraint firstAttribute="topMargin" secondItem="Rwx-en-UPa" secondAttribute="top" id="OUP-Mx-0T8"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="dM7-Yd-1Vy" secondAttribute="leading" id="Znw-Ss-P98"/>
+                    <constraint firstItem="Vj9-Kc-uNy" firstAttribute="leading" secondItem="dM7-Yd-1Vy" secondAttribute="trailing" constant="9" id="dma-gK-EWp"/>
+                    <constraint firstItem="Ahu-gx-3eg" firstAttribute="top" secondItem="dM7-Yd-1Vy" secondAttribute="bottom" constant="8" id="eGr-Tq-ad7"/>
+                    <constraint firstItem="Vj9-Kc-uNy" firstAttribute="centerY" secondItem="dM7-Yd-1Vy" secondAttribute="centerY" id="kU1-VL-ngM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Rwx-en-UPa" secondAttribute="trailing" constant="0.5" id="mTM-7U-8C9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ageLabel" destination="Rwx-en-UPa" id="MVP-de-PGf"/>
+                <outlet property="descLabel" destination="Ahu-gx-3eg" id="wtT-mj-nHS"/>
+                <outlet property="headImageView" destination="dM7-Yd-1Vy" id="49f-Jw-Gq5"/>
+                <outlet property="nameLabel" destination="Vj9-Kc-uNy" id="RxR-fa-oFq"/>
+            </connections>
+            <point key="canvasLocation" x="61.5" y="103"/>
+        </tableViewCell>
+    </objects>
+</document>
