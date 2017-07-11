@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "DYTableViewAgent.h"
-#import <ReactiveObjC.h>
-#import <objc/runtime.h>
+#import "objc/runtime.h"
+
+
+#if __has_include("ReactiveCocoa.h")
+#import "ReactiveCocoa.h"
+#else
+#import <ReactiveObjC/ReactiveObjC.h>
+#endif
 
 @interface UITableView (DYTableViewBinder)
 
