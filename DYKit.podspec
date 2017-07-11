@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DYKit"
-  s.version      = "0.0.8"
+  s.version      = "0.0.9"
   s.summary      = "DYKit easyUse UITableView block reactiveCocoa"
   s.description  = <<-DESC
   DYKit easyUse UITableView block reactiveCocoa reactiveObjC
@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.source       = { :git => "https://github.com/jyo2206208/DYKit.git", :tag => "#{s.version}" }
   s.source_files  = "DYKit/*.{h,m}"
+  s.public_header_files = 'DYKit/DYKit.h'
   s.dependency "ReactiveObjC"
 
 end
