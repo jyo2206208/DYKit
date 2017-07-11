@@ -33,7 +33,7 @@ typedef void(^CellBindBlock)(id cell,id viewModel,NSIndexPath *indexPath);
 
 typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
 @property (nonatomic, copy) CGFloatTableViewIndexPath heightForRowAtIndexPath;
-@property (nonatomic, copy) CGFloatTableViewIndexPath estimatedHeightForRowAtIndexPath;
+//@property (nonatomic, copy) CGFloatTableViewIndexPath estimatedHeightForRowAtIndexPath;
 
 typedef CGFloat (^CGFloatTableViewNSInteger)(UITableView *tableView,NSInteger section);
 @property (nonatomic, copy) CGFloatTableViewNSInteger heightForHeaderInSection;

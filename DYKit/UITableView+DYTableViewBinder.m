@@ -29,7 +29,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (NSIntegerUITableViewNSStringNSInteger)sectionForSectionIndexTitle{return self.dy_agent.sectionForSectionIndexTitle;}
 - (CGFloatTableViewNSInteger)heightForHeaderInSection{return self.dy_agent.heightForHeaderInSection;}
 - (CGFloatTableViewNSInteger)heightForFooterInSection{return self.dy_agent.heightForFooterInSection;}
-- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath{return self.dy_agent.estimatedHeightForRowAtIndexPath;}
+//- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath{return self.dy_agent.estimatedHeightForRowAtIndexPath;}
 //- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection{return self.dy_agent.estimatedHeightForHeaderInSection;}
 //- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection{return self.dy_agent.estimatedHeightForFooterInSection;}
 - (UIViewTableViewNSInteger)viewForHeaderInSection{return self.dy_agent.viewForHeaderInSection;}
@@ -60,7 +60,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (void)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block{self.dy_agent.sectionForSectionIndexTitle = block;}
 - (void)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.heightForHeaderInSection = block;}
 - (void)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.heightForFooterInSection = block;}
-- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.estimatedHeightForRowAtIndexPath = block;}
+//- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.estimatedHeightForRowAtIndexPath = block;}
 //- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForHeaderInSection = block;}
 //- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForFooterInSection = block;}
 - (void)setViewForHeaderInSection:(UIViewTableViewNSInteger)block{self.dy_agent.viewForHeaderInSection = block;}

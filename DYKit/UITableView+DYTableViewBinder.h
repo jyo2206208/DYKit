@@ -39,7 +39,7 @@
 - (NSIntegerUITableViewNSStringNSInteger)sectionForSectionIndexTitle;
 - (CGFloatTableViewNSInteger)heightForHeaderInSection;
 - (CGFloatTableViewNSInteger)heightForFooterInSection;
-- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath;
+//- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath;
 //- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection;
 //- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection;
 - (UIViewTableViewNSInteger)viewForHeaderInSection;
@@ -70,7 +70,7 @@
 - (void)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block;
 - (void)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
 - (void)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
-- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
+//- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
 //- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
 //- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
 - (void)setViewForHeaderInSection:(UIViewTableViewNSInteger)block;
@@ -91,14 +91,14 @@
 
 /**
  固定UItableViewCell
-
+ 
  @param block cellForRowAtIndexPath的block
  */
 - (void) bindingForBindingBlock:(CellBindBlock)block;
 
 /**
  固定一种自定义cell
-
+ 
  @param block cellForRowAtIndexPath的block
  @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
  */
@@ -106,7 +106,7 @@
 
 /**
  多种自定义cell，由nib或class创建
-
+ 
  @param block cellForRowAtIndexPath的block
  @param identifiers cell的重用ID的数组(使用cell的类名，可以是xib或者class创建)
  */

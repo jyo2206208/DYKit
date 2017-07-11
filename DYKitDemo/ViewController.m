@@ -49,6 +49,10 @@
         }];
         return @[action1,action2];
     };
+    [self.homeTableView setCanEditRowAtIndexPath:^BOOL(UITableView *tableView, NSIndexPath *indexPath) {
+        return YES;
+    }];
+//    self.homeTableView.editing = YES;
     
 //    self.homeTableView.shouldHighlightRowAtIndexPath = ^BOOL(UITableView *tableView, NSIndexPath *indexPath) {
 //        return indexPath.row == 1?NO:YES;

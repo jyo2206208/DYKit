@@ -38,7 +38,7 @@
     return self.numberOfSectionsInTableView ? self.numberOfSectionsInTableView(tableView) : 1;
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return self.canEditRowAtIndexPath ? self.canEditRowAtIndexPath(tableView, indexPath) : (self.editActionsForRowAtIndexPath ? YES : NO);
+    return self.canEditRowAtIndexPath ? self.canEditRowAtIndexPath(tableView, indexPath) : tableView.editing;
 }
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return self.titleForHeaderInSection ? self.titleForHeaderInSection(tableView,section) : nil;
@@ -67,9 +67,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return self.heightForFooterInSection ? self.heightForFooterInSection(tableView,section) : tableView.sectionFooterHeight;
 }
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0){
-    return self.estimatedHeightForRowAtIndexPath ? self.estimatedHeightForRowAtIndexPath(tableView,indexPath) : tableView.estimatedRowHeight;
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0){
+//    return self.estimatedHeightForRowAtIndexPath ? self.estimatedHeightForRowAtIndexPath(tableView,indexPath) : tableView.estimatedRowHeight;
+//}
 //- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0){
 //    return self.estimatedHeightForHeaderInSection ? self.estimatedHeightForHeaderInSection(tableView,section) : tableView.estimatedSectionHeaderHeight;
 //}
@@ -92,7 +92,7 @@
     return self.willDeselectRowAtIndexPath ? self.willDeselectRowAtIndexPath(tableView,indexPath) : indexPath;
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self tableView:tableView canEditRowAtIndexPath:indexPath]) {
+    if ([self tableView:tableView canEditRowAtIndexPath:indexPath ]) {
         return self.editingStyleForRowAtIndexPath ? self.editingStyleForRowAtIndexPath(tableView,indexPath) : UITableViewCellEditingStyleDelete;
     } else {return UITableViewCellEditingStyleNone;}
 }
@@ -101,7 +101,6 @@
 }
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED{
     if (self.editActionsForRowAtIndexPath) {
-        self.canEditRowAtIndexPath = ^BOOL(UITableView *tableView, NSIndexPath *indexPath) {return YES;};
         return self.editActionsForRowAtIndexPath(tableView,indexPath);
     } else {return nil;}
 }
