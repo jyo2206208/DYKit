@@ -22,18 +22,19 @@
         return self.cellForRowAtIndexPath(tableView,indexPath);
     } else {
         if ([self.data isKindOfClass:NSArray.class]) {
+            
             NSString *cellIdentifier = self.identifier ? self.identifier : DY_DEFAULT_ID;
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             self.cellBindBlock(cell, self.data[indexPath.row], indexPath);
             return cell;
-        } else if ([self.data isKindOfClass:NSDictionary.class]){
-            NSArray *keys = [self.data allKeys];
-            NSString *cellIdentifier = keys[indexPath.row];
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            self.cellBindBlock(cell, self.data[cellIdentifier], indexPath);
-            return cell;
+//        } else if ([self.data isKindOfClass:NSDictionary.class]){
+//            NSArray *keys = [self.data allKeys];
+//            NSString *cellIdentifier = keys[indexPath.row];
+//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//            self.cellBindBlock(cell, self.data[cellIdentifier], indexPath);
+//            return cell;
         } else {
-            NSLog(@"dy_data is not NSArray or NSDictionary");
+            NSLog(@"dy_data is not NSArray");
             return nil;
         }
     }
