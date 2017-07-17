@@ -28,7 +28,7 @@
 - (void)setUpMultipleTypeCellByNibTableView {
     self.multipleTypeCellByNibTableView.rowHeight = 80;
     @weakify(self)
-    [self.multipleTypeCellByNibTableView bindingForBindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
+    [self.multipleTypeCellByNibTableView bindingForReuseIdentifiers:@[@"OneTypeCellByNibTableViewCell",@"CellWithButtonByNibTableViewCell"] bindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
         @strongify(self)
         if ([cell isKindOfClass:OneTypeCellByNibTableViewCell.class]) {
             OneTypeCellByNibTableViewCell *customerCell = (OneTypeCellByNibTableViewCell*)cell;
@@ -55,9 +55,7 @@
             customerCell.addButton.rac_command = customerViewModel.addButtonCommand;
             
         }
-        
-//    } registerByNib:YES reuseIdentifierArray:@[@"OneTypeCellByNibTableViewCell",@"CellWithButtonByNibTableViewCell"]];
-    } reuseIdentifiers:@"OneTypeCellByNibTableViewCell",@"CellWithButtonByNibTableViewCell",nil];
+    }];
     
     
     

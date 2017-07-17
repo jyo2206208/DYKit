@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DYTableViewCellViewModelProtocol.h"
+//#import "DYTableViewCellViewModelProtocol.h"
 
-@interface BlueTableViewCellViewModel : NSObject<DYTableViewCellViewModelProtocol>
+@interface BlueTableViewCellViewModel : NSObject
 
 @property (nonatomic, copy) NSString *title;
 

@@ -26,7 +26,7 @@
 - (void)setUpOneTypeCellByNibTableView {
     self.oneTypeCellByNibTableView.rowHeight = 80;
     @weakify(self)
-    [self.oneTypeCellByNibTableView bindingForBindingBlock:^(OneTypeCellByNibTableViewCell *cell, OneTypeCellByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
+    [self.oneTypeCellByNibTableView bindingForReuseIdentifier:@"OneTypeCellByNibTableViewCell" bindingBlock:^(OneTypeCellByNibTableViewCell *cell, OneTypeCellByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
         @strongify(self)
         RAC(cell,nameLabel.text) = [RACObserve(viewModel, user.name) takeUntil:cell.rac_prepareForReuseSignal];
         RAC(cell,headImageView.image) = [[RACObserve(viewModel, user.img) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
@@ -36,7 +36,7 @@
             return [NSString stringWithFormat:@"age:%@",value];
         }];;
         RAC(cell,descLabel.text) = [RACObserve(viewModel, user.desc) takeUntil:cell.rac_prepareForReuseSignal];
-    } reuseIdentifier:@"OneTypeCellByNibTableViewCell"];
+    }];
     
     
     User *user1 = [[User alloc] init];

@@ -15,23 +15,27 @@
 
 #pragma dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : (self.data ? self.data.count : 0);
+    return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : (self.data ? [self.data count] : 0);
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.cellForRowAtIndexPath) {
         return self.cellForRowAtIndexPath(tableView,indexPath);
     } else {
-        NSString *cellIdentifier;
-        if ([self.data[indexPath.row] conformsToProtocol:@protocol(DYTableViewCellViewModelProtocol)]) {
-            id<DYTableViewCellViewModelProtocol> viewModel = self.data[indexPath.row];
-            cellIdentifier = viewModel.cellIdentifier;
+        if ([self.data isKindOfClass:NSArray.class]) {
+            NSString *cellIdentifier = self.identifier ? self.identifier : DY_DEFAULT_ID;
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            self.cellBindBlock(cell, self.data[indexPath.row], indexPath);
+            return cell;
+        } else if ([self.data isKindOfClass:NSDictionary.class]){
+            NSArray *keys = [self.data allKeys];
+            NSString *cellIdentifier = keys[indexPath.row];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            self.cellBindBlock(cell, self.data[cellIdentifier], indexPath);
+            return cell;
         } else {
-            cellIdentifier = self.identifier ? self.identifier : DY_DEFAULT_ID;
+            NSLog(@"dy_data is not NSArray or NSDictionary");
+            return nil;
         }
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        self.cellBindBlock(cell, self.data[indexPath.row], indexPath);
-        return cell;
     }
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -67,15 +71,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return self.heightForFooterInSection ? self.heightForFooterInSection(tableView,section) : tableView.sectionFooterHeight;
 }
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0){
-//    return self.estimatedHeightForRowAtIndexPath ? self.estimatedHeightForRowAtIndexPath(tableView,indexPath) : tableView.estimatedRowHeight;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0){
-//    return self.estimatedHeightForHeaderInSection ? self.estimatedHeightForHeaderInSection(tableView,section) : tableView.estimatedSectionHeaderHeight;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0){
-//    return self.estimatedHeightForFooterInSection ? self.estimatedHeightForFooterInSection(tableView,section) : tableView.estimatedSectionFooterHeight;
-//}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0){
+    return self.estimatedHeightForRowAtIndexPath ? self.estimatedHeightForRowAtIndexPath(tableView,indexPath) : [self tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0){
+    return self.estimatedHeightForHeaderInSection ? self.estimatedHeightForHeaderInSection(tableView,section) : [self tableView:tableView heightForHeaderInSection:section];
+}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0){
+    return self.estimatedHeightForFooterInSection ? self.estimatedHeightForFooterInSection(tableView,section) : [self tableView:tableView heightForFooterInSection:section];
+}
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return self.viewForHeaderInSection ? self.viewForHeaderInSection(tableView,section) : nil;
 }

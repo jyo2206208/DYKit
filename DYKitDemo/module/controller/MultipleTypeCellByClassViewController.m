@@ -26,7 +26,7 @@
 }
 
 - (void)setUpMultipleTypeCellByClassTableView {
-    [self.multipleTypeCellByClassTableView bindingForBindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
+    [self.multipleTypeCellByClassTableView bindingForReuseIdentifiers:@[@"OneTypeCellByClassTableViewCell",@"BlueTableViewCell"] bindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
         if ([cell isKindOfClass:OneTypeCellByClassTableViewCell.class]) {
             OneTypeCellByClassTableViewCellViewModel *customerViewModel = (OneTypeCellByClassTableViewCellViewModel*)viewModel;
             cell.textLabel.text = customerViewModel.title;
@@ -34,8 +34,7 @@
             BlueTableViewCellViewModel *tableViewCellViewModel = (BlueTableViewCellViewModel*)viewModel;
             cell.textLabel.text = tableViewCellViewModel.title;
         }
-//    } reuseIdentifierArray:@[@"OneTypeCellByClassTableViewCell",@"BlueTableViewCell"]];
-        } reuseIdentifiers:@"OneTypeCellByClassTableViewCell",@"BlueTableViewCell",nil];
+    }];
     
     
     BlueTableViewCellViewModel *tableViewCellViewModel = [[BlueTableViewCellViewModel alloc] init];
@@ -45,10 +44,9 @@
     oneTypeCellByClassTableViewCellViewModel.title = @"王宝强";
     
     RAC(self,multipleTypeCellByClassTableView.dy_data) = [RACSignal return:@[tableViewCellViewModel,oneTypeCellByClassTableViewCellViewModel]];
-    
-    
-    
-    
 }
+
+
+
 
 @end

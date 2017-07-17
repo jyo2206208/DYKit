@@ -22,8 +22,8 @@
 @property (nonatomic,strong) DYTableViewAgent *dy_agent;
 
 #pragma getSet
-- (NSArray*)dy_data;
-- (void)setDy_data:(NSArray *)dy_data;
+- (id)dy_data;
+- (void)setDy_data:(id)dy_data;
 
 - (CGFloatTableViewIndexPath)heightForRowAtIndexPath;
 - (EditActionsForRowAtIndexPath)editActionsForRowAtIndexPath;
@@ -39,9 +39,9 @@
 - (NSIntegerUITableViewNSStringNSInteger)sectionForSectionIndexTitle;
 - (CGFloatTableViewNSInteger)heightForHeaderInSection;
 - (CGFloatTableViewNSInteger)heightForFooterInSection;
-//- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath;
-//- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection;
-//- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection;
+- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath;
+- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection;
+- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection;
 - (UIViewTableViewNSInteger)viewForHeaderInSection;
 - (UIViewTableViewNSInteger)viewForFooterInSection;
 - (NSIndexPathUITableViewNSIndexPath)willSelectRowAtIndexPath;
@@ -70,9 +70,9 @@
 - (void)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block;
 - (void)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
 - (void)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
-//- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
-//- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
-//- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
+- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
+- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
+- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
 - (void)setViewForHeaderInSection:(UIViewTableViewNSInteger)block;
 - (void)setViewForFooterInSection:(UIViewTableViewNSInteger)block;
 - (void)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
@@ -102,7 +102,7 @@
  @param block cellForRowAtIndexPath的block
  @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
  */
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifier:(NSString *)identifier;
+- (void) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
 
 /**
  多种自定义cell，由nib或class创建
@@ -110,8 +110,7 @@
  @param block cellForRowAtIndexPath的block
  @param identifiers cell的重用ID的数组(使用cell的类名，可以是xib或者class创建)
  */
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifierArray:(NSArray *)identifiers;
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifiers:(NSString *)identifiers,...;
+- (void) bindingForReuseIdentifiers:(NSArray *)identifiers bindingBlock:(CellBindBlock)block;
 
 #pragma delegate方法
 - (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal;

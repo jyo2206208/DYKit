@@ -73,7 +73,6 @@
 		E3518EB21F106B86008534B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E374C2AD1F14B432002D53B5 /* DYTableViewAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYTableViewAgent.h; sourceTree = "<group>"; };
 		E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYTableViewAgent.m; sourceTree = "<group>"; };
-		E374C2AF1F14B432002D53B5 /* DYTableViewCellViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYTableViewCellViewModelProtocol.h; sourceTree = "<group>"; };
 		E374C2B01F14B432002D53B5 /* UITableView+DYTableViewBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DYTableViewBinder.h"; sourceTree = "<group>"; };
 		E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+DYTableViewBinder.m"; sourceTree = "<group>"; };
 		E374C2B41F14B451002D53B5 /* DYKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DYKit.podspec; sourceTree = "<group>"; };
@@ -217,7 +216,6 @@
 			children = (
 				E374C2AD1F14B432002D53B5 /* DYTableViewAgent.h */,
 				E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */,
-				E374C2AF1F14B432002D53B5 /* DYTableViewCellViewModelProtocol.h */,
 				E374C2B01F14B432002D53B5 /* UITableView+DYTableViewBinder.h */,
 				E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */,
 				E374C2B61F14B46D002D53B5 /* DYKit.h */,

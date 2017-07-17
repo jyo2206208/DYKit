@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DYTableViewCellViewModelProtocol.h"
+//#import "DYTableViewCellViewModelProtocol.h"
 
 #define DY_DEFAULT_ID @"UITableViewCell"
 
@@ -26,20 +26,20 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
 typedef void(^CellBindBlock)(id cell,id viewModel,NSIndexPath *indexPath);
-@property (nonatomic, copy) NSArray *data;
+@property (nonatomic, copy) id data;
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, copy) CellBindBlock cellBindBlock;
 
 
 typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
 @property (nonatomic, copy) CGFloatTableViewIndexPath heightForRowAtIndexPath;
-//@property (nonatomic, copy) CGFloatTableViewIndexPath estimatedHeightForRowAtIndexPath;
+@property (nonatomic, copy) CGFloatTableViewIndexPath estimatedHeightForRowAtIndexPath;
 
 typedef CGFloat (^CGFloatTableViewNSInteger)(UITableView *tableView,NSInteger section);
 @property (nonatomic, copy) CGFloatTableViewNSInteger heightForHeaderInSection;
 @property (nonatomic, copy) CGFloatTableViewNSInteger heightForFooterInSection;
-//@property (nonatomic, copy) CGFloatTableViewNSInteger estimatedHeightForHeaderInSection;
-//@property (nonatomic, copy) CGFloatTableViewNSInteger estimatedHeightForFooterInSection;
+@property (nonatomic, copy) CGFloatTableViewNSInteger estimatedHeightForHeaderInSection;
+@property (nonatomic, copy) CGFloatTableViewNSInteger estimatedHeightForFooterInSection;
 
 typedef NSArray<UITableViewRowAction *> *(^EditActionsForRowAtIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
 @property (nonatomic, copy) EditActionsForRowAtIndexPath editActionsForRowAtIndexPath;

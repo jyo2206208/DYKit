@@ -12,8 +12,8 @@
 
 DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent *)
 
-- (NSArray*)dy_data{return self.dy_agent.data;}
-- (void)setDy_data:(NSArray *)dy_data{self.dy_agent.data = dy_data;}
+- (id)dy_data{return self.dy_agent.data;}
+- (void)setDy_data:(id)dy_data{self.dy_agent.data = dy_data;}
 
 - (CGFloatTableViewIndexPath)heightForRowAtIndexPath{return self.dy_agent.heightForRowAtIndexPath;}
 - (EditActionsForRowAtIndexPath)editActionsForRowAtIndexPath{return self.dy_agent.editActionsForRowAtIndexPath;}
@@ -29,9 +29,9 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (NSIntegerUITableViewNSStringNSInteger)sectionForSectionIndexTitle{return self.dy_agent.sectionForSectionIndexTitle;}
 - (CGFloatTableViewNSInteger)heightForHeaderInSection{return self.dy_agent.heightForHeaderInSection;}
 - (CGFloatTableViewNSInteger)heightForFooterInSection{return self.dy_agent.heightForFooterInSection;}
-//- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath{return self.dy_agent.estimatedHeightForRowAtIndexPath;}
-//- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection{return self.dy_agent.estimatedHeightForHeaderInSection;}
-//- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection{return self.dy_agent.estimatedHeightForFooterInSection;}
+- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath{return self.dy_agent.estimatedHeightForRowAtIndexPath;}
+- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection{return self.dy_agent.estimatedHeightForHeaderInSection;}
+- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection{return self.dy_agent.estimatedHeightForFooterInSection;}
 - (UIViewTableViewNSInteger)viewForHeaderInSection{return self.dy_agent.viewForHeaderInSection;}
 - (UIViewTableViewNSInteger)viewForFooterInSection{return self.dy_agent.viewForFooterInSection;}
 - (NSIndexPathUITableViewNSIndexPath)willSelectRowAtIndexPath{return self.dy_agent.willSelectRowAtIndexPath;}
@@ -60,9 +60,9 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (void)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block{self.dy_agent.sectionForSectionIndexTitle = block;}
 - (void)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.heightForHeaderInSection = block;}
 - (void)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.heightForFooterInSection = block;}
-//- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.estimatedHeightForRowAtIndexPath = block;}
-//- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForHeaderInSection = block;}
-//- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForFooterInSection = block;}
+- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.estimatedHeightForRowAtIndexPath = block;}
+- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForHeaderInSection = block;}
+- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForFooterInSection = block;}
 - (void)setViewForHeaderInSection:(UIViewTableViewNSInteger)block{self.dy_agent.viewForHeaderInSection = block;}
 - (void)setViewForFooterInSection:(UIViewTableViewNSInteger)block{self.dy_agent.viewForFooterInSection = block;}
 - (void)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{self.dy_agent.willSelectRowAtIndexPath = block;}
@@ -79,10 +79,10 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (void)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block{self.dy_agent.indexPathForPreferredFocusedViewInTableView = block;}
 
 - (void) bindingForBindingBlock:(CellBindBlock)block{
-    [self bindingForBindingBlock:block reuseIdentifier:nil];
+    [self bindingForReuseIdentifier:nil bindingBlock:block];
 }
 
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifier:(NSString *)identifier{
+- (void) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block{
     [self commonBindingForbindingBlock:block];
     if (identifier) {
         self.dy_agent.identifier = identifier;
@@ -90,7 +90,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     }
 }
 
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifierArray:(NSArray *)identifiers{
+- (void) bindingForReuseIdentifiers:(NSArray *)identifiers bindingBlock:(CellBindBlock)block{
     [self commonBindingForbindingBlock:block];
     if (identifiers) {
         for (NSString *identifier in identifiers) {
@@ -99,34 +99,34 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     }
 }
 
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifiers:(NSString *)identifiers,...{
-    if(identifiers)
-    {
-        NSMutableArray *array = [NSMutableArray array];
-        if (identifiers)
-        {
-            va_list argsList;
-            [array addObject:identifiers];
-            va_start(argsList, identifiers);
-            id arg;
-            while ((arg = va_arg(argsList, id)))
-            {
-                [array addObject:arg];
-            }
-            va_end(argsList);
-        }
-        [self bindingForBindingBlock:block reuseIdentifierArray:array];
-    }
-}
+//- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifiers:(NSString *)identifiers,...{
+//    if(identifiers)
+//    {
+//        NSMutableArray *array = [NSMutableArray array];
+//        if (identifiers)
+//        {
+//            va_list argsList;
+//            [array addObject:identifiers];
+//            va_start(argsList, identifiers);
+//            id arg;
+//            while ((arg = va_arg(argsList, id)))
+//            {
+//                [array addObject:arg];
+//            }
+//            va_end(argsList);
+//        }
+//        [self bindingForBindingBlock:block reuseIdentifierArray:array];
+//    }
+//}
 
 - (void) commonBindingForbindingBlock:(CellBindBlock)block{
     self.dy_agent = [[DYTableViewAgent alloc] init];
     self.dataSource = self.dy_agent;
     self.delegate = self.dy_agent;
     self.dy_agent.cellBindBlock = block;
-    [self registerClass:[UITableViewCell class] forCellReuseIdentifier:DY_DEFAULT_ID];
+    [self registerClass:UITableViewCell.class forCellReuseIdentifier:DY_DEFAULT_ID];
     @weakify(self)
-    [RACObserve(self, dy_agent.data) subscribeNext:^(id  _Nullable x) {
+    [[RACObserve(self, dy_agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
         @strongify(self)
         [self reloadData];
     }];

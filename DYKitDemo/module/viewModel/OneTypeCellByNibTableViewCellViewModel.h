@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
-#import "DYTableViewCellViewModelProtocol.h"
+//#import "DYTableViewCellViewModelProtocol.h"
 
-@interface OneTypeCellByNibTableViewCellViewModel : NSObject<DYTableViewCellViewModelProtocol>
+@interface OneTypeCellByNibTableViewCellViewModel : NSObject
 
 @property (nonatomic, strong) User *user;
 

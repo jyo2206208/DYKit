@@ -24,9 +24,9 @@
 
 - (void)setUpOneTypeCellByClassTableView {
     
-    [self.oneTypeCellByClassTableView bindingForBindingBlock:^(OneTypeCellByClassTableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
+    [self.oneTypeCellByClassTableView bindingForReuseIdentifier:@"OneTypeCellByClassTableViewCell" bindingBlock:^(OneTypeCellByClassTableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;
-    } reuseIdentifier:@"OneTypeCellByClassTableViewCell"];
+    }];
     
     RAC(self,oneTypeCellByClassTableView.dy_data) = [RACSignal return:@[@"刘德华",@"张学友",@"黎明",@"郭富城",@"金城武",@"郭采洁",@"林志玲",@"小S",@"大S",@"陈坤",@"杨坤",@"杨幂",@"刘恺威",@"王宝强",@"王凯",@"钟欣桐",@"蔡卓妍",@"陈冠希",@"乐嘉",@"汪涵",@"薛之谦",@"柳岩"]];
 }

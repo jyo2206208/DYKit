@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveObjC.h>
-#import "DYTableViewCellViewModelProtocol.h"
+//#import "DYTableViewCellViewModelProtocol.h"
 
-@interface CellWithButtonByNibTableViewCellViewModel : NSObject<DYTableViewCellViewModelProtocol>
+@interface CellWithButtonByNibTableViewCellViewModel : NSObject
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) RACCommand *addButtonCommand;

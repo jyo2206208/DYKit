@@ -38,7 +38,6 @@
     };
     
     self.homeTableView.editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *> *(UITableView *tableView, NSIndexPath *indexPath) {
-//        return nil;
         UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"action1" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
             NSLog(@"do someThing by action1");
         }];
@@ -52,11 +51,6 @@
     [self.homeTableView setCanEditRowAtIndexPath:^BOOL(UITableView *tableView, NSIndexPath *indexPath) {
         return YES;
     }];
-//    self.homeTableView.editing = YES;
-    
-//    self.homeTableView.shouldHighlightRowAtIndexPath = ^BOOL(UITableView *tableView, NSIndexPath *indexPath) {
-//        return indexPath.row == 1?NO:YES;
-//    };
     
     
     
