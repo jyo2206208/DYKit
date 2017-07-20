@@ -8,11 +8,6 @@
 
 #import "ViewController.h"
 #import "DYKit.h"
-#import "OneTypeCellByNibViewController.h"
-#import "OneTypeCellByClassTableViewController.h"
-#import "MultipleTypeCellByNibViewController.h"
-#import "MultipleTypeCellByClassViewController.h"
-#import "MultipleSectionTableViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTableView;
@@ -33,67 +28,46 @@
         cell.textLabel.text = text;
     }];
     
-    self.homeTableView.heightForRowAtIndexPath = ^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
-        return indexPath.row == 0 ? 150:tableView.rowHeight;
-    };
+    RAC(self,homeTableView.dy_data) = [RACSignal return:@[@"固定一种自定义cell",
+                                                          @"指定section和row进行cell设定",
+                                                          @"指定row进行cell设定",
+                                                          @"指定具体的indexPath进行cell设定"
+                                                          ]];
     
-    self.homeTableView.editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *> *(UITableView *tableView, NSIndexPath *indexPath) {
-        UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"action1" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            NSLog(@"do someThing by action1");
-        }];
-        action1.backgroundColor = [UIColor lightGrayColor];
-        
-        UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"action2" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            NSLog(@"do someThing by action2");
-        }];
-        return @[action1,action2];
-    };
-    [self.homeTableView setCanEditRowAtIndexPath:^BOOL(UITableView *tableView, NSIndexPath *indexPath) {
-        return YES;
-    }];
-    
-    
-    
-    RAC(self,homeTableView.dy_data) = [RACSignal return:@[@"固定一种自定义cell，由nib创建",
-                                                          @"固定一种自定义cell，由class创建",
-                                                          @"多种自定义cell，由nib创建",
-                                                          @"多种自定义cell，由class创建",
-                                                          @"带多个section的表"]];
-    
-    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-        NSIndexPath *indexPath = tuple.second;
-        return indexPath.row == 0;
-    }] subscribeNext:^(RACTuple *tuple) {
-        [self.navigationController pushViewController:[[OneTypeCellByNibViewController alloc] init] animated:YES];
-    }];
-    
-    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-        NSIndexPath *indexPath = tuple.second;
-        return indexPath.row == 1;
-    }] subscribeNext:^(RACTuple *tuple) {
-        [self.navigationController pushViewController:[[OneTypeCellByClassTableViewController alloc] init] animated:YES];
-    }];
-    
-    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-        NSIndexPath *indexPath = tuple.second;
-        return indexPath.row == 2;
-    }] subscribeNext:^(RACTuple *tuple) {
-        [self.navigationController pushViewController:[[MultipleTypeCellByNibViewController alloc] init] animated:YES];
-    }];
-    
-    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-        NSIndexPath *indexPath = tuple.second;
-        return indexPath.row == 3;
-    }] subscribeNext:^(RACTuple *tuple) {
-        [self.navigationController pushViewController:[[MultipleTypeCellByClassViewController alloc] init] animated:YES];
-    }];
-    
-    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-        NSIndexPath *indexPath = tuple.second;
-        return indexPath.row == 4;
-    }] subscribeNext:^(RACTuple *tuple) {
-        [self.navigationController pushViewController:[[MultipleSectionTableViewController alloc] init] animated:YES];
-    }];
+//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
+//        NSIndexPath *indexPath = tuple.second;
+//        return indexPath.row == 0;
+//    }] subscribeNext:^(RACTuple *tuple) {
+//        [self.navigationController pushViewController:[[OneTypeCellByNibViewController alloc] init] animated:YES];
+//    }];
+//    
+//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
+//        NSIndexPath *indexPath = tuple.second;
+//        return indexPath.row == 1;
+//    }] subscribeNext:^(RACTuple *tuple) {
+//        [self.navigationController pushViewController:[[OneTypeCellByClassTableViewController alloc] init] animated:YES];
+//    }];
+//    
+//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
+//        NSIndexPath *indexPath = tuple.second;
+//        return indexPath.row == 2;
+//    }] subscribeNext:^(RACTuple *tuple) {
+//        [self.navigationController pushViewController:[[MultipleTypeCellByNibViewController alloc] init] animated:YES];
+//    }];
+//    
+//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
+//        NSIndexPath *indexPath = tuple.second;
+//        return indexPath.row == 3;
+//    }] subscribeNext:^(RACTuple *tuple) {
+//        [self.navigationController pushViewController:[[MultipleTypeCellByClassViewController alloc] init] animated:YES];
+//    }];
+//    
+//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
+//        NSIndexPath *indexPath = tuple.second;
+//        return indexPath.row == 4;
+//    }] subscribeNext:^(RACTuple *tuple) {
+//        [self.navigationController pushViewController:[[MultipleSectionTableViewController alloc] init] animated:YES];
+//    }];
     
     
 }

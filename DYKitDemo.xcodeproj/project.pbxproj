@@ -18,27 +18,13 @@
 		E374C2B21F14B432002D53B5 /* DYTableViewAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */; };
 		E374C2B31F14B432002D53B5 /* UITableView+DYTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */; };
 		E374C2B51F14B451002D53B5 /* DYKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E374C2B41F14B451002D53B5 /* DYKit.podspec */; };
-		E3C0248F1F11812D0043DD8F /* OneTypeCellByNibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C0248D1F11812D0043DD8F /* OneTypeCellByNibViewController.m */; };
-		E3C024901F11812D0043DD8F /* OneTypeCellByNibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C0248E1F11812D0043DD8F /* OneTypeCellByNibViewController.xib */; };
 		E3C024941F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024921F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m */; };
 		E3C024951F11831D0043DD8F /* OneTypeCellByNibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C024931F11831D0043DD8F /* OneTypeCellByNibTableViewCell.xib */; };
 		E3C024981F1186D20043DD8F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024971F1186D20043DD8F /* User.m */; };
-		E3C0249B1F1187AD0043DD8F /* OneTypeCellByNibTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C0249A1F1187AD0043DD8F /* OneTypeCellByNibTableViewCellViewModel.m */; };
 		E3C0249E1F11DFED0043DD8F /* OneTypeCellByClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C0249D1F11DFED0043DD8F /* OneTypeCellByClassTableViewCell.m */; };
-		E3C024A21F11E07C0043DD8F /* OneTypeCellByClassTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024A01F11E07C0043DD8F /* OneTypeCellByClassTableViewController.m */; };
-		E3C024A31F11E07C0043DD8F /* OneTypeCellByClassTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C024A11F11E07C0043DD8F /* OneTypeCellByClassTableViewController.xib */; };
 		E3C024A71F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024A51F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m */; };
 		E3C024A81F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C024A61F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib */; };
-		E3C024AC1F1205E90043DD8F /* MultipleTypeCellByNibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024AA1F1205E90043DD8F /* MultipleTypeCellByNibViewController.m */; };
-		E3C024AD1F1205E90043DD8F /* MultipleTypeCellByNibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C024AB1F1205E90043DD8F /* MultipleTypeCellByNibViewController.xib */; };
-		E3C024B01F1225360043DD8F /* CellWithButtonByNibTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024AF1F1225360043DD8F /* CellWithButtonByNibTableViewCellViewModel.m */; };
-		E3C024B91F1273070043DD8F /* MultipleTypeCellByClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024B71F1273070043DD8F /* MultipleTypeCellByClassViewController.m */; };
-		E3C024BA1F1273070043DD8F /* MultipleTypeCellByClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C024B81F1273070043DD8F /* MultipleTypeCellByClassViewController.xib */; };
-		E3C024C01F12767A0043DD8F /* OneTypeCellByClassTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024BF1F12767A0043DD8F /* OneTypeCellByClassTableViewCellViewModel.m */; };
-		E3C024C31F127BB30043DD8F /* BlueTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024C21F127BB30043DD8F /* BlueTableViewCellViewModel.m */; };
 		E3C024C61F127BFD0043DD8F /* BlueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024C51F127BFD0043DD8F /* BlueTableViewCell.m */; };
-		E3C024D41F135FB20043DD8F /* MultipleSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024D21F135FB20043DD8F /* MultipleSectionTableViewController.m */; };
-		E3C024D51F135FB20043DD8F /* MultipleSectionTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C024D31F135FB20043DD8F /* MultipleSectionTableViewController.xib */; };
 		F3E5D61059E59339761F5566 /* libPods-DYKitDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40DCAC09DA2A7A20FC02D49 /* libPods-DYKitDemoTests.a */; };
 /* End PBXBuildFile section */
 
@@ -77,41 +63,18 @@
 		E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+DYTableViewBinder.m"; sourceTree = "<group>"; };
 		E374C2B41F14B451002D53B5 /* DYKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DYKit.podspec; sourceTree = "<group>"; };
 		E374C2B61F14B46D002D53B5 /* DYKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYKit.h; sourceTree = "<group>"; };
-		E3C0248C1F11812D0043DD8F /* OneTypeCellByNibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTypeCellByNibViewController.h; sourceTree = "<group>"; };
-		E3C0248D1F11812D0043DD8F /* OneTypeCellByNibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneTypeCellByNibViewController.m; sourceTree = "<group>"; };
-		E3C0248E1F11812D0043DD8F /* OneTypeCellByNibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneTypeCellByNibViewController.xib; sourceTree = "<group>"; };
 		E3C024911F11831D0043DD8F /* OneTypeCellByNibTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTypeCellByNibTableViewCell.h; sourceTree = "<group>"; };
 		E3C024921F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneTypeCellByNibTableViewCell.m; sourceTree = "<group>"; };
 		E3C024931F11831D0043DD8F /* OneTypeCellByNibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneTypeCellByNibTableViewCell.xib; sourceTree = "<group>"; };
 		E3C024961F1186D20043DD8F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		E3C024971F1186D20043DD8F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		E3C024991F1187AD0043DD8F /* OneTypeCellByNibTableViewCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTypeCellByNibTableViewCellViewModel.h; sourceTree = "<group>"; };
-		E3C0249A1F1187AD0043DD8F /* OneTypeCellByNibTableViewCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneTypeCellByNibTableViewCellViewModel.m; sourceTree = "<group>"; };
 		E3C0249C1F11DFED0043DD8F /* OneTypeCellByClassTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTypeCellByClassTableViewCell.h; sourceTree = "<group>"; };
 		E3C0249D1F11DFED0043DD8F /* OneTypeCellByClassTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneTypeCellByClassTableViewCell.m; sourceTree = "<group>"; };
-		E3C0249F1F11E07C0043DD8F /* OneTypeCellByClassTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTypeCellByClassTableViewController.h; sourceTree = "<group>"; };
-		E3C024A01F11E07C0043DD8F /* OneTypeCellByClassTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneTypeCellByClassTableViewController.m; sourceTree = "<group>"; };
-		E3C024A11F11E07C0043DD8F /* OneTypeCellByClassTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneTypeCellByClassTableViewController.xib; sourceTree = "<group>"; };
 		E3C024A41F11FE280043DD8F /* CellWithButtonByNibTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWithButtonByNibTableViewCell.h; sourceTree = "<group>"; };
 		E3C024A51F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithButtonByNibTableViewCell.m; sourceTree = "<group>"; };
 		E3C024A61F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithButtonByNibTableViewCell.xib; sourceTree = "<group>"; };
-		E3C024A91F1205E90043DD8F /* MultipleTypeCellByNibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleTypeCellByNibViewController.h; sourceTree = "<group>"; };
-		E3C024AA1F1205E90043DD8F /* MultipleTypeCellByNibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleTypeCellByNibViewController.m; sourceTree = "<group>"; };
-		E3C024AB1F1205E90043DD8F /* MultipleTypeCellByNibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleTypeCellByNibViewController.xib; sourceTree = "<group>"; };
-		E3C024AE1F1225360043DD8F /* CellWithButtonByNibTableViewCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWithButtonByNibTableViewCellViewModel.h; sourceTree = "<group>"; };
-		E3C024AF1F1225360043DD8F /* CellWithButtonByNibTableViewCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithButtonByNibTableViewCellViewModel.m; sourceTree = "<group>"; };
-		E3C024B61F1273070043DD8F /* MultipleTypeCellByClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleTypeCellByClassViewController.h; sourceTree = "<group>"; };
-		E3C024B71F1273070043DD8F /* MultipleTypeCellByClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleTypeCellByClassViewController.m; sourceTree = "<group>"; };
-		E3C024B81F1273070043DD8F /* MultipleTypeCellByClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleTypeCellByClassViewController.xib; sourceTree = "<group>"; };
-		E3C024BE1F12767A0043DD8F /* OneTypeCellByClassTableViewCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTypeCellByClassTableViewCellViewModel.h; sourceTree = "<group>"; };
-		E3C024BF1F12767A0043DD8F /* OneTypeCellByClassTableViewCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneTypeCellByClassTableViewCellViewModel.m; sourceTree = "<group>"; };
-		E3C024C11F127BB30043DD8F /* BlueTableViewCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueTableViewCellViewModel.h; sourceTree = "<group>"; };
-		E3C024C21F127BB30043DD8F /* BlueTableViewCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueTableViewCellViewModel.m; sourceTree = "<group>"; };
 		E3C024C41F127BFD0043DD8F /* BlueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueTableViewCell.h; sourceTree = "<group>"; };
 		E3C024C51F127BFD0043DD8F /* BlueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueTableViewCell.m; sourceTree = "<group>"; };
-		E3C024D11F135FB20043DD8F /* MultipleSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleSectionTableViewController.h; sourceTree = "<group>"; };
-		E3C024D21F135FB20043DD8F /* MultipleSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleSectionTableViewController.m; sourceTree = "<group>"; };
-		E3C024D31F135FB20043DD8F /* MultipleSectionTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleSectionTableViewController.xib; sourceTree = "<group>"; };
 		FCC7EA0B3413388469B9EEBA /* Pods-DYKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DYKitDemo/Pods-DYKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,7 +192,6 @@
 				E3C024881F1180B20043DD8F /* controller */,
 				E3C024891F1180B20043DD8F /* model */,
 				E3C0248A1F1180B20043DD8F /* view */,
-				E3C0248B1F1180B20043DD8F /* viewModel */,
 			);
 			path = module;
 			sourceTree = "<group>";
@@ -237,21 +199,6 @@
 		E3C024881F1180B20043DD8F /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				E3C0248C1F11812D0043DD8F /* OneTypeCellByNibViewController.h */,
-				E3C0248D1F11812D0043DD8F /* OneTypeCellByNibViewController.m */,
-				E3C0248E1F11812D0043DD8F /* OneTypeCellByNibViewController.xib */,
-				E3C0249F1F11E07C0043DD8F /* OneTypeCellByClassTableViewController.h */,
-				E3C024A01F11E07C0043DD8F /* OneTypeCellByClassTableViewController.m */,
-				E3C024A11F11E07C0043DD8F /* OneTypeCellByClassTableViewController.xib */,
-				E3C024A91F1205E90043DD8F /* MultipleTypeCellByNibViewController.h */,
-				E3C024AA1F1205E90043DD8F /* MultipleTypeCellByNibViewController.m */,
-				E3C024AB1F1205E90043DD8F /* MultipleTypeCellByNibViewController.xib */,
-				E3C024B61F1273070043DD8F /* MultipleTypeCellByClassViewController.h */,
-				E3C024B71F1273070043DD8F /* MultipleTypeCellByClassViewController.m */,
-				E3C024B81F1273070043DD8F /* MultipleTypeCellByClassViewController.xib */,
-				E3C024D11F135FB20043DD8F /* MultipleSectionTableViewController.h */,
-				E3C024D21F135FB20043DD8F /* MultipleSectionTableViewController.m */,
-				E3C024D31F135FB20043DD8F /* MultipleSectionTableViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -280,21 +227,6 @@
 				E3C024C51F127BFD0043DD8F /* BlueTableViewCell.m */,
 			);
 			path = view;
-			sourceTree = "<group>";
-		};
-		E3C0248B1F1180B20043DD8F /* viewModel */ = {
-			isa = PBXGroup;
-			children = (
-				E3C024991F1187AD0043DD8F /* OneTypeCellByNibTableViewCellViewModel.h */,
-				E3C0249A1F1187AD0043DD8F /* OneTypeCellByNibTableViewCellViewModel.m */,
-				E3C024AE1F1225360043DD8F /* CellWithButtonByNibTableViewCellViewModel.h */,
-				E3C024AF1F1225360043DD8F /* CellWithButtonByNibTableViewCellViewModel.m */,
-				E3C024C11F127BB30043DD8F /* BlueTableViewCellViewModel.h */,
-				E3C024C21F127BB30043DD8F /* BlueTableViewCellViewModel.m */,
-				E3C024BE1F12767A0043DD8F /* OneTypeCellByClassTableViewCellViewModel.h */,
-				E3C024BF1F12767A0043DD8F /* OneTypeCellByClassTableViewCellViewModel.m */,
-			);
-			path = viewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,15 +317,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3C024A31F11E07C0043DD8F /* OneTypeCellByClassTableViewController.xib in Resources */,
 				E374C2B51F14B451002D53B5 /* DYKit.podspec in Resources */,
-				E3C024BA1F1273070043DD8F /* MultipleTypeCellByClassViewController.xib in Resources */,
-				E3C024AD1F1205E90043DD8F /* MultipleTypeCellByNibViewController.xib in Resources */,
 				E3518EA61F106B86008534B1 /* LaunchScreen.storyboard in Resources */,
 				E3C024A81F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib in Resources */,
 				E3518EA31F106B86008534B1 /* Assets.xcassets in Resources */,
-				E3C024901F11812D0043DD8F /* OneTypeCellByNibViewController.xib in Resources */,
-				E3C024D51F135FB20043DD8F /* MultipleSectionTableViewController.xib in Resources */,
 				E3C024951F11831D0043DD8F /* OneTypeCellByNibTableViewCell.xib in Resources */,
 				E3518EA11F106B86008534B1 /* Main.storyboard in Resources */,
 			);
@@ -507,22 +434,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3C024981F1186D20043DD8F /* User.m in Sources */,
-				E3C0248F1F11812D0043DD8F /* OneTypeCellByNibViewController.m in Sources */,
-				E3C024AC1F1205E90043DD8F /* MultipleTypeCellByNibViewController.m in Sources */,
 				E3518E9E1F106B86008534B1 /* ViewController.m in Sources */,
-				E3C024B91F1273070043DD8F /* MultipleTypeCellByClassViewController.m in Sources */,
 				E374C2B31F14B432002D53B5 /* UITableView+DYTableViewBinder.m in Sources */,
 				E3C024C61F127BFD0043DD8F /* BlueTableViewCell.m in Sources */,
 				E3C024941F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m in Sources */,
-				E3C024A21F11E07C0043DD8F /* OneTypeCellByClassTableViewController.m in Sources */,
 				E3518E9B1F106B86008534B1 /* AppDelegate.m in Sources */,
 				E3C024A71F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m in Sources */,
-				E3C024C31F127BB30043DD8F /* BlueTableViewCellViewModel.m in Sources */,
-				E3C024C01F12767A0043DD8F /* OneTypeCellByClassTableViewCellViewModel.m in Sources */,
-				E3C0249B1F1187AD0043DD8F /* OneTypeCellByNibTableViewCellViewModel.m in Sources */,
-				E3C024B01F1225360043DD8F /* CellWithButtonByNibTableViewCellViewModel.m in Sources */,
 				E374C2B21F14B432002D53B5 /* DYTableViewAgent.m in Sources */,
-				E3C024D41F135FB20043DD8F /* MultipleSectionTableViewController.m in Sources */,
 				E3C0249E1F11DFED0043DD8F /* OneTypeCellByClassTableViewCell.m in Sources */,
 				E3518E981F106B86008534B1 /* main.m in Sources */,
 			);

@@ -21,18 +21,20 @@
 #pragma 主要配置方法
 /**
  固定UItableViewCell
- 
+
  @param block cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
  */
-- (void) bindingForBindingBlock:(CellBindBlock)block;
+- (UITableView*) bindingForBindingBlock:(CellBindBlock)block;
 
 /**
  固定一种自定义cell
  
  @param block cellForRowAtIndexPath的block
  @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @return 返回自身，用于链式调用
  */
-- (void) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
+- (UITableView*) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
 
 /**
  指定section和row进行cell设定
@@ -108,37 +110,37 @@
 - (BOOLTableViewIndexPath)canFocusRowAtIndexPath;
 - (BOOLUITableViewFocusUpdateContext)shouldUpdateFocusInContext;
 - (NSIndexPathUITableView)indexPathForPreferredFocusedViewInTableView;
-- (void)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
-- (void)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block;
-- (void)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setCanEditRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setNumberOfRowsInSection:(NSIntegerTableViewIndexPath)block;
+- (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
+- (UITableView*)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block;
+- (UITableView*)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setCanEditRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setNumberOfRowsInSection:(NSIntegerTableViewIndexPath)block;
 //- (void)setCellForRowAtIndexPath:(UITableViewCellTableViewIndexPath)block;
-- (void)setNumberOfSectionsInTableView:(NSIntegerUITableView)block;
-- (void)setTitleForHeaderInSection:(NSStringTableViewNSInteger)block;
-- (void)setTitleForFooterInSection:(NSStringTableViewNSInteger)block;
-- (void)setCanMoveRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setSectionIndexTitlesForTableView:(SectionIndexTitlesForTableView)block;
-- (void)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block;
-- (void)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
-- (void)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
-- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
-- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
-- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
-- (void)setViewForHeaderInSection:(UIViewTableViewNSInteger)block;
-- (void)setViewForFooterInSection:(UIViewTableViewNSInteger)block;
-- (void)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
-- (void)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
-- (void)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block;
-- (void)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block;
-- (void)setShouldIndentWhileEditingRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setTargetIndexPathForMoveFromRowAtIndexPath:(NSIndexPathUITableViewNSIndexPathNSIndexPath)block;
-- (void)setIndentationLevelForRowAtIndexPath:(NSIntegerUITableViewNSIndexPath)block;
-- (void)setShouldShowMenuForRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setCanPerformAction:(BOOLUITableViewSELNSIndexPath)block;
-- (void)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block;
-- (void)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block;
+- (UITableView*)setNumberOfSectionsInTableView:(NSIntegerUITableView)block;
+- (UITableView*)setTitleForHeaderInSection:(NSStringTableViewNSInteger)block;
+- (UITableView*)setTitleForFooterInSection:(NSStringTableViewNSInteger)block;
+- (UITableView*)setCanMoveRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setSectionIndexTitlesForTableView:(SectionIndexTitlesForTableView)block;
+- (UITableView*)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block;
+- (UITableView*)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
+- (UITableView*)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setViewForHeaderInSection:(UIViewTableViewNSInteger)block;
+- (UITableView*)setViewForFooterInSection:(UIViewTableViewNSInteger)block;
+- (UITableView*)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
+- (UITableView*)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
+- (UITableView*)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block;
+- (UITableView*)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block;
+- (UITableView*)setShouldIndentWhileEditingRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setTargetIndexPathForMoveFromRowAtIndexPath:(NSIndexPathUITableViewNSIndexPathNSIndexPath)block;
+- (UITableView*)setIndentationLevelForRowAtIndexPath:(NSIntegerUITableViewNSIndexPath)block;
+- (UITableView*)setShouldShowMenuForRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setCanPerformAction:(BOOLUITableViewSELNSIndexPath)block;
+- (UITableView*)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block;
+- (UITableView*)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block;
 
 #pragma delegate方法
 - (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal;
