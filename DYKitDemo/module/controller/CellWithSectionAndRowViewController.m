@@ -22,17 +22,26 @@
     [super viewDidLoad];
     
     
-    [[self.tableView addReuseIdentifier:DY_DEFAULT_ID indexPathRange:^BOOL(NSIndexPath *indexPath) {
-        return indexPath.row != 14;
+    [[[[[[self.tableView addReuseIdentifier:DY_DEFAULT_ID indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return !(indexPath.section == 1 && indexPath.row == 0);
     } bindingBlock:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
         cell.textLabel.text = string;
-    }] addReuseIdentifier:@"OneTypeCellByNibTableViewCell" section:0 row:14 bindingBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
+    }] addReuseIdentifier:@"OneTypeCellByNibTableViewCell" section:1 row:0 bindingBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
         cell.headImageView.image = [UIImage imageNamed:user.img];
         cell.headImageView.backgroundColor = user.sex == 0 ? [UIColor purpleColor] : [UIColor blackColor];
         cell.nameLabel.text = user.name;
         cell.ageLabel.text = user.age;
         cell.descLabel.text = user.desc;
-    }];
+    }] setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
+        switch (section) {
+            case 0: return 14; break;
+            default: return 7; break;
+        }
+    }] setNumberOfSectionsInTableView:^NSInteger(UITableView *tableView) {
+        return 2;
+    }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
+        return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
+    }] setSectionHeaderHeight:50];
     
     
     User *user1 = [User new];

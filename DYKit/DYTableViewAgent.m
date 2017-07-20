@@ -22,7 +22,14 @@
     for (CellInfo *cellInfo in self.cellInfoList) {
         if (cellInfo.indexPathRangeBlock(indexPath)) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
-            cellInfo.cellBindBlock(cell, self.data[indexPath.row], indexPath);
+            NSInteger rowNow;
+            if (indexPath.section != 0) {
+                NSInteger preRowCount = [self tableView:tableView numberOfRowsInSection:(indexPath.section -1)];
+                rowNow = preRowCount + indexPath.row;
+            } else {
+                rowNow = indexPath.row;
+            }
+            cellInfo.cellBindBlock(cell, self.data[rowNow], indexPath);
         }
     }
     if (!cell) {
