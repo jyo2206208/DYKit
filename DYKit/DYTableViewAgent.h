@@ -29,7 +29,7 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 
 @interface CellInfo : NSObject
 
-typedef void(^CellBindBlock)(id cell,id viewModel,NSIndexPath *indexPath);
+typedef void(^CellBindBlock)(id cell,id model,NSIndexPath *indexPath);
 typedef BOOL(^IndexPathRangeBlock)(NSIndexPath *indexPath);
 
 @property (nonatomic, copy) NSString *reuseIdentifier;
@@ -41,12 +41,8 @@ typedef BOOL(^IndexPathRangeBlock)(NSIndexPath *indexPath);
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, copy) id data;
-//@property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, copy) CellBindBlock cellBindBlock;
-
-
 @property (nonatomic, strong) NSMutableArray<CellInfo*> *cellInfoList;
-//@property (nonatomic, strong) NSMutableDictionary *reuseIdAndCellBlockDic;
 
 
 typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
