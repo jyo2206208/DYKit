@@ -4,70 +4,112 @@ DYKit
 [![CocoaPods](http://img.shields.io/cocoapods/p/YYKit.svg?style=flat)](http://cocoadocs.org/docsets/DYKit)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
-DYKit是一套使用了ReactiveObjC的UI库
+DYKit是一套使用了ReactiveObjC的系统控件封装库
 
-DYKit将UIkit中的大部分常用组件进行了封装，让这些控件不再使用delegate,datasource等而是可以通过block，RACSignal等形式进行控制，很多控件从此可以通过一句代码完成。
+DYKit将UIkit中的大部分常用组件进行了封装，让这些控件不再使用delegate,datasource等而是可以通过block，RACSignal等形式进行控制，通过链式调用，很多控件从此可以通过一句代码完成。
 
 sample
 ==============
-####↓不需要delegate，datasource。你可以如此简单的创建一个tableView:
+####不需要delegate，datasource。你可以如此简单的创建一个tableView:
 
 ```objc
-//固定UItableViewCell的TableView
 [self.homeTableView bindingForBindingBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
-    //这个block充当了cellForRowAtIndexPath的作用
-    cell.textLabel.text = text;
+//这个block充当了cellForRowAtIndexPath的作用
+        cell.textLabel.text = text;
 }];
-//绑定数据源
-RAC(self,homeTableView.dy_data) = [RACSignal return:@[@"标题1",@"标题2",@"标题3",@"标题4"]];
+    
+//设定数据
+self.homeTableView.dy_data = @[@"标题1",@"标题2",@"标题3",@"标题4"];
 ```
 1. dy_data是一个NSArray的属性。你只能给他绑定发送NSArray的RACSignal.当然你也可以像下面这样直接给他赋值。
 //self,homeTableView.dy_data = @[@"标题1",@"标题2",@"标题3",@"标题4"];  
-2. dy_data中的每一个元素都会出现在上面那个BindingBlock中的第二个参数。你可以修改参数成任意类型，比如model或VideModel。
+2. dy_data中的每一个元素都会出现在上面那个BindingBlock中的第二个参数。你可以修改参数成任意类型，比如model或VideModel甚至是NSString。
 
 
 
-####↓你可以使用下面的方法来创建不同类型的tableView:
+####你可以使用下面的方法来创建不同类型的tableView:
 
 ```objc
-    @weakify(self)
-    [self.oneTypeCellByNibTableView bindingForBindingBlock:^(OneTypeCellByNibTableViewCell *cell, OneTypeCellByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
-        @strongify(self)
-        RAC(cell,nameLabel.text) = [RACObserve(viewModel, user.name) takeUntil:cell.rac_prepareForReuseSignal];
-        RAC(cell,headImageView.image) = [[RACObserve(viewModel, user.img) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
-            return [UIImage imageNamed:value];
-        }];
-        RAC(cell,ageLabel.text) = [[RACObserve(viewModel, user.age) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
-            return [NSString stringWithFormat:@"age:%@",value];
-        }];;
-        RAC(cell,descLabel.text) = [RACObserve(viewModel, user.desc) takeUntil:cell.rac_prepareForReuseSignal];
-    } reuseIdentifier:@"OneTypeCellByNibTableViewCell"];
+[self.tableView bindingForReuseIdentifier:@"OneTypeCellByNibTableViewCell" bindingBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
+        cell.headImageView.image = [UIImage imageNamed:user.img];
+        cell.headImageView.backgroundColor = user.sex == 0 ? [UIColor purpleColor] : [UIColor blackColor];
+        cell.nameLabel.text = user.name;
+        cell.ageLabel.text = user.age;
+        cell.descLabel.text = user.desc;
+    }];
     
     
-    User *user1 = [[User alloc] init];
+    User *user1 = [User new];
+    User *user2 = [User new];
+    User *user3 = [User new];
+    
+    user1.id = @"001";
     user1.name = @"jack";
     user1.img = @"head";
-    user1.age = @"12";
-    user1.desc = @"Like black";
-    OneTypeCellByNibTableViewCellViewModel *viewModel1 = [[OneTypeCellByNibTableViewCellViewModel alloc] init];
-    viewModel1.user = user1;
-    User *user2 = [[User alloc] init];
-    user2.name = @"pinkMan";
+    user1.age = @"29";
+    user1.desc = @"她喜欢黑色";
+    user1.sex = 0;
+    user2.id = @"002";
+    user2.name = @"Pink man";
     user2.img = @"head";
-    user2.age = @"28";
-    user2.desc = @"partner of the world's biggest drug dealer";
-    OneTypeCellByNibTableViewCellViewModel *viewModel2 = [[OneTypeCellByNibTableViewCellViewModel alloc] init];
-    viewModel2.user = user2;
-    RAC(self,oneTypeCellByNibTableView.dy_data) = [RACSignal return:@[viewModel1,viewModel2]];
+    user2.age = @"18";
+    user2.desc = @"白老师得意门生";
+    user2.sex = 1;
+    user3.id = @"003";
+    user3.name = @"MR.white";
+    user3.img = @"head";
+    user3.age = @"43";
+    user3.desc = @"平淡无奇的中学化学老师";
+    user3.sex = 1;
+    
+    self.tableView.dy_data = @[user1,user2,user3];
 ```
 1. reuseIdentifier参数传入一个复用ID。用来自动注册cell和使用复用cell，可支持nib或class创建的cell。(优先寻找reuseIdentifier命名的xib文件，找到的情况下直接注册nibcell。找不到的情况下会使用reuseIdentifier作为类名的非nib创建cell)
 
 
-####↓当然你也可以使用下面这两个方法传入多个reuseIdentifier来满足不同cell在同一个tableView使用的需求 
+####当然你也可以使用下面这些方法来满足不同cell在同一个tableView或者不同的cetion下使用的需求
 
 ```objc
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifierArray:(NSArray *)identifiers;
-- (void) bindingForBindingBlock:(CellBindBlock)block reuseIdentifiers:(NSString *)identifiers,...;
+/**
+ 指定section和row进行cell设定
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param section 指定section位置
+ @param row 指定row位置
+ @param block cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block;
+
+/**
+ 指定section进行cell设定。默认本section下的cell全部按照block内容进行设定
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param section 指定section位置
+ @param block cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block;
+
+/**
+ 指定row进行cell设定。默认只有一个section
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param row 指定row位置
+ @param block cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block;
+
+/**
+ 指定具体的indexPath进行cell设定，可选择任意位置
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param indexPathRangeBlock 用于指定具体地址的block。通过对参数的indexPath进行判断，返回需要的具体位置
+ @param cellBindBlock cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock;
 ```
 
 ####代理事件
@@ -75,7 +117,7 @@ RAC(self,homeTableView.dy_data) = [RACSignal return:@[@"标题1",@"标题2",@"�
 
 ```objc
 #pragma delegate方法
-(RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal;
+- (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal;
 - (RACSignal*)didEndDisplayingCellSignal;
 - (RACSignal*)didEndDisplayingHeaderViewSignal;
 - (RACSignal*)didEndDisplayingFooterViewSignal;
@@ -90,6 +132,7 @@ RAC(self,homeTableView.dy_data) = [RACSignal return:@[@"标题1",@"标题2",@"�
 - (RACSignal*)willDisplayCellSignal;
 - (RACSignal*)willDisplayHeaderViewSignal;
 - (RACSignal*)willDisplayFooterViewSignal;
+
 #pragma DataSource方法
 - (RACSignal*)commitEditingStyleSignal;
 - (RACSignal*)moveRowAtIndexPathSignal;
@@ -99,37 +142,69 @@ RAC(self,homeTableView.dy_data) = [RACSignal return:@[@"标题1",@"标题2",@"�
 你也可以通过传入block的方法来设置tableView的属性。名字和原来的那些一样
 
 ```objc
-- (void)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
-- (void)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block;
-- (void)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setCanEditRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setNumberOfRowsInSection:(NSIntegerTableViewIndexPath)block;
-- (void)setCellForRowAtIndexPath:(UITableViewCellTableViewIndexPath)block;
-- (void)setNumberOfSectionsInTableView:(NSIntegerUITableView)block;
-- (void)setTitleForHeaderInSection:(NSStringTableViewNSInteger)block;
-- (void)setTitleForFooterInSection:(NSStringTableViewNSInteger)block;
-- (void)setCanMoveRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setSectionIndexTitlesForTableView:(SectionIndexTitlesForTableView)block;
-- (void)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block;
-- (void)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
-- (void)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
-//- (void)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
-//- (void)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
-//- (void)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
-- (void)setViewForHeaderInSection:(UIViewTableViewNSInteger)block;
-- (void)setViewForFooterInSection:(UIViewTableViewNSInteger)block;
-- (void)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
-- (void)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
-- (void)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block;
-- (void)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block;
-- (void)setShouldIndentWhileEditingRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setTargetIndexPathForMoveFromRowAtIndexPath:(NSIndexPathUITableViewNSIndexPathNSIndexPath)block;
-- (void)setIndentationLevelForRowAtIndexPath:(NSIntegerUITableViewNSIndexPath)block;
-- (void)setShouldShowMenuForRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setCanPerformAction:(BOOLUITableViewSELNSIndexPath)block;
-- (void)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block;
-- (void)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block;
-- (void)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block;
+#pragma 配置用block
+- (CGFloatTableViewIndexPath)heightForRowAtIndexPath;
+- (EditActionsForRowAtIndexPath)editActionsForRowAtIndexPath;
+- (BOOLTableViewIndexPath)shouldHighlightRowAtIndexPath;
+- (BOOLTableViewIndexPath)canEditRowAtIndexPath;
+- (NSIntegerTableViewIndexPath)numberOfRowsInSection;
+//- (UITableViewCellTableViewIndexPath)cellForRowAtIndexPath;
+- (NSIntegerUITableView)numberOfSectionsInTableView;
+- (NSStringTableViewNSInteger)titleForHeaderInSection;
+- (NSStringTableViewNSInteger)titleForFooterInSection;
+- (BOOLTableViewIndexPath)canMoveRowAtIndexPath;
+- (SectionIndexTitlesForTableView)sectionIndexTitlesForTableView;
+- (NSIntegerUITableViewNSStringNSInteger)sectionForSectionIndexTitle;
+- (CGFloatTableViewNSInteger)heightForHeaderInSection;
+- (CGFloatTableViewNSInteger)heightForFooterInSection;
+- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath;
+- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection;
+- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection;
+- (UIViewTableViewNSInteger)viewForHeaderInSection;
+- (UIViewTableViewNSInteger)viewForFooterInSection;
+- (NSIndexPathUITableViewNSIndexPath)willSelectRowAtIndexPath;
+- (NSIndexPathUITableViewNSIndexPath)willDeselectRowAtIndexPath;
+- (UITableViewCellEditingStyleUITableViewNSIndexPath)editingStyleForRowAtIndexPath;
+- (NSStringTableViewIndexPath)titleForDeleteConfirmationButtonForRowAtIndexPath;
+- (BOOLTableViewIndexPath)shouldIndentWhileEditingRowAtIndexPath;
+- (NSIndexPathUITableViewNSIndexPathNSIndexPath)targetIndexPathForMoveFromRowAtIndexPath;
+- (NSIntegerUITableViewNSIndexPath)indentationLevelForRowAtIndexPath;
+- (BOOLTableViewIndexPath)shouldShowMenuForRowAtIndexPath;
+- (BOOLUITableViewSELNSIndexPath)canPerformAction;
+- (BOOLTableViewIndexPath)canFocusRowAtIndexPath;
+- (BOOLUITableViewFocusUpdateContext)shouldUpdateFocusInContext;
+- (NSIndexPathUITableView)indexPathForPreferredFocusedViewInTableView;
+- (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
+- (UITableView*)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block;
+- (UITableView*)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setCanEditRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setNumberOfRowsInSection:(NSIntegerTableViewIndexPath)block;
+//- (void)setCellForRowAtIndexPath:(UITableViewCellTableViewIndexPath)block;
+- (UITableView*)setNumberOfSectionsInTableView:(NSIntegerUITableView)block;
+- (UITableView*)setTitleForHeaderInSection:(NSStringTableViewNSInteger)block;
+- (UITableView*)setTitleForFooterInSection:(NSStringTableViewNSInteger)block;
+- (UITableView*)setCanMoveRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setSectionIndexTitlesForTableView:(SectionIndexTitlesForTableView)block;
+- (UITableView*)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block;
+- (UITableView*)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
+- (UITableView*)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
+- (UITableView*)setViewForHeaderInSection:(UIViewTableViewNSInteger)block;
+- (UITableView*)setViewForFooterInSection:(UIViewTableViewNSInteger)block;
+- (UITableView*)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
+- (UITableView*)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
+- (UITableView*)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block;
+- (UITableView*)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block;
+- (UITableView*)setShouldIndentWhileEditingRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setTargetIndexPathForMoveFromRowAtIndexPath:(NSIndexPathUITableViewNSIndexPathNSIndexPath)block;
+- (UITableView*)setIndentationLevelForRowAtIndexPath:(NSIntegerUITableViewNSIndexPath)block;
+- (UITableView*)setShouldShowMenuForRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setCanPerformAction:(BOOLUITableViewSELNSIndexPath)block;
+- (UITableView*)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block;
+- (UITableView*)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block;
+- (UITableView*)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block;
 
 ```
 

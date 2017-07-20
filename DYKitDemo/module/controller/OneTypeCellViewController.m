@@ -53,7 +53,7 @@
     user3.desc = @"平淡无奇的中学化学老师";
     user3.sex = 1;
     
-    RAC(self,tableView.dy_data) = [RACSignal return:@[user1,user2,user3]];
+    self.tableView.dy_data = @[user1,user2,user3];
 }
 
 @end
