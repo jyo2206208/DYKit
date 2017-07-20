@@ -22,14 +22,7 @@
     for (CellInfo *cellInfo in self.cellInfoList) {
         if (cellInfo.indexPathRangeBlock(indexPath)) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
-            NSInteger rowNow;
-            if (indexPath.section != 0) {
-                NSInteger preRowCount = [self tableView:tableView numberOfRowsInSection:(indexPath.section -1)];
-                rowNow = preRowCount + indexPath.row;
-            } else {
-                rowNow = indexPath.row;
-            }
-            cellInfo.cellBindBlock(cell, self.data[rowNow], indexPath);
+            cellInfo.cellBindBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
         }
     }
     if (!cell) {
@@ -149,6 +142,11 @@
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0){}
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0){}
 
+#pragma 自定义方法
+
+- (NSInteger)getFlattenRow:(UITableView *)tableView IndexPath:(NSIndexPath*) indexPath{
+    return indexPath.section == 0 ? indexPath.row : [self tableView:tableView numberOfRowsInSection:indexPath.section - 1] + [self getFlattenRow:tableView IndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - 1]];
+}
 
 @end
 

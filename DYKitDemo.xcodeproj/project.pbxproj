@@ -19,6 +19,8 @@
 		E35F5CEC1F205D52009ADC93 /* OneTypeCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F5CEA1F205D52009ADC93 /* OneTypeCellViewController.xib */; };
 		E35F5CF01F207B06009ADC93 /* CellWithSectionAndRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E35F5CEE1F207B06009ADC93 /* CellWithSectionAndRowViewController.m */; };
 		E35F5CF11F207B06009ADC93 /* CellWithSectionAndRowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F5CEF1F207B06009ADC93 /* CellWithSectionAndRowViewController.xib */; };
+		E35F5CF51F209466009ADC93 /* CellWithSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E35F5CF31F209466009ADC93 /* CellWithSectionViewController.m */; };
+		E35F5CF61F209466009ADC93 /* CellWithSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F5CF41F209466009ADC93 /* CellWithSectionViewController.xib */; };
 		E374C2B21F14B432002D53B5 /* DYTableViewAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */; };
 		E374C2B31F14B432002D53B5 /* UITableView+DYTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */; };
 		E374C2B51F14B451002D53B5 /* DYKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E374C2B41F14B451002D53B5 /* DYKit.podspec */; };
@@ -67,6 +69,9 @@
 		E35F5CED1F207B06009ADC93 /* CellWithSectionAndRowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWithSectionAndRowViewController.h; sourceTree = "<group>"; };
 		E35F5CEE1F207B06009ADC93 /* CellWithSectionAndRowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithSectionAndRowViewController.m; sourceTree = "<group>"; };
 		E35F5CEF1F207B06009ADC93 /* CellWithSectionAndRowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithSectionAndRowViewController.xib; sourceTree = "<group>"; };
+		E35F5CF21F209466009ADC93 /* CellWithSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWithSectionViewController.h; sourceTree = "<group>"; };
+		E35F5CF31F209466009ADC93 /* CellWithSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithSectionViewController.m; sourceTree = "<group>"; };
+		E35F5CF41F209466009ADC93 /* CellWithSectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithSectionViewController.xib; sourceTree = "<group>"; };
 		E374C2AD1F14B432002D53B5 /* DYTableViewAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYTableViewAgent.h; sourceTree = "<group>"; };
 		E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYTableViewAgent.m; sourceTree = "<group>"; };
 		E374C2B01F14B432002D53B5 /* UITableView+DYTableViewBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DYTableViewBinder.h"; sourceTree = "<group>"; };
@@ -215,6 +220,9 @@
 				E35F5CED1F207B06009ADC93 /* CellWithSectionAndRowViewController.h */,
 				E35F5CEE1F207B06009ADC93 /* CellWithSectionAndRowViewController.m */,
 				E35F5CEF1F207B06009ADC93 /* CellWithSectionAndRowViewController.xib */,
+				E35F5CF21F209466009ADC93 /* CellWithSectionViewController.h */,
+				E35F5CF31F209466009ADC93 /* CellWithSectionViewController.m */,
+				E35F5CF41F209466009ADC93 /* CellWithSectionViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -335,6 +343,7 @@
 			files = (
 				E374C2B51F14B451002D53B5 /* DYKit.podspec in Resources */,
 				E3518EA61F106B86008534B1 /* LaunchScreen.storyboard in Resources */,
+				E35F5CF61F209466009ADC93 /* CellWithSectionViewController.xib in Resources */,
 				E3C024A81F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib in Resources */,
 				E35F5CF11F207B06009ADC93 /* CellWithSectionAndRowViewController.xib in Resources */,
 				E3518EA31F106B86008534B1 /* Assets.xcassets in Resources */,
@@ -462,6 +471,7 @@
 				E3C024A71F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m in Sources */,
 				E374C2B21F14B432002D53B5 /* DYTableViewAgent.m in Sources */,
 				E3C0249E1F11DFED0043DD8F /* OneTypeCellByClassTableViewCell.m in Sources */,
+				E35F5CF51F209466009ADC93 /* CellWithSectionViewController.m in Sources */,
 				E3518E981F106B86008534B1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

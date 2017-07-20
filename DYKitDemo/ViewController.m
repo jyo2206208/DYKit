@@ -10,6 +10,7 @@
 #import "DYKit.h"
 #import "OneTypeCellViewController.h"
 #import "CellWithSectionAndRowViewController.h"
+#import "CellWithSectionViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTableView;
@@ -54,6 +55,16 @@
         @strongify(self)
         [self.navigationController pushViewController:[[CellWithSectionAndRowViewController alloc] init] animated:YES];
     }];
+    
+    [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
+        return @(indexPath.row);
+    }] filter:^BOOL(id  _Nullable value) {
+        return [value intValue] == 2;
+    }] subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        [self.navigationController pushViewController:[[CellWithSectionViewController alloc] init] animated:YES];
+    }];
+    
     
     
     
