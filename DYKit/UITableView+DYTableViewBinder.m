@@ -88,6 +88,17 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     } bindingBlock:block];
 }
 
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block{
+    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return indexPath.section == section;
+    } bindingBlock:block];
+}
+- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block{
+    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return indexPath.section == 0 && indexPath.row == row;
+    } bindingBlock:block];
+}
+
 - (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock{
     [self commonBindingForbindingBlock];
     [self dyRegisterForCellReuseIdentifier:identifier];
