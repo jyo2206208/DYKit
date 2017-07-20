@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSString *img;
 @property (nonatomic, copy) NSString *age;
 @property (nonatomic, copy) NSString *desc;
+@property (nonatomic) int sex;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DYKit.h"
+#import "OneTypeCellViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTableView;
@@ -30,44 +31,20 @@
     
     RAC(self,homeTableView.dy_data) = [RACSignal return:@[@"固定一种自定义cell",
                                                           @"指定section和row进行cell设定",
+                                                          @"指定section进行cell设定",
                                                           @"指定row进行cell设定",
                                                           @"指定具体的indexPath进行cell设定"
                                                           ]];
     
-//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-//        NSIndexPath *indexPath = tuple.second;
-//        return indexPath.row == 0;
-//    }] subscribeNext:^(RACTuple *tuple) {
-//        [self.navigationController pushViewController:[[OneTypeCellByNibViewController alloc] init] animated:YES];
-//    }];
-//    
-//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-//        NSIndexPath *indexPath = tuple.second;
-//        return indexPath.row == 1;
-//    }] subscribeNext:^(RACTuple *tuple) {
-//        [self.navigationController pushViewController:[[OneTypeCellByClassTableViewController alloc] init] animated:YES];
-//    }];
-//    
-//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-//        NSIndexPath *indexPath = tuple.second;
-//        return indexPath.row == 2;
-//    }] subscribeNext:^(RACTuple *tuple) {
-//        [self.navigationController pushViewController:[[MultipleTypeCellByNibViewController alloc] init] animated:YES];
-//    }];
-//    
-//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-//        NSIndexPath *indexPath = tuple.second;
-//        return indexPath.row == 3;
-//    }] subscribeNext:^(RACTuple *tuple) {
-//        [self.navigationController pushViewController:[[MultipleTypeCellByClassViewController alloc] init] animated:YES];
-//    }];
-//    
-//    [[self.homeTableView.didSelectRowAtIndexPathSignal filter:^BOOL(RACTuple *tuple) {
-//        NSIndexPath *indexPath = tuple.second;
-//        return indexPath.row == 4;
-//    }] subscribeNext:^(RACTuple *tuple) {
-//        [self.navigationController pushViewController:[[MultipleSectionTableViewController alloc] init] animated:YES];
-//    }];
+    @weakify(self)
+    [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
+        return @(indexPath.row);
+    }] filter:^BOOL(id  _Nullable value) {
+        return [value intValue] == 0;
+    }] subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        [self.navigationController pushViewController:[[OneTypeCellViewController alloc] init] animated:YES];
+    }];
     
     
 }
