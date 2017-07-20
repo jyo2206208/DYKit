@@ -18,29 +18,17 @@
     return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : (self.data ? [self.data count] : 0);
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.cellInfoList.count != 0) {
-        UITableViewCell *cell;
-        for (CellInfo *cellInfo in self.cellInfoList) {
-            if (cellInfo.indexPathRangeBlock(indexPath)) {
-                cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
-                cellInfo.cellBindBlock(cell, self.data[indexPath.row], indexPath);
-            }
-        }
-        if (!cell) {
-            NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
-        }
-        return cell;
-    } else {
-        if ([self.data isKindOfClass:NSArray.class]) {
-            NSString *cellIdentifier = self.identifier ? self.identifier : DY_DEFAULT_ID;
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            self.cellBindBlock(cell, self.data[indexPath.row], indexPath);
-            return cell;
-        } else {
-            NSLog(@"dy_data is not NSArray");
-            return nil;
+    UITableViewCell *cell;
+    for (CellInfo *cellInfo in self.cellInfoList) {
+        if (cellInfo.indexPathRangeBlock(indexPath)) {
+            cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
+            cellInfo.cellBindBlock(cell, self.data[indexPath.row], indexPath);
         }
     }
+    if (!cell) {
+        NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
+    }
+    return cell;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.numberOfSectionsInTableView ? self.numberOfSectionsInTableView(tableView) : 1;

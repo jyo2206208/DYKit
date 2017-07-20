@@ -12,12 +12,71 @@
 
 @interface UITableView (DYTableViewBinder)
 
+#pragma 隐形代理
 @property (nonatomic,strong) DYTableViewAgent *dy_agent;
 
-#pragma getSet
 - (id)dy_data;
 - (void)setDy_data:(id)dy_data;
 
+#pragma 主要配置方法
+/**
+ 固定UItableViewCell
+ 
+ @param block cellForRowAtIndexPath的block
+ */
+- (void) bindingForBindingBlock:(CellBindBlock)block;
+
+/**
+ 固定一种自定义cell
+ 
+ @param block cellForRowAtIndexPath的block
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ */
+- (void) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
+
+/**
+ 指定section和row进行cell设定
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param section 指定section位置
+ @param row 指定row位置
+ @param block cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block;
+
+/**
+ 指定section进行cell设定。默认本section下的cell全部按照block内容进行设定
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param section 指定section位置
+ @param block cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block;
+
+/**
+ 指定row进行cell设定。默认只有一个section
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param row 指定row位置
+ @param block cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block;
+
+/**
+ 指定具体的indexPath进行cell设定，可选择任意位置
+
+ @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
+ @param indexPathRangeBlock 用于指定具体地址的block。通过对参数的indexPath进行判断，返回需要的具体位置
+ @param cellBindBlock cellForRowAtIndexPath的block
+ @return 返回自身，用于链式调用
+ */
+- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock;
+
+
+#pragma 配置用block
 - (CGFloatTableViewIndexPath)heightForRowAtIndexPath;
 - (EditActionsForRowAtIndexPath)editActionsForRowAtIndexPath;
 - (BOOLTableViewIndexPath)shouldHighlightRowAtIndexPath;
@@ -80,41 +139,6 @@
 - (void)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block;
 - (void)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block;
 - (void)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block;
-#pragma binding
-
-/**
- 固定UItableViewCell
- 
- @param block cellForRowAtIndexPath的block
- */
-- (void) bindingForBindingBlock:(CellBindBlock)block;
-
-
-//- (void) addReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
-
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block;
-
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block;
-- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block;
-
-
-- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock;
-
-/**
- 固定一种自定义cell
- 
- @param block cellForRowAtIndexPath的block
- @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- */
-- (void) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
-
-/**
- 多种自定义cell，由nib或class创建
- 
- @param block cellForRowAtIndexPath的block
- @param identifiers cell的重用ID的数组(使用cell的类名，可以是xib或者class创建)
- */
-//- (void) bindingForReuseIdentifiers:(NSArray *)identifiers bindingBlock:(CellBindBlock)block;
 
 #pragma delegate方法
 - (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal;

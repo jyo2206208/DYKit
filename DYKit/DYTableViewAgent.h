@@ -13,7 +13,7 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #endif
 
-#define DY_DEFAULT_ID @"UITableViewCell"
+#define DY_DEFAULT_ID @"DYTableViewCell"
 
 #ifndef DYSYNTH_DYNAMIC_PROPERTY_OBJECT
 #define DYSYNTH_DYNAMIC_PROPERTY_OBJECT(_getter_, _setter_, _association_, _type_) \
@@ -32,8 +32,6 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 typedef void(^CellBindBlock)(id cell,id viewModel,NSIndexPath *indexPath);
 typedef BOOL(^IndexPathRangeBlock)(NSIndexPath *indexPath);
 
-//@property (nonatomic) NSInteger section;
-//@property (nonatomic) NSInteger row;
 @property (nonatomic, copy) NSString *reuseIdentifier;
 @property (nonatomic, copy) IndexPathRangeBlock indexPathRangeBlock;
 @property (nonatomic, copy) CellBindBlock cellBindBlock;
@@ -42,11 +40,8 @@ typedef BOOL(^IndexPathRangeBlock)(NSIndexPath *indexPath);
 
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
-
-
-
 @property (nonatomic, copy) id data;
-@property (nonatomic, copy) NSString *identifier;
+//@property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, copy) CellBindBlock cellBindBlock;
 
 

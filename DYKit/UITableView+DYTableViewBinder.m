@@ -10,11 +10,73 @@
 
 @implementation UITableView (DYTableViewBinder)
 
+#pragma 隐形代理
 DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent *)
 
 - (id)dy_data{return self.dy_agent.data;}
 - (void)setDy_data:(id)dy_data{self.dy_agent.data = dy_data;}
 
+#pragma 主要配置方法
+- (void) bindingForBindingBlock:(CellBindBlock)block{
+    [self bindingForReuseIdentifier:DY_DEFAULT_ID bindingBlock:block];
+}
+
+- (void) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block{
+    [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return YES;
+    } bindingBlock:block];
+}
+
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block{
+    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return indexPath.section == section && indexPath.row == row;
+    } bindingBlock:block];
+}
+
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block{
+    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return indexPath.section == section;
+    } bindingBlock:block];
+}
+- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block{
+    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return indexPath.section == 0 && indexPath.row == row;
+    } bindingBlock:block];
+}
+
+- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock{
+    if (!self.dy_agent) {
+        self.dy_agent = [[DYTableViewAgent alloc] init];
+        self.dataSource = self.dy_agent;
+        self.delegate = self.dy_agent;
+        @weakify(self)
+        [[RACObserve(self, dy_agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
+            @strongify(self)
+            [self reloadData];
+        }];
+    }
+    [self dyRegisterForCellReuseIdentifier:identifier];
+    CellInfo *cellInfo = [[CellInfo alloc] init];
+    cellInfo.reuseIdentifier = identifier;
+    cellInfo.indexPathRangeBlock = indexPathRangeBlock;
+    cellInfo.cellBindBlock = cellBindBlock;
+    [self.dy_agent.cellInfoList addObject:cellInfo];
+    return self;
+}
+
+- (void)dyRegisterForCellReuseIdentifier:(NSString *)identifier{
+    if ([identifier isEqualToString:DY_DEFAULT_ID]) {
+        [self registerClass:UITableViewCell.class forCellReuseIdentifier:identifier];
+    } else {
+        if ([[NSBundle mainBundle] pathForResource:identifier ofType:@"nib"]) {
+            [self registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellReuseIdentifier:identifier];
+        } else {
+            [self registerClass:NSClassFromString(identifier) forCellReuseIdentifier:identifier];
+        }
+    }
+}
+
+#pragma 配置用block
 - (CGFloatTableViewIndexPath)heightForRowAtIndexPath{return self.dy_agent.heightForRowAtIndexPath;}
 - (EditActionsForRowAtIndexPath)editActionsForRowAtIndexPath{return self.dy_agent.editActionsForRowAtIndexPath;}
 - (BOOLTableViewIndexPath)shouldHighlightRowAtIndexPath{return self.dy_agent.shouldHighlightRowAtIndexPath;}
@@ -77,69 +139,6 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (void)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.canFocusRowAtIndexPath = block;}
 - (void)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block{self.dy_agent.shouldUpdateFocusInContext = block;}
 - (void)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block{self.dy_agent.indexPathForPreferredFocusedViewInTableView = block;}
-
-- (void) bindingForBindingBlock:(CellBindBlock)block{
-    [self bindingForReuseIdentifier:nil bindingBlock:block];
-}
-
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block{
-    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
-        return indexPath.section == section && indexPath.row == row;
-    } bindingBlock:block];
-}
-
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block{
-    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
-        return indexPath.section == section;
-    } bindingBlock:block];
-}
-- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block{
-    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
-        return indexPath.section == 0 && indexPath.row == row;
-    } bindingBlock:block];
-}
-
-- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock{
-    [self commonBindingForbindingBlock];
-    [self dyRegisterForCellReuseIdentifier:identifier];
-    CellInfo *cellInfo = [[CellInfo alloc] init];
-    cellInfo.reuseIdentifier = identifier;
-    cellInfo.indexPathRangeBlock = indexPathRangeBlock;
-    cellInfo.cellBindBlock = cellBindBlock;
-    [self.dy_agent.cellInfoList addObject:cellInfo];
-    return self;
-}
-
-- (void) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block{
-    [self commonBindingForbindingBlock];
-    self.dy_agent.cellBindBlock = block;
-    if (identifier) {
-        self.dy_agent.identifier = identifier;
-        [self dyRegisterForCellReuseIdentifier:identifier];
-    }
-}
-
-- (void) commonBindingForbindingBlock{
-    if (!self.dy_agent) {
-        self.dy_agent = [[DYTableViewAgent alloc] init];
-        self.dataSource = self.dy_agent;
-        self.delegate = self.dy_agent;
-        [self registerClass:UITableViewCell.class forCellReuseIdentifier:DY_DEFAULT_ID];
-        @weakify(self)
-        [[RACObserve(self, dy_agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
-            @strongify(self)
-            [self reloadData];
-        }];
-    }
-}
-
-- (void)dyRegisterForCellReuseIdentifier:(NSString *)identifier{
-    if ([[NSBundle mainBundle] pathForResource:identifier ofType:@"nib"]) {
-        [self registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellReuseIdentifier:identifier];
-    } else {
-        [self registerClass:NSClassFromString(identifier) forCellReuseIdentifier:identifier];
-    }
-}
 
 #pragma delegate方法
 - (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal{
