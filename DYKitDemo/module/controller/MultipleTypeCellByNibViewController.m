@@ -27,37 +27,95 @@
 
 - (void)setUpMultipleTypeCellByNibTableView {
     self.multipleTypeCellByNibTableView.rowHeight = 80;
+//    @weakify(self)
+//    [self.multipleTypeCellByNibTableView bindingForReuseIdentifiers:@[@"OneTypeCellByNibTableViewCell",@"CellWithButtonByNibTableViewCell"] bindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
+//        @strongify(self)
+//        if ([cell isKindOfClass:OneTypeCellByNibTableViewCell.class]) {
+//            OneTypeCellByNibTableViewCell *customerCell = (OneTypeCellByNibTableViewCell*)cell;
+//            OneTypeCellByNibTableViewCellViewModel *customerViewModel = (OneTypeCellByNibTableViewCellViewModel*)viewModel;
+//            RAC(customerCell,nameLabel.text) = [RACObserve(customerViewModel, user.name) takeUntil:cell.rac_prepareForReuseSignal];
+//            RAC(customerCell,headImageView.image) = [[RACObserve(customerViewModel, user.img) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+//                return [UIImage imageNamed:value];
+//            }];
+//            RAC(customerCell,ageLabel.text) = [[RACObserve(customerViewModel, user.age) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+//                return [NSString stringWithFormat:@"age:%@",value];
+//            }];;
+//            RAC(customerCell,descLabel.text) = [RACObserve(customerViewModel, user.desc) takeUntil:cell.rac_prepareForReuseSignal];
+//        }
+//        
+//        if ([cell isKindOfClass:CellWithButtonByNibTableViewCell.class]) {
+//            CellWithButtonByNibTableViewCell *customerCell = (CellWithButtonByNibTableViewCell*)cell;
+//            CellWithButtonByNibTableViewCellViewModel *customerViewModel = (CellWithButtonByNibTableViewCellViewModel*)viewModel;
+//            customerCell.textLabel.text = customerViewModel.title;
+//            [customerViewModel.addButtonCommand.executionSignals.switchToLatest subscribeNext:^(CellWithButtonByNibTableViewCellViewModel *x) {
+//                NSMutableArray *newData = [NSMutableArray arrayWithArray:self.multipleTypeCellByNibTableView.dy_data];
+//                [newData addObject:x];
+//                self.multipleTypeCellByNibTableView.dy_data = newData;
+//            }];
+//            customerCell.addButton.rac_command = customerViewModel.addButtonCommand;
+//
+//        }
+//    }];
+    
     @weakify(self)
-    [self.multipleTypeCellByNibTableView bindingForReuseIdentifiers:@[@"OneTypeCellByNibTableViewCell",@"CellWithButtonByNibTableViewCell"] bindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
+    [[self.multipleTypeCellByNibTableView addReuseIdentifier:@"OneTypeCellByNibTableViewCell" indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 1);
+    } bindingBlock:^(OneTypeCellByNibTableViewCell *cell, OneTypeCellByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
         @strongify(self)
-        if ([cell isKindOfClass:OneTypeCellByNibTableViewCell.class]) {
-            OneTypeCellByNibTableViewCell *customerCell = (OneTypeCellByNibTableViewCell*)cell;
-            OneTypeCellByNibTableViewCellViewModel *customerViewModel = (OneTypeCellByNibTableViewCellViewModel*)viewModel;
-            RAC(customerCell,nameLabel.text) = [RACObserve(customerViewModel, user.name) takeUntil:cell.rac_prepareForReuseSignal];
-            RAC(customerCell,headImageView.image) = [[RACObserve(customerViewModel, user.img) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
-                return [UIImage imageNamed:value];
-            }];
-            RAC(customerCell,ageLabel.text) = [[RACObserve(customerViewModel, user.age) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
-                return [NSString stringWithFormat:@"age:%@",value];
-            }];;
-            RAC(customerCell,descLabel.text) = [RACObserve(customerViewModel, user.desc) takeUntil:cell.rac_prepareForReuseSignal];
-        }
-        
-        if ([cell isKindOfClass:CellWithButtonByNibTableViewCell.class]) {
-            CellWithButtonByNibTableViewCell *customerCell = (CellWithButtonByNibTableViewCell*)cell;
-            CellWithButtonByNibTableViewCellViewModel *customerViewModel = (CellWithButtonByNibTableViewCellViewModel*)viewModel;
-            customerCell.textLabel.text = customerViewModel.title;
-            [customerViewModel.addButtonCommand.executionSignals.switchToLatest subscribeNext:^(CellWithButtonByNibTableViewCellViewModel *x) {
-                NSMutableArray *newData = [NSMutableArray arrayWithArray:self.multipleTypeCellByNibTableView.dy_data];
-                [newData addObject:x];
-                self.multipleTypeCellByNibTableView.dy_data = newData;
-            }];
-            customerCell.addButton.rac_command = customerViewModel.addButtonCommand;
-            
-        }
+        RAC(cell,nameLabel.text) = [RACObserve(viewModel, user.name) takeUntil:cell.rac_prepareForReuseSignal];
+        RAC(cell,headImageView.image) = [[RACObserve(viewModel, user.img) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+            return [UIImage imageNamed:value];
+        }];
+        RAC(cell,ageLabel.text) = [[RACObserve(viewModel, user.age) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+            return [NSString stringWithFormat:@"age:%@",value];
+        }];;
+        RAC(cell,descLabel.text) = [RACObserve(viewModel, user.desc) takeUntil:cell.rac_prepareForReuseSignal];
+    }] addReuseIdentifier:@"CellWithButtonByNibTableViewCell" indexPathRange:^BOOL(NSIndexPath *indexPath) {
+        return indexPath.section == 0 && indexPath.row >= 2;
+    } bindingBlock:^(CellWithButtonByNibTableViewCell *cell, CellWithButtonByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
+        @strongify(self)
+        cell.textLabel.text = viewModel.title;
+        [viewModel.addButtonCommand.executionSignals.switchToLatest subscribeNext:^(CellWithButtonByNibTableViewCellViewModel *x) {
+            NSMutableArray *newData = [NSMutableArray arrayWithArray:self.multipleTypeCellByNibTableView.dy_data];
+            [newData addObject:x];
+            self.multipleTypeCellByNibTableView.dy_data = newData;
+        }];
+        cell.addButton.rac_command = viewModel.addButtonCommand;
     }];
     
     
+    
+//    @weakify(self)
+//    [[[self.multipleTypeCellByNibTableView addReuseIdentifier:@"OneTypeCellByNibTableViewCell" section:0 row:0 bindingBlock:^(OneTypeCellByNibTableViewCell *cell, OneTypeCellByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
+//        @strongify(self)
+//        RAC(cell,nameLabel.text) = [RACObserve(viewModel, user.name) takeUntil:cell.rac_prepareForReuseSignal];
+//        RAC(cell,headImageView.image) = [[RACObserve(viewModel, user.img) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+//            return [UIImage imageNamed:value];
+//        }];
+//        RAC(cell,ageLabel.text) = [[RACObserve(viewModel, user.age) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+//            return [NSString stringWithFormat:@"age:%@",value];
+//        }];;
+//        RAC(cell,descLabel.text) = [RACObserve(viewModel, user.desc) takeUntil:cell.rac_prepareForReuseSignal];
+//    }] addReuseIdentifier:@"OneTypeCellByNibTableViewCell" section:0 row:1 bindingBlock:^(OneTypeCellByNibTableViewCell *cell, OneTypeCellByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
+//        @strongify(self)
+//        RAC(cell,nameLabel.text) = [RACObserve(viewModel, user.name) takeUntil:cell.rac_prepareForReuseSignal];
+//        RAC(cell,headImageView.image) = [[RACObserve(viewModel, user.img) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+//            return [UIImage imageNamed:value];
+//        }];
+//        RAC(cell,ageLabel.text) = [[RACObserve(viewModel, user.age) takeUntil:cell.rac_prepareForReuseSignal] map:^id _Nullable(NSString *value) {
+//            return [NSString stringWithFormat:@"age:%@",value];
+//        }];;
+//        RAC(cell,descLabel.text) = [RACObserve(viewModel, user.desc) takeUntil:cell.rac_prepareForReuseSignal];
+//    }] addReuseIdentifier:@"CellWithButtonByNibTableViewCell" section:0 row:2 bindingBlock:^(CellWithButtonByNibTableViewCell *cell, CellWithButtonByNibTableViewCellViewModel *viewModel, NSIndexPath *indexPath) {
+//        @strongify(self)
+//        cell.textLabel.text = viewModel.title;
+//        [viewModel.addButtonCommand.executionSignals.switchToLatest subscribeNext:^(CellWithButtonByNibTableViewCellViewModel *x) {
+//            NSMutableArray *newData = [NSMutableArray arrayWithArray:self.multipleTypeCellByNibTableView.dy_data];
+//            [newData addObject:x];
+//            self.multipleTypeCellByNibTableView.dy_data = newData;
+//        }];
+//        cell.addButton.rac_command = viewModel.addButtonCommand;
+//    }];
     
     
     User *user1 = [[User alloc] init];

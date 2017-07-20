@@ -10,29 +10,32 @@
 
 @implementation DYTableViewAgent
 
-#pragma 过时的代理方法
-//- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED{}
+#pragma lazyProperties
+-(NSMutableArray *)cellInfoList{return _cellInfoList = (_cellInfoList ?: [[NSMutableArray alloc] init]);}
 
 #pragma dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : (self.data ? [self.data count] : 0);
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.cellForRowAtIndexPath) {
-        return self.cellForRowAtIndexPath(tableView,indexPath);
+    if (self.cellInfoList.count != 0) {
+        UITableViewCell *cell;
+        for (CellInfo *cellInfo in self.cellInfoList) {
+            if (cellInfo.indexPathRangeBlock(indexPath)) {
+                cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
+                cellInfo.cellBindBlock(cell, self.data[indexPath.row], indexPath);
+            }
+        }
+        if (!cell) {
+            NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
+        }
+        return cell;
     } else {
         if ([self.data isKindOfClass:NSArray.class]) {
-            
             NSString *cellIdentifier = self.identifier ? self.identifier : DY_DEFAULT_ID;
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             self.cellBindBlock(cell, self.data[indexPath.row], indexPath);
             return cell;
-//        } else if ([self.data isKindOfClass:NSDictionary.class]){
-//            NSArray *keys = [self.data allKeys];
-//            NSString *cellIdentifier = keys[indexPath.row];
-//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//            self.cellBindBlock(cell, self.data[cellIdentifier], indexPath);
-//            return cell;
         } else {
             NSLog(@"dy_data is not NSArray");
             return nil;
@@ -151,5 +154,9 @@
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0){}
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0){}
 
+
+@end
+
+@implementation CellInfo
 
 @end

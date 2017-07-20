@@ -23,8 +23,4 @@
     }]));
 }
 
-- (NSString *) cellIdentifier{
-    return @"CellWithButtonByNibTableViewCell";
-}
-
 @end

@@ -10,8 +10,4 @@
 
 @implementation OneTypeCellByClassTableViewCellViewModel
 
-- (NSString *) cellIdentifier{
-    return @"OneTypeCellByClassTableViewCell";
-}
-
 @end

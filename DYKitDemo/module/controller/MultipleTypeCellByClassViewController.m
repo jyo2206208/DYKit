@@ -26,24 +26,24 @@
 }
 
 - (void)setUpMultipleTypeCellByClassTableView {
-    [self.multipleTypeCellByClassTableView bindingForReuseIdentifiers:@[@"OneTypeCellByClassTableViewCell",@"BlueTableViewCell"] bindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
-        if ([cell isKindOfClass:OneTypeCellByClassTableViewCell.class]) {
-            OneTypeCellByClassTableViewCellViewModel *customerViewModel = (OneTypeCellByClassTableViewCellViewModel*)viewModel;
-            cell.textLabel.text = customerViewModel.title;
-        } else if ([cell isKindOfClass:BlueTableViewCell.class]) {
-            BlueTableViewCellViewModel *tableViewCellViewModel = (BlueTableViewCellViewModel*)viewModel;
-            cell.textLabel.text = tableViewCellViewModel.title;
-        }
-    }];
-    
-    
-    BlueTableViewCellViewModel *tableViewCellViewModel = [[BlueTableViewCellViewModel alloc] init];
-    tableViewCellViewModel.title = @"刘德华";
-    
-    OneTypeCellByClassTableViewCellViewModel *oneTypeCellByClassTableViewCellViewModel = [[OneTypeCellByClassTableViewCellViewModel alloc] init];
-    oneTypeCellByClassTableViewCellViewModel.title = @"王宝强";
-    
-    RAC(self,multipleTypeCellByClassTableView.dy_data) = [RACSignal return:@[tableViewCellViewModel,oneTypeCellByClassTableViewCellViewModel]];
+//    [self.multipleTypeCellByClassTableView bindingForReuseIdentifiers:@[@"OneTypeCellByClassTableViewCell",@"BlueTableViewCell"] bindingBlock:^(UITableViewCell *cell, id viewModel, NSIndexPath *indexPath) {
+//        if ([cell isKindOfClass:OneTypeCellByClassTableViewCell.class]) {
+//            OneTypeCellByClassTableViewCellViewModel *customerViewModel = (OneTypeCellByClassTableViewCellViewModel*)viewModel;
+//            cell.textLabel.text = customerViewModel.title;
+//        } else if ([cell isKindOfClass:BlueTableViewCell.class]) {
+//            BlueTableViewCellViewModel *tableViewCellViewModel = (BlueTableViewCellViewModel*)viewModel;
+//            cell.textLabel.text = tableViewCellViewModel.title;
+//        }
+//    }];
+//    
+//    
+//    BlueTableViewCellViewModel *tableViewCellViewModel = [[BlueTableViewCellViewModel alloc] init];
+//    tableViewCellViewModel.title = @"刘德华";
+//    
+//    OneTypeCellByClassTableViewCellViewModel *oneTypeCellByClassTableViewCellViewModel = [[OneTypeCellByClassTableViewCellViewModel alloc] init];
+//    oneTypeCellByClassTableViewCellViewModel.title = @"王宝强";
+//    
+//    RAC(self,multipleTypeCellByClassTableView.dy_data) = [RACSignal return:@[tableViewCellViewModel,oneTypeCellByClassTableViewCellViewModel]];
 }
 
 

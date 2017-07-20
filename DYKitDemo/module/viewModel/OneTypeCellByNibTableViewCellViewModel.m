@@ -10,8 +10,4 @@
 
 @implementation OneTypeCellByNibTableViewCellViewModel
 
-- (NSString*)cellIdentifier {
-    return @"OneTypeCellByNibTableViewCell";
-}
-
 @end

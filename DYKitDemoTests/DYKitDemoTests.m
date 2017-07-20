@@ -25,8 +25,13 @@
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:2 inSection:1];
+    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:2 inSection:1];
+    if ([indexPath1 isEqual:indexPath2]) {
+        NSLog(@"yes");
+    } else {
+        NSLog(@"no");
+    }
 }
 
 - (void)testPerformanceExample {

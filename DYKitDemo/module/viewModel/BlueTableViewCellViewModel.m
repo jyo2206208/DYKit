@@ -10,8 +10,5 @@
 
 @implementation BlueTableViewCellViewModel
 
-- (NSString *) cellIdentifier{
-    return @"BlueTableViewCell";
-}
 
 @end

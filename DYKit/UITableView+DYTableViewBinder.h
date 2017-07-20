@@ -10,13 +10,6 @@
 #import "DYTableViewAgent.h"
 #import "objc/runtime.h"
 
-
-#if __has_include("ReactiveCocoa.h")
-#import "ReactiveCocoa.h"
-#else
-#import <ReactiveObjC/ReactiveObjC.h>
-#endif
-
 @interface UITableView (DYTableViewBinder)
 
 @property (nonatomic,strong) DYTableViewAgent *dy_agent;
@@ -30,7 +23,7 @@
 - (BOOLTableViewIndexPath)shouldHighlightRowAtIndexPath;
 - (BOOLTableViewIndexPath)canEditRowAtIndexPath;
 - (NSIntegerTableViewIndexPath)numberOfRowsInSection;
-- (UITableViewCellTableViewIndexPath)cellForRowAtIndexPath;
+//- (UITableViewCellTableViewIndexPath)cellForRowAtIndexPath;
 - (NSIntegerUITableView)numberOfSectionsInTableView;
 - (NSStringTableViewNSInteger)titleForHeaderInSection;
 - (NSStringTableViewNSInteger)titleForFooterInSection;
@@ -61,7 +54,7 @@
 - (void)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block;
 - (void)setCanEditRowAtIndexPath:(BOOLTableViewIndexPath)block;
 - (void)setNumberOfRowsInSection:(NSIntegerTableViewIndexPath)block;
-- (void)setCellForRowAtIndexPath:(UITableViewCellTableViewIndexPath)block;
+//- (void)setCellForRowAtIndexPath:(UITableViewCellTableViewIndexPath)block;
 - (void)setNumberOfSectionsInTableView:(NSIntegerUITableView)block;
 - (void)setTitleForHeaderInSection:(NSStringTableViewNSInteger)block;
 - (void)setTitleForFooterInSection:(NSStringTableViewNSInteger)block;
@@ -96,6 +89,14 @@
  */
 - (void) bindingForBindingBlock:(CellBindBlock)block;
 
+
+//- (void) addReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
+
+- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block;
+
+
+- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock;
+
 /**
  固定一种自定义cell
  
@@ -110,7 +111,7 @@
  @param block cellForRowAtIndexPath的block
  @param identifiers cell的重用ID的数组(使用cell的类名，可以是xib或者class创建)
  */
-- (void) bindingForReuseIdentifiers:(NSArray *)identifiers bindingBlock:(CellBindBlock)block;
+//- (void) bindingForReuseIdentifiers:(NSArray *)identifiers bindingBlock:(CellBindBlock)block;
 
 #pragma delegate方法
 - (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal;

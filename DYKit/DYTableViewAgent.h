@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "DYTableViewCellViewModelProtocol.h"
+#if __has_include("ReactiveCocoa.h")
+#import "ReactiveCocoa.h"
+#else
+#import <ReactiveObjC/ReactiveObjC.h>
+#endif
 
 #define DY_DEFAULT_ID @"UITableViewCell"
 
@@ -23,12 +27,31 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 }
 #endif
 
-@interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
+@interface CellInfo : NSObject
 
 typedef void(^CellBindBlock)(id cell,id viewModel,NSIndexPath *indexPath);
+typedef BOOL(^IndexPathRangeBlock)(NSIndexPath *indexPath);
+
+//@property (nonatomic) NSInteger section;
+//@property (nonatomic) NSInteger row;
+@property (nonatomic, copy) NSString *reuseIdentifier;
+@property (nonatomic, copy) IndexPathRangeBlock indexPathRangeBlock;
+@property (nonatomic, copy) CellBindBlock cellBindBlock;
+
+@end
+
+@interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
+
+
+
+
 @property (nonatomic, copy) id data;
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, copy) CellBindBlock cellBindBlock;
+
+
+@property (nonatomic, strong) NSMutableArray<CellInfo*> *cellInfoList;
+//@property (nonatomic, strong) NSMutableDictionary *reuseIdAndCellBlockDic;
 
 
 typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
@@ -54,8 +77,8 @@ typedef BOOL (^BOOLTableViewIndexPath)(UITableView *tableView,NSIndexPath *index
 typedef NSInteger (^NSIntegerTableViewIndexPath)(UITableView *tableView,NSInteger section);
 @property (nonatomic, copy) NSIntegerTableViewIndexPath numberOfRowsInSection;
 
-typedef UITableViewCell *(^UITableViewCellTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) UITableViewCellTableViewIndexPath cellForRowAtIndexPath;
+//typedef UITableViewCell *(^UITableViewCellTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
+//@property (nonatomic, copy) UITableViewCellTableViewIndexPath cellForRowAtIndexPath;
 
 typedef NSInteger (^NSIntegerUITableView)(UITableView *tableView);
 @property (nonatomic, copy) NSIntegerUITableView numberOfSectionsInTableView;
@@ -104,3 +127,5 @@ typedef NSIndexPath *(^NSIndexPathUITableView)(UITableView *tableView);
 @property (nonatomic, copy) NSIndexPathUITableView indexPathForPreferredFocusedViewInTableView;
 
 @end
+
+
