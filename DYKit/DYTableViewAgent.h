@@ -31,7 +31,6 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 
 typedef void(^AssemblyBlock)(id cell,id model,NSIndexPath *indexPath);
 typedef BOOL(^SlotBlock)(NSIndexPath *indexPath, id model);
-//typedef BOOL(^DataSlotBlock)(id data);
 
 @property (nonatomic, copy) NSString *reuseIdentifier;
 @property (nonatomic, copy) SlotBlock slotBlock;

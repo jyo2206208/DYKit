@@ -64,14 +64,6 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     return self;
 }
 
-//- (UITableView*) addReuseIdentifier:(NSString *)identifier dataSlotBlock:(DataSlotBlock)dataSlotBlock bindingBlock:(CellBindBlock)cellBindBlock{
-//    @weakify(self)
-//    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
-//        @strongify(self)
-//        return dataSlotBlock(self.dy_data[indexPath.row]);
-//    } bindingBlock:cellBindBlock];
-//}
-
 - (void)dyRegisterForCellReuseIdentifier:(NSString *)identifier{
     if ([identifier isEqualToString:DY_DEFAULT_ID]) {
         [self registerClass:UITableViewCell.class forCellReuseIdentifier:identifier];

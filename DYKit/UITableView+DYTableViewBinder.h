@@ -71,14 +71,11 @@
  指定具体的indexPath进行cell设定，可选择任意位置
 
  @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- @param slotBlock 用于指定具体地址的block。通过对参数的indexPath进行判断，返回需要的具体位置
+ @param slotBlock 用于指定具体条件的block。通过对参数的indexPath进行判断，返回需要的具体位置
  @param cellBindBlock cellForRowAtIndexPath的block
  @return 返回自身，用于链式调用
  */
 - (UITableView*) addReuseIdentifier:(NSString *)identifier FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock;
-
-
-//- (UITableView*) addReuseIdentifier:(NSString *)identifier dataSlotBlock:(DataSlotBlock)dataSlotBlock bindingBlock:(CellBindBlock)cellBindBlock;
 
 #pragma 配置用block
 - (CGFloatTableViewIndexPath)heightForRowAtIndexPath;

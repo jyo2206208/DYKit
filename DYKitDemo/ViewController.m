@@ -12,6 +12,7 @@
 #import "CellWithSectionAndRowViewController.h"
 #import "CellWithSectionViewController.h"
 #import "CellWithRowViewController.h"
+#import "DataSlotViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTableView;
@@ -29,13 +30,15 @@
 - (void)homeTableViewSetUp {
     
     [self.homeTableView assemblyWithAssemblyBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
+        //这个block充当了cellForRowAtIndexPath的作用
         cell.textLabel.text = text;
     }];
     
     self.homeTableView.dy_data = @[@"固定一种自定义cell",
                                    @"指定section和row(或具体indexPath)设定cell",
                                    @"指定section进行cell设定",
-                                   @"指定row进行cell设定"];
+                                   @"指定row进行cell设定",
+                                   @"指定数据条件进行cell设定"];
     
     @weakify(self)
     [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
@@ -74,7 +77,14 @@
         [self.navigationController pushViewController:[[CellWithRowViewController alloc] init] animated:YES];
     }];
     
+    [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
+        return @(indexPath.row);
+    }] filter:^BOOL(id  _Nullable value) {
+        return [value intValue] == 4;
+    }] subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        [self.navigationController pushViewController:[[DataSlotViewController alloc] init] animated:YES];
+    }];
     
 }
-
 @end
