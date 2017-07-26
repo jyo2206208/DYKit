@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView bindingForReuseIdentifier:@"OneTypeCellByNibTableViewCell" bindingBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
+    [self.tableView assemblyByReuseIdentifier:@"OneTypeCellByNibTableViewCell" withAssemblyBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
         cell.headImageView.image = [UIImage imageNamed:user.img];
         cell.headImageView.backgroundColor = user.sex == 0 ? [UIColor purpleColor] : [UIColor blackColor];
         cell.nameLabel.text = user.name;

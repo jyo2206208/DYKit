@@ -20,13 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    [[[[[[self.tableView addReuseIdentifier:DY_DEFAULT_ID indexPathRange:^BOOL(NSIndexPath *indexPath) {
+    [[[[[[self.tableView addReuseIdentifier:DY_DEFAULT_ID FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
         return !(indexPath.section == 1 && indexPath.row == 0);
-    } bindingBlock:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
+    } withAssemblyBlock:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
         cell.textLabel.text = string;
-    }] addReuseIdentifier:@"OneTypeCellByNibTableViewCell" section:1 row:0 bindingBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
+    }] addReuseIdentifier:@"OneTypeCellByNibTableViewCell" FromSection:1 row:0 withAssemblyBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
         cell.headImageView.image = [UIImage imageNamed:user.img];
         cell.headImageView.backgroundColor = user.sex == 0 ? [UIColor purpleColor] : [UIColor blackColor];
         cell.nameLabel.text = user.name;
@@ -42,6 +40,8 @@
     }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
         return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
     }] setSectionHeaderHeight:50];
+    
+    
     
     
     User *user1 = [User new];

@@ -6,8 +6,9 @@ target 'DYKitDemo' do
   # use_frameworks!
 
   # Pods for DYKitDemo
-pod 'ReactiveObjC'
-
+    pod 'ReactiveObjC'
+    pod 'MLeaksFinder', :inhibit_warnings => true
+    
   target 'DYKitDemoTests' do
     inherit! :search_paths
     # Pods for testing

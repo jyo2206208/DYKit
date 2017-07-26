@@ -28,7 +28,7 @@
 
 - (void)homeTableViewSetUp {
     
-    [self.homeTableView bindingForBindingBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
+    [self.homeTableView assemblyWithAssemblyBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;
     }];
     

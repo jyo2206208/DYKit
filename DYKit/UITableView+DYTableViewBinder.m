@@ -17,34 +17,34 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (void)setDy_data:(id)dy_data{self.dy_agent.data = dy_data;}
 
 #pragma 主要配置方法
-- (UITableView*) bindingForBindingBlock:(CellBindBlock)block{
-    return [self bindingForReuseIdentifier:DY_DEFAULT_ID bindingBlock:block];
+- (UITableView*) assemblyWithAssemblyBlock:(AssemblyBlock)block{
+    return [self assemblyByReuseIdentifier:DY_DEFAULT_ID withAssemblyBlock:block];
 }
 
-- (UITableView*) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block{
-    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+- (UITableView*) assemblyByReuseIdentifier:(NSString *)identifier withAssemblyBlock:(AssemblyBlock)block{
+    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
         return YES;
-    } bindingBlock:block];
+    } withAssemblyBlock:block];
 }
 
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block{
-    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section row:(int)row withAssemblyBlock:(AssemblyBlock)block{
+    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
         return indexPath.section == section && indexPath.row == row;
-    } bindingBlock:block];
+    } withAssemblyBlock:block];
 }
 
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block{
-    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section withAssemblyBlock:(AssemblyBlock)block{
+    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
         return indexPath.section == section;
-    } bindingBlock:block];
+    } withAssemblyBlock:block];
 }
-- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block{
-    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromRow:(int)row withAssemblyBlock:(AssemblyBlock)block{
+    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
         return indexPath.section == 0 && indexPath.row == row;
-    } bindingBlock:block];
+    } withAssemblyBlock:block];
 }
 
-- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock{
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock{
     if (!self.dy_agent) {
         self.dy_agent = [[DYTableViewAgent alloc] init];
         self.dataSource = self.dy_agent;
@@ -58,11 +58,19 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     [self dyRegisterForCellReuseIdentifier:identifier];
     CellInfo *cellInfo = [[CellInfo alloc] init];
     cellInfo.reuseIdentifier = identifier;
-    cellInfo.indexPathRangeBlock = indexPathRangeBlock;
+    cellInfo.slotBlock = slotBlock;
     cellInfo.cellBindBlock = cellBindBlock;
     [self.dy_agent.cellInfoList addObject:cellInfo];
     return self;
 }
+
+//- (UITableView*) addReuseIdentifier:(NSString *)identifier dataSlotBlock:(DataSlotBlock)dataSlotBlock bindingBlock:(CellBindBlock)cellBindBlock{
+//    @weakify(self)
+//    return [self addReuseIdentifier:identifier indexPathRange:^BOOL(NSIndexPath *indexPath) {
+//        @strongify(self)
+//        return dataSlotBlock(self.dy_data[indexPath.row]);
+//    } bindingBlock:cellBindBlock];
+//}
 
 - (void)dyRegisterForCellReuseIdentifier:(NSString *)identifier{
     if ([identifier isEqualToString:DY_DEFAULT_ID]) {

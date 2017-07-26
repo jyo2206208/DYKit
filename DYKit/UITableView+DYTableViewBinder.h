@@ -25,7 +25,7 @@
  @param block cellForRowAtIndexPath的block
  @return 返回自身，用于链式调用
  */
-- (UITableView*) bindingForBindingBlock:(CellBindBlock)block;
+- (UITableView*) assemblyWithAssemblyBlock:(AssemblyBlock)block;
 
 /**
  固定一种自定义cell
@@ -34,7 +34,7 @@
  @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
  @return 返回自身，用于链式调用
  */
-- (UITableView*) bindingForReuseIdentifier:(NSString *)identifier bindingBlock:(CellBindBlock)block;
+- (UITableView*) assemblyByReuseIdentifier:(NSString *)identifier withAssemblyBlock:(AssemblyBlock)block;
 
 /**
  指定section和row进行cell设定
@@ -45,7 +45,7 @@
  @param block cellForRowAtIndexPath的block
  @return 返回自身，用于链式调用
  */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section row:(int)row bindingBlock:(CellBindBlock)block;
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section row:(int)row withAssemblyBlock:(AssemblyBlock)block;
 
 /**
  指定section进行cell设定。默认本section下的cell全部按照block内容进行设定
@@ -55,7 +55,7 @@
  @param block cellForRowAtIndexPath的block
  @return 返回自身，用于链式调用
  */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier section:(int)section bindingBlock:(CellBindBlock)block;
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section withAssemblyBlock:(AssemblyBlock)block;
 
 /**
  指定row进行cell设定。默认只有一个section
@@ -65,18 +65,20 @@
  @param block cellForRowAtIndexPath的block
  @return 返回自身，用于链式调用
  */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier row:(int)row bindingBlock:(CellBindBlock)block;
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromRow:(int)row withAssemblyBlock:(AssemblyBlock)block;
 
 /**
  指定具体的indexPath进行cell设定，可选择任意位置
 
  @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- @param indexPathRangeBlock 用于指定具体地址的block。通过对参数的indexPath进行判断，返回需要的具体位置
+ @param slotBlock 用于指定具体地址的block。通过对参数的indexPath进行判断，返回需要的具体位置
  @param cellBindBlock cellForRowAtIndexPath的block
  @return 返回自身，用于链式调用
  */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier indexPathRange:(IndexPathRangeBlock)indexPathRangeBlock bindingBlock:(CellBindBlock)cellBindBlock;
+- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock;
 
+
+//- (UITableView*) addReuseIdentifier:(NSString *)identifier dataSlotBlock:(DataSlotBlock)dataSlotBlock bindingBlock:(CellBindBlock)cellBindBlock;
 
 #pragma 配置用block
 - (CGFloatTableViewIndexPath)heightForRowAtIndexPath;

@@ -20,7 +20,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
     for (CellInfo *cellInfo in self.cellInfoList) {
-        if (cellInfo.indexPathRangeBlock(indexPath)) {
+        if (cellInfo.slotBlock(indexPath,self.data[indexPath.row])) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
             cellInfo.cellBindBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
         }

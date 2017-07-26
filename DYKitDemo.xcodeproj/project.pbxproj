@@ -23,7 +23,6 @@
 		E35F5CF61F209466009ADC93 /* CellWithSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F5CF41F209466009ADC93 /* CellWithSectionViewController.xib */; };
 		E35F5CFA1F209E72009ADC93 /* CellWithRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E35F5CF81F209E72009ADC93 /* CellWithRowViewController.m */; };
 		E35F5CFB1F209E72009ADC93 /* CellWithRowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F5CF91F209E72009ADC93 /* CellWithRowViewController.xib */; };
-		E35F5CFD1F20A084009ADC93 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E35F5CFC1F20A084009ADC93 /* README.md */; };
 		E374C2B21F14B432002D53B5 /* DYTableViewAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */; };
 		E374C2B31F14B432002D53B5 /* UITableView+DYTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */; };
 		E374C2B51F14B451002D53B5 /* DYKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E374C2B41F14B451002D53B5 /* DYKit.podspec */; };
@@ -34,6 +33,8 @@
 		E3C024A71F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024A51F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m */; };
 		E3C024A81F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C024A61F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib */; };
 		E3C024C61F127BFD0043DD8F /* BlueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C024C51F127BFD0043DD8F /* BlueTableViewCell.m */; };
+		E3DF6D291F277426000D3E29 /* DataSlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DF6D271F277426000D3E29 /* DataSlotViewController.m */; };
+		E3DF6D2A1F277426000D3E29 /* DataSlotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3DF6D281F277426000D3E29 /* DataSlotViewController.xib */; };
 		F3E5D61059E59339761F5566 /* libPods-DYKitDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40DCAC09DA2A7A20FC02D49 /* libPods-DYKitDemoTests.a */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,9 @@
 		E3C024A61F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithButtonByNibTableViewCell.xib; sourceTree = "<group>"; };
 		E3C024C41F127BFD0043DD8F /* BlueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueTableViewCell.h; sourceTree = "<group>"; };
 		E3C024C51F127BFD0043DD8F /* BlueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueTableViewCell.m; sourceTree = "<group>"; };
+		E3DF6D261F277426000D3E29 /* DataSlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSlotViewController.h; sourceTree = "<group>"; };
+		E3DF6D271F277426000D3E29 /* DataSlotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSlotViewController.m; sourceTree = "<group>"; };
+		E3DF6D281F277426000D3E29 /* DataSlotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataSlotViewController.xib; sourceTree = "<group>"; };
 		FCC7EA0B3413388469B9EEBA /* Pods-DYKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DYKitDemo/Pods-DYKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,6 +238,9 @@
 				E35F5CF71F209E72009ADC93 /* CellWithRowViewController.h */,
 				E35F5CF81F209E72009ADC93 /* CellWithRowViewController.m */,
 				E35F5CF91F209E72009ADC93 /* CellWithRowViewController.xib */,
+				E3DF6D261F277426000D3E29 /* DataSlotViewController.h */,
+				E3DF6D271F277426000D3E29 /* DataSlotViewController.m */,
+				E3DF6D281F277426000D3E29 /* DataSlotViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -359,6 +366,7 @@
 				E35F5CF11F207B06009ADC93 /* CellWithSectionAndRowViewController.xib in Resources */,
 				E3518EA31F106B86008534B1 /* Assets.xcassets in Resources */,
 				E35F5CEC1F205D52009ADC93 /* OneTypeCellViewController.xib in Resources */,
+				E3DF6D2A1F277426000D3E29 /* DataSlotViewController.xib in Resources */,
 				E35F5CFB1F209E72009ADC93 /* CellWithRowViewController.xib in Resources */,
 				E3C024951F11831D0043DD8F /* OneTypeCellByNibTableViewCell.xib in Resources */,
 				E3518EA11F106B86008534B1 /* Main.storyboard in Resources */,
@@ -484,8 +492,8 @@
 				E3C024A71F11FE280043DD8F /* CellWithButtonByNibTableViewCell.m in Sources */,
 				E374C2B21F14B432002D53B5 /* DYTableViewAgent.m in Sources */,
 				E3C0249E1F11DFED0043DD8F /* OneTypeCellByClassTableViewCell.m in Sources */,
-				E35F5CFD1F20A084009ADC93 /* README.md in Sources */,
 				E35F5CF51F209466009ADC93 /* CellWithSectionViewController.m in Sources */,
+				E3DF6D291F277426000D3E29 /* DataSlotViewController.m in Sources */,
 				E3518E981F106B86008534B1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
