@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[[[[[[self.tableView addReuseIdentifier:DY_DEFAULT_ID FromSection:0 withAssemblyBlock:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
+    [[[[[[[[self.tableView addReuseIdentifier:DY_DEFAULT_ID FromSection:0 withAssemblyBlock:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
         cell.textLabel.text = string;
     }] addReuseIdentifier:@"OneTypeCellByNibTableViewCell" FromSection:1 withAssemblyBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
         cell.headImageView.image = [UIImage imageNamed:user.img];
@@ -42,6 +42,8 @@
         return 3;
     }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
         return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
+    }] setHeightForRowAtIndexPath:^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
+        return indexPath.row == 1 ? 100 : tableView.rowHeight;
     }] setSectionHeaderHeight:50];
     
     

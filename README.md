@@ -1,7 +1,7 @@
 DYKit
 ==============
-[![CocoaPods](http://img.shields.io/cocoapods/v/YYKit.svg?style=flat)](http://cocoapods.org/pods/DYKit)&nbsp;
-[![CocoaPods](http://img.shields.io/cocoapods/p/YYKit.svg?style=flat)](http://cocoadocs.org/docsets/DYKit)&nbsp;
+[![CocoaPods](http://img.shields.io/cocoapods/v/DYKit.svg?style=flat)](http://cocoapods.org/pods/DYKit)&nbsp;
+[![CocoaPods](http://img.shields.io/cocoapods/p/DYKit.svg?style=flat)](http://cocoadocs.org/docsets/DYKit)&nbsp;
 [![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
 DYKit是一套使用了ReactiveObjC的系统控件封装库
@@ -142,37 +142,6 @@ self.tableView.dy_data = @[user1,user2,user3];
 
 ```objc
 #pragma 配置用block
-- (CGFloatTableViewIndexPath)heightForRowAtIndexPath;
-- (EditActionsForRowAtIndexPath)editActionsForRowAtIndexPath;
-- (BOOLTableViewIndexPath)shouldHighlightRowAtIndexPath;
-- (BOOLTableViewIndexPath)canEditRowAtIndexPath;
-- (NSIntegerTableViewIndexPath)numberOfRowsInSection;
-//- (UITableViewCellTableViewIndexPath)cellForRowAtIndexPath;
-- (NSIntegerUITableView)numberOfSectionsInTableView;
-- (NSStringTableViewNSInteger)titleForHeaderInSection;
-- (NSStringTableViewNSInteger)titleForFooterInSection;
-- (BOOLTableViewIndexPath)canMoveRowAtIndexPath;
-- (SectionIndexTitlesForTableView)sectionIndexTitlesForTableView;
-- (NSIntegerUITableViewNSStringNSInteger)sectionForSectionIndexTitle;
-- (CGFloatTableViewNSInteger)heightForHeaderInSection;
-- (CGFloatTableViewNSInteger)heightForFooterInSection;
-- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath;
-- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection;
-- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection;
-- (UIViewTableViewNSInteger)viewForHeaderInSection;
-- (UIViewTableViewNSInteger)viewForFooterInSection;
-- (NSIndexPathUITableViewNSIndexPath)willSelectRowAtIndexPath;
-- (NSIndexPathUITableViewNSIndexPath)willDeselectRowAtIndexPath;
-- (UITableViewCellEditingStyleUITableViewNSIndexPath)editingStyleForRowAtIndexPath;
-- (NSStringTableViewIndexPath)titleForDeleteConfirmationButtonForRowAtIndexPath;
-- (BOOLTableViewIndexPath)shouldIndentWhileEditingRowAtIndexPath;
-- (NSIndexPathUITableViewNSIndexPathNSIndexPath)targetIndexPathForMoveFromRowAtIndexPath;
-- (NSIntegerUITableViewNSIndexPath)indentationLevelForRowAtIndexPath;
-- (BOOLTableViewIndexPath)shouldShowMenuForRowAtIndexPath;
-- (BOOLUITableViewSELNSIndexPath)canPerformAction;
-- (BOOLTableViewIndexPath)canFocusRowAtIndexPath;
-- (BOOLUITableViewFocusUpdateContext)shouldUpdateFocusInContext;
-- (NSIndexPathUITableView)indexPathForPreferredFocusedViewInTableView;
 - (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
 - (UITableView*)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block;
 - (UITableView*)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block;
