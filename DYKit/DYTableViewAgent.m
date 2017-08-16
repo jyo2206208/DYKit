@@ -55,7 +55,14 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 
 #pragma delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return self.heightForRowAtIndexPath ? self.heightForRowAtIndexPath(tableView, indexPath) : tableView.rowHeight;
+    CGFloat height = tableView.rowHeight;
+    for (DYTableViewModule *module in self.tableModuleLists) {
+        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+            height = module.rowHeight ?: (self.heightForRowAtIndexPath ? self.heightForRowAtIndexPath(tableView, indexPath) : tableView.rowHeight);
+            break;
+        }
+    }
+    return height;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return self.heightForHeaderInSection ? self.heightForHeaderInSection(tableView,section) : tableView.sectionHeaderHeight;

@@ -10,6 +10,4 @@
 
 @implementation DYTableViewModule
 
--(NSString *)reuseIdentifier{return DY_LAZY(_reuseIdentifier,DY_DEFAULT_ID);}
-
 @end

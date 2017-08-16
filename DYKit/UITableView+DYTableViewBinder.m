@@ -64,6 +64,34 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     return self;
 }
 
+- (DYTableViewModule*) addSlotClass:(Class)slotClass FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock{
+    if (!self.dy_agent) {
+        self.dy_agent = [[DYTableViewAgent alloc] init];
+        self.dataSource = self.dy_agent;
+        self.delegate = self.dy_agent;
+        @weakify(self)
+        [[RACObserve(self, dy_agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
+            @strongify(self)
+            [self reloadData];
+        }];
+    }
+    [self dyRegisterForCellReuseIdentifier:NSStringFromClass(slotClass)];
+    DYTableViewModule *module = [[DYTableViewModule alloc] init];
+    module.reuseIdentifier = NSStringFromClass(slotClass);
+    module.slotBlock = slotBlock;
+    module.cellBindBlock = cellBindBlock;
+    
+    
+    NSUInteger __block count = self.dy_agent.tableModuleLists.count;
+    [self.dy_agent.tableModuleLists addObject:module];
+    @weakify(self)
+    [RACObserve(module, self) subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        [self.dy_agent.tableModuleLists replaceObjectAtIndex:count withObject:module];
+    }];
+    return module;
+}
+
 - (void)dyRegisterForCellReuseIdentifier:(NSString *)identifier{
     if ([identifier isEqualToString:DY_DEFAULT_ID]) {
         [self registerClass:UITableViewCell.class forCellReuseIdentifier:identifier];
