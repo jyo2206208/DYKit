@@ -41,7 +41,6 @@ typedef BOOL(^SlotBlock)(NSIndexPath *indexPath, id model);
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, copy) id data;
-@property (nonatomic, copy) AssemblyBlock cellBindBlock;
 @property (nonatomic, strong) NSMutableArray<CellInfo*> *cellInfoList;
 
 

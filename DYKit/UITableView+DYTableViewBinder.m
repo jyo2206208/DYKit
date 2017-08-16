@@ -77,37 +77,6 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 }
 
 #pragma 配置用block
-//- (CGFloatTableViewIndexPath)heightForRowAtIndexPath{return self.dy_agent.heightForRowAtIndexPath;}
-//- (EditActionsForRowAtIndexPath)editActionsForRowAtIndexPath{return self.dy_agent.editActionsForRowAtIndexPath;}
-//- (BOOLTableViewIndexPath)shouldHighlightRowAtIndexPath{return self.dy_agent.shouldHighlightRowAtIndexPath;}
-//- (BOOLTableViewIndexPath)canEditRowAtIndexPath{return self.dy_agent.canEditRowAtIndexPath;}
-//- (NSIntegerTableViewIndexPath)numberOfRowsInSection{return self.dy_agent.numberOfRowsInSection;}
-////- (UITableViewCellTableViewIndexPath)cellForRowAtIndexPath{return self.dy_agent.cellForRowAtIndexPath;}
-//- (NSIntegerUITableView)numberOfSectionsInTableView{return self.dy_agent.numberOfSectionsInTableView;}
-//- (NSStringTableViewNSInteger)titleForHeaderInSection{return self.dy_agent.titleForHeaderInSection;}
-//- (NSStringTableViewNSInteger)titleForFooterInSection{return self.dy_agent.titleForFooterInSection;}
-//- (BOOLTableViewIndexPath)canMoveRowAtIndexPath{return self.dy_agent.canMoveRowAtIndexPath;}
-//- (SectionIndexTitlesForTableView)sectionIndexTitlesForTableView{return self.dy_agent.sectionIndexTitlesForTableView;}
-//- (NSIntegerUITableViewNSStringNSInteger)sectionForSectionIndexTitle{return self.dy_agent.sectionForSectionIndexTitle;}
-//- (CGFloatTableViewNSInteger)heightForHeaderInSection{return self.dy_agent.heightForHeaderInSection;}
-//- (CGFloatTableViewNSInteger)heightForFooterInSection{return self.dy_agent.heightForFooterInSection;}
-//- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath{return self.dy_agent.estimatedHeightForRowAtIndexPath;}
-//- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection{return self.dy_agent.estimatedHeightForHeaderInSection;}
-//- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection{return self.dy_agent.estimatedHeightForFooterInSection;}
-//- (UIViewTableViewNSInteger)viewForHeaderInSection{return self.dy_agent.viewForHeaderInSection;}
-//- (UIViewTableViewNSInteger)viewForFooterInSection{return self.dy_agent.viewForFooterInSection;}
-//- (NSIndexPathUITableViewNSIndexPath)willSelectRowAtIndexPath{return self.dy_agent.willSelectRowAtIndexPath;}
-//- (NSIndexPathUITableViewNSIndexPath)willDeselectRowAtIndexPath{return self.dy_agent.willDeselectRowAtIndexPath;}
-//- (UITableViewCellEditingStyleUITableViewNSIndexPath)editingStyleForRowAtIndexPath{return self.dy_agent.editingStyleForRowAtIndexPath;}
-//- (NSStringTableViewIndexPath)titleForDeleteConfirmationButtonForRowAtIndexPath{return self.dy_agent.titleForDeleteConfirmationButtonForRowAtIndexPath;}
-//- (BOOLTableViewIndexPath)shouldIndentWhileEditingRowAtIndexPath{return self.dy_agent.shouldIndentWhileEditingRowAtIndexPath;}
-//- (NSIndexPathUITableViewNSIndexPathNSIndexPath)targetIndexPathForMoveFromRowAtIndexPath{return self.dy_agent.targetIndexPathForMoveFromRowAtIndexPath;}
-//- (NSIntegerUITableViewNSIndexPath)indentationLevelForRowAtIndexPath{return self.dy_agent.indentationLevelForRowAtIndexPath;}
-//- (BOOLTableViewIndexPath)shouldShowMenuForRowAtIndexPath{return self.dy_agent.shouldShowMenuForRowAtIndexPath;}
-//- (BOOLUITableViewSELNSIndexPath)canPerformAction{return self.dy_agent.canPerformAction;}
-//- (BOOLTableViewIndexPath)canFocusRowAtIndexPath{return self.dy_agent.canFocusRowAtIndexPath;}
-//- (BOOLUITableViewFocusUpdateContext)shouldUpdateFocusInContext{return self.dy_agent.shouldUpdateFocusInContext;}
-//- (NSIndexPathUITableView)indexPathForPreferredFocusedViewInTableView{return self.dy_agent.indexPathForPreferredFocusedViewInTableView;}
 - (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.heightForRowAtIndexPath = block;return self;}
 - (UITableView*)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block{self.dy_agent.editActionsForRowAtIndexPath = block;return self;}
 - (UITableView*)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.shouldHighlightRowAtIndexPath = block;return self;}
