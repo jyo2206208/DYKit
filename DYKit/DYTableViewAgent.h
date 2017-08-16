@@ -7,41 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DYTableViewModule.h"
+
 #if __has_include("ReactiveCocoa.h")
 #import "ReactiveCocoa.h"
 #else
 #import <ReactiveObjC/ReactiveObjC.h>
 #endif
 
-#define DY_DEFAULT_ID @"DYTableViewCell"
-
-#ifndef DYSYNTH_DYNAMIC_PROPERTY_OBJECT
-#define DYSYNTH_DYNAMIC_PROPERTY_OBJECT(_getter_, _setter_, _association_, _type_) \
-- (void)_setter_ : (_type_)object { \
-[self willChangeValueForKey:@#_getter_]; \
-objc_setAssociatedObject(self, _cmd, object, OBJC_ASSOCIATION_ ## _association_); \
-[self didChangeValueForKey:@#_getter_]; \
-} \
-- (_type_)_getter_ { \
-return objc_getAssociatedObject(self, @selector(_setter_:)); \
-}
-#endif
-
-@interface CellInfo : NSObject
-
-typedef void(^AssemblyBlock)(id cell,id model,NSIndexPath *indexPath);
-typedef BOOL(^SlotBlock)(NSIndexPath *indexPath, id model);
-
-@property (nonatomic, copy) NSString *reuseIdentifier;
-@property (nonatomic, copy) SlotBlock slotBlock;
-@property (nonatomic, copy) AssemblyBlock cellBindBlock;
-
-@end
-
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, copy) id data;
-@property (nonatomic, strong) NSMutableArray<CellInfo*> *cellInfoList;
+@property (nonatomic, strong) NSMutableArray<DYTableViewModule*> *tableModuleLists;
 
 
 typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);

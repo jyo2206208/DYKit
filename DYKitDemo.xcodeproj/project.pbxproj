@@ -23,6 +23,9 @@
 		E35F5CF61F209466009ADC93 /* CellWithSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F5CF41F209466009ADC93 /* CellWithSectionViewController.xib */; };
 		E35F5CFA1F209E72009ADC93 /* CellWithRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E35F5CF81F209E72009ADC93 /* CellWithRowViewController.m */; };
 		E35F5CFB1F209E72009ADC93 /* CellWithRowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F5CF91F209E72009ADC93 /* CellWithRowViewController.xib */; };
+		E36E5FF41F442BAB0029336A /* DataSlotForHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E36E5FF21F442BAB0029336A /* DataSlotForHeightViewController.m */; };
+		E36E5FF51F442BAB0029336A /* DataSlotForHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E36E5FF31F442BAB0029336A /* DataSlotForHeightViewController.xib */; };
+		E36E5FF91F4431E30029336A /* DYTableViewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E36E5FF81F4431E30029336A /* DYTableViewModule.m */; };
 		E374C2B21F14B432002D53B5 /* DYTableViewAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */; };
 		E374C2B31F14B432002D53B5 /* UITableView+DYTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */; };
 		E374C2B51F14B451002D53B5 /* DYKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E374C2B41F14B451002D53B5 /* DYKit.podspec */; };
@@ -80,6 +83,12 @@
 		E35F5CF81F209E72009ADC93 /* CellWithRowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWithRowViewController.m; sourceTree = "<group>"; };
 		E35F5CF91F209E72009ADC93 /* CellWithRowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellWithRowViewController.xib; sourceTree = "<group>"; };
 		E35F5CFC1F20A084009ADC93 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E36E5FF11F442BAB0029336A /* DataSlotForHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSlotForHeightViewController.h; sourceTree = "<group>"; };
+		E36E5FF21F442BAB0029336A /* DataSlotForHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSlotForHeightViewController.m; sourceTree = "<group>"; };
+		E36E5FF31F442BAB0029336A /* DataSlotForHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataSlotForHeightViewController.xib; sourceTree = "<group>"; };
+		E36E5FF61F442FC40029336A /* DYMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYMacro.h; sourceTree = "<group>"; };
+		E36E5FF71F4431E30029336A /* DYTableViewModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYTableViewModule.h; sourceTree = "<group>"; };
+		E36E5FF81F4431E30029336A /* DYTableViewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYTableViewModule.m; sourceTree = "<group>"; };
 		E374C2AD1F14B432002D53B5 /* DYTableViewAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYTableViewAgent.h; sourceTree = "<group>"; };
 		E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYTableViewAgent.m; sourceTree = "<group>"; };
 		E374C2B01F14B432002D53B5 /* UITableView+DYTableViewBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DYTableViewBinder.h"; sourceTree = "<group>"; };
@@ -209,6 +218,9 @@
 				E374C2B01F14B432002D53B5 /* UITableView+DYTableViewBinder.h */,
 				E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */,
 				E374C2B61F14B46D002D53B5 /* DYKit.h */,
+				E36E5FF61F442FC40029336A /* DYMacro.h */,
+				E36E5FF71F4431E30029336A /* DYTableViewModule.h */,
+				E36E5FF81F4431E30029336A /* DYTableViewModule.m */,
 			);
 			path = DYKit;
 			sourceTree = "<group>";
@@ -241,6 +253,9 @@
 				E3DF6D261F277426000D3E29 /* DataSlotViewController.h */,
 				E3DF6D271F277426000D3E29 /* DataSlotViewController.m */,
 				E3DF6D281F277426000D3E29 /* DataSlotViewController.xib */,
+				E36E5FF11F442BAB0029336A /* DataSlotForHeightViewController.h */,
+				E36E5FF21F442BAB0029336A /* DataSlotForHeightViewController.m */,
+				E36E5FF31F442BAB0029336A /* DataSlotForHeightViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -362,6 +377,7 @@
 				E374C2B51F14B451002D53B5 /* DYKit.podspec in Resources */,
 				E3518EA61F106B86008534B1 /* LaunchScreen.storyboard in Resources */,
 				E35F5CF61F209466009ADC93 /* CellWithSectionViewController.xib in Resources */,
+				E36E5FF51F442BAB0029336A /* DataSlotForHeightViewController.xib in Resources */,
 				E3C024A81F11FE280043DD8F /* CellWithButtonByNibTableViewCell.xib in Resources */,
 				E35F5CF11F207B06009ADC93 /* CellWithSectionAndRowViewController.xib in Resources */,
 				E3518EA31F106B86008534B1 /* Assets.xcassets in Resources */,
@@ -484,7 +500,9 @@
 				E35F5CFA1F209E72009ADC93 /* CellWithRowViewController.m in Sources */,
 				E3518E9E1F106B86008534B1 /* ViewController.m in Sources */,
 				E374C2B31F14B432002D53B5 /* UITableView+DYTableViewBinder.m in Sources */,
+				E36E5FF91F4431E30029336A /* DYTableViewModule.m in Sources */,
 				E35F5CEB1F205D52009ADC93 /* OneTypeCellViewController.m in Sources */,
+				E36E5FF41F442BAB0029336A /* DataSlotForHeightViewController.m in Sources */,
 				E3C024C61F127BFD0043DD8F /* BlueTableViewCell.m in Sources */,
 				E3C024941F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m in Sources */,
 				E3518E9B1F106B86008534B1 /* AppDelegate.m in Sources */,

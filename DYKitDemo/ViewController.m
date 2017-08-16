@@ -13,6 +13,7 @@
 #import "CellWithSectionViewController.h"
 #import "CellWithRowViewController.h"
 #import "DataSlotViewController.h"
+#import "DataSlotForHeightViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTableView;
@@ -38,7 +39,8 @@
                                    @"指定section和row(或具体indexPath)设定cell",
                                    @"指定section进行cell设定",
                                    @"指定row进行cell设定",
-                                   @"指定数据条件进行cell设定"];
+                                   @"指定数据条件进行cell设定",
+                                   @"指定模块进行高度设定"];
     
     @weakify(self)
     [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
@@ -85,6 +87,17 @@
         @strongify(self)
         [self.navigationController pushViewController:[[DataSlotViewController alloc] init] animated:YES];
     }];
+    
+    [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
+        return @(indexPath.row);
+    }] filter:^BOOL(id  _Nullable value) {
+        return [value intValue] == 5;
+    }] subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        [self.navigationController pushViewController:[[DataSlotForHeightViewController alloc] init] animated:YES];
+    }];
+    
+    
     
 }
 @end

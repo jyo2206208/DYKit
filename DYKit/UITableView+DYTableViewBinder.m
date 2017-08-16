@@ -56,11 +56,11 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
         }];
     }
     [self dyRegisterForCellReuseIdentifier:identifier];
-    CellInfo *cellInfo = [[CellInfo alloc] init];
-    cellInfo.reuseIdentifier = identifier;
-    cellInfo.slotBlock = slotBlock;
-    cellInfo.cellBindBlock = cellBindBlock;
-    [self.dy_agent.cellInfoList addObject:cellInfo];
+    DYTableViewModule *module = [[DYTableViewModule alloc] init];
+    module.reuseIdentifier = identifier;
+    module.slotBlock = slotBlock;
+    module.cellBindBlock = cellBindBlock;
+    [self.dy_agent.tableModuleLists addObject:module];
     return self;
 }
 

@@ -11,7 +11,7 @@
 @implementation DYTableViewAgent
 
 #pragma lazyProperties
--(NSMutableArray *)cellInfoList{return _cellInfoList = (_cellInfoList ?: [[NSMutableArray alloc] init]);}
+DYN_LAZY(tableModuleLists, NSMutableArray)
 
 #pragma dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -19,10 +19,10 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    for (CellInfo *cellInfo in self.cellInfoList) {
-        if (cellInfo.slotBlock(indexPath,self.data[indexPath.row])) {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
-            cellInfo.cellBindBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+    for (DYTableViewModule *module in self.tableModuleLists) {
+        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+            cell = [tableView dequeueReusableCellWithIdentifier:module.reuseIdentifier];
+            module.cellBindBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
         }
     }
     if (!cell) {
@@ -147,9 +147,5 @@
 - (NSInteger)getFlattenRow:(UITableView *)tableView IndexPath:(NSIndexPath*) indexPath{
     return indexPath.section == 0 ? indexPath.row : [self tableView:tableView numberOfRowsInSection:indexPath.section - 1] + [self getFlattenRow:tableView IndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - 1]];
 }
-
-@end
-
-@implementation CellInfo
 
 @end

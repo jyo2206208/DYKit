@@ -77,6 +77,8 @@
  */
 - (UITableView*) addReuseIdentifier:(NSString *)identifier FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock;
 
+//- (DYTableViewAgent*) assembly:(AssemblyBlock)block;
+
 #pragma 配置用block
 - (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
 - (UITableView*)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block;
