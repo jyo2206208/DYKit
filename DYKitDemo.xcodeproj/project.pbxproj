@@ -213,14 +213,14 @@
 		E374C2AC1F14B432002D53B5 /* DYKit */ = {
 			isa = PBXGroup;
 			children = (
-				E374C2AD1F14B432002D53B5 /* DYTableViewAgent.h */,
-				E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */,
-				E374C2B01F14B432002D53B5 /* UITableView+DYTableViewBinder.h */,
-				E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */,
 				E374C2B61F14B46D002D53B5 /* DYKit.h */,
 				E36E5FF61F442FC40029336A /* DYMacro.h */,
+				E374C2AD1F14B432002D53B5 /* DYTableViewAgent.h */,
+				E374C2AE1F14B432002D53B5 /* DYTableViewAgent.m */,
 				E36E5FF71F4431E30029336A /* DYTableViewModule.h */,
 				E36E5FF81F4431E30029336A /* DYTableViewModule.m */,
+				E374C2B01F14B432002D53B5 /* UITableView+DYTableViewBinder.h */,
+				E374C2B11F14B432002D53B5 /* UITableView+DYTableViewBinder.m */,
 			);
 			path = DYKit;
 			sourceTree = "<group>";

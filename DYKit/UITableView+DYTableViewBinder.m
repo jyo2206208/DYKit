@@ -64,7 +64,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     return self;
 }
 
-- (DYTableViewModule*) addSlotClass:(Class)slotClass FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock{
+- (DYTableViewModule*) addPlug:(Class)plug FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock{
     if (!self.dy_agent) {
         self.dy_agent = [[DYTableViewAgent alloc] init];
         self.dataSource = self.dy_agent;
@@ -75,12 +75,11 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
             [self reloadData];
         }];
     }
-    [self dyRegisterForCellReuseIdentifier:NSStringFromClass(slotClass)];
+    [self dyRegisterForCellReuseIdentifier:NSStringFromClass(plug)];
     DYTableViewModule *module = [[DYTableViewModule alloc] init];
-    module.reuseIdentifier = NSStringFromClass(slotClass);
+    module.reuseIdentifier = NSStringFromClass(plug);
     module.slotBlock = slotBlock;
     module.cellBindBlock = cellBindBlock;
-    
     
     NSUInteger __block count = self.dy_agent.tableModuleLists.count;
     [self.dy_agent.tableModuleLists addObject:module];

@@ -19,13 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[self.tableView addSlotClass:UITableViewCell.class FromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
+    [[self.tableView addPlug:UITableViewCell.class FromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
         return text.length >= 3;;
     } withAssemblyBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;
     }] setRowHeight:100];
     
-    [self.tableView addSlotClass:UITableViewCell.class FromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
+    [self.tableView addPlug:UITableViewCell.class FromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
         return text.length < 3;
     } withAssemblyBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = [text stringByAppendingString:@" 长度不达3的有这段文字"];
