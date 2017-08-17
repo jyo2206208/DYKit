@@ -30,7 +30,7 @@
 
 - (void)homeTableViewSetUp {
     
-    [self.homeTableView assemblyWithAssemblyBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
+    [self.homeTableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         //这个block充当了cellForRowAtIndexPath的作用
         cell.textLabel.text = text;
     }];

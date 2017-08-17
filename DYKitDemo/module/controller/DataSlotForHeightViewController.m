@@ -19,18 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[self.tableView addPlug:UITableViewCell.class FromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
-        return text.length >= 3;;
-    } withAssemblyBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
+    [self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;
-    }] setRowHeight:100];
+    } fromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
+        return text.length >= 3;
+    }];
     
-    [self.tableView addPlug:UITableViewCell.class FromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
-        return text.length < 3;
-    } withAssemblyBlock:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
+    [[self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = [text stringByAppendingString:@" 长度不达3的有这段文字"];
         cell.backgroundColor = [UIColor yellowColor];
-    }];
+    } fromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
+        return text.length < 3;
+    }] setRowHeight:100];
     
     RAC(self,tableView.dy_data) = [RACSignal return:@[@"0",@"01",@"012",@"0123",@"01234",@"a",@"bb",@"ccc",@"dddd"]];
 }

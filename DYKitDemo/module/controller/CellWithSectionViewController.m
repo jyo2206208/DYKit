@@ -10,6 +10,7 @@
 #import "DYKit.h"
 #import "User.h"
 #import "OneTypeCellByNibTableViewCell.h"
+#import "BlueTableViewCell.h"
 
 @interface CellWithSectionViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,17 +22,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[[[[[[[self.tableView addReuseIdentifier:DY_DEFAULT_ID FromSection:0 withAssemblyBlock:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
+    [self.tableView assembly:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
         cell.textLabel.text = string;
-    }] addReuseIdentifier:@"OneTypeCellByNibTableViewCell" FromSection:1 withAssemblyBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
+    } fromSlot:^BOOL(NSIndexPath *indexPath, id model) {
+        return indexPath.section == 0;
+    }];
+    
+    [self.tableView assembly:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
         cell.headImageView.image = [UIImage imageNamed:user.img];
         cell.headImageView.backgroundColor = user.sex == 0 ? [UIColor purpleColor] : [UIColor blackColor];
         cell.nameLabel.text = user.name;
         cell.ageLabel.text = user.age;
         cell.descLabel.text = user.desc;
-    }] addReuseIdentifier:@"BlueTableViewCell" FromSection:2 withAssemblyBlock:^(UITableViewCell *cell, NSString *string, NSIndexPath *indexPath) {
-        cell.textLabel.text = string;
-    }] setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
+    } fromSlot:^BOOL(NSIndexPath *indexPath, id model) {
+        return indexPath.section == 1;
+    } withPlug:OneTypeCellByNibTableViewCell.class];
+    
+    [self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
+        cell.textLabel.text = text;
+    } fromSlot:^BOOL(NSIndexPath *indexPath, id model) {
+        return indexPath.section == 2;
+    } withPlug:BlueTableViewCell.class];
+    
+    
+    [[[[[self.tableView setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
         switch (section) {
             case 0: return 14; break;
             case 1: return 3; break;

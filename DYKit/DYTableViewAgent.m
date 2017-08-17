@@ -22,7 +22,7 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     for (DYTableViewModule *module in self.tableModuleLists) {
         if (module.slotBlock(indexPath,self.data[indexPath.row])) {
             cell = [tableView dequeueReusableCellWithIdentifier:module.reuseIdentifier];
-            module.cellBindBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+            module.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
         }
     }
     if (!cell) {

@@ -16,55 +16,24 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (id)dy_data{return self.dy_agent.data;}
 - (void)setDy_data:(id)dy_data{self.dy_agent.data = dy_data;}
 
-#pragma 主要配置方法
-- (UITableView*) assemblyWithAssemblyBlock:(AssemblyBlock)block{
-    return [self assemblyByReuseIdentifier:DY_DEFAULT_ID withAssemblyBlock:block];
-}
-
-- (UITableView*) assemblyByReuseIdentifier:(NSString *)identifier withAssemblyBlock:(AssemblyBlock)block{
-    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
+#pragma 主要装配方法
+- (DYTableViewModule*) assembly:(AssemblyBlock)block{
+    return [self assembly:block fromSlot:^BOOL(NSIndexPath *indexPath, id model) {
         return YES;
-    } withAssemblyBlock:block];
+    } withPlug:UITableViewCell.class];
 }
 
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section row:(int)row withAssemblyBlock:(AssemblyBlock)block{
-    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
-        return indexPath.section == section && indexPath.row == row;
-    } withAssemblyBlock:block];
+- (DYTableViewModule*) assembly:(AssemblyBlock)block withPlug:(Class)plug{
+    return [self assembly:block fromSlot:^BOOL(NSIndexPath *indexPath, id model) {
+        return YES;
+    } withPlug:plug];
 }
 
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section withAssemblyBlock:(AssemblyBlock)block{
-    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
-        return indexPath.section == section;
-    } withAssemblyBlock:block];
-}
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromRow:(int)row withAssemblyBlock:(AssemblyBlock)block{
-    return [self addReuseIdentifier:identifier FromSlot:^BOOL(NSIndexPath *indexPath, id model) {
-        return indexPath.section == 0 && indexPath.row == row;
-    } withAssemblyBlock:block];
+- (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock{
+    return [self assembly:assemblyBlock fromSlot:slotBlock withPlug:UITableViewCell.class];
 }
 
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock{
-    if (!self.dy_agent) {
-        self.dy_agent = [[DYTableViewAgent alloc] init];
-        self.dataSource = self.dy_agent;
-        self.delegate = self.dy_agent;
-        @weakify(self)
-        [[RACObserve(self, dy_agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
-            @strongify(self)
-            [self reloadData];
-        }];
-    }
-    [self dyRegisterForCellReuseIdentifier:identifier];
-    DYTableViewModule *module = [[DYTableViewModule alloc] init];
-    module.reuseIdentifier = identifier;
-    module.slotBlock = slotBlock;
-    module.cellBindBlock = cellBindBlock;
-    [self.dy_agent.tableModuleLists addObject:module];
-    return self;
-}
-
-- (DYTableViewModule*) addPlug:(Class)plug FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock{
+- (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock withPlug:(Class)plug{
     if (!self.dy_agent) {
         self.dy_agent = [[DYTableViewAgent alloc] init];
         self.dataSource = self.dy_agent;
@@ -79,7 +48,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     DYTableViewModule *module = [[DYTableViewModule alloc] init];
     module.reuseIdentifier = NSStringFromClass(plug);
     module.slotBlock = slotBlock;
-    module.cellBindBlock = cellBindBlock;
+    module.assemblyBlock = assemblyBlock;
     
     NSUInteger __block count = self.dy_agent.tableModuleLists.count;
     [self.dy_agent.tableModuleLists addObject:module];
@@ -92,14 +61,10 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 }
 
 - (void)dyRegisterForCellReuseIdentifier:(NSString *)identifier{
-    if ([identifier isEqualToString:DY_DEFAULT_ID]) {
-        [self registerClass:UITableViewCell.class forCellReuseIdentifier:identifier];
+    if ([[NSBundle mainBundle] pathForResource:identifier ofType:@"nib"]) {
+        [self registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellReuseIdentifier:identifier];
     } else {
-        if ([[NSBundle mainBundle] pathForResource:identifier ofType:@"nib"]) {
-            [self registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellReuseIdentifier:identifier];
-        } else {
-            [self registerClass:NSClassFromString(identifier) forCellReuseIdentifier:identifier];
-        }
+        [self registerClass:NSClassFromString(identifier) forCellReuseIdentifier:identifier];
     }
 }
 

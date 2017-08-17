@@ -18,68 +18,43 @@
 - (id)dy_data;
 - (void)setDy_data:(id)dy_data;
 
-#pragma 主要配置方法
+#pragma 主要装配方法
 /**
- 固定UItableViewCell
+ 所有cell为UItableViewCell
 
- @param block cellForRowAtIndexPath的block
- @return 返回自身，用于链式调用
+ @param block 装配用block
+ @return 模块本体，可在返回后继续链式调用配置
  */
-- (UITableView*) assemblyWithAssemblyBlock:(AssemblyBlock)block;
-
-/**
- 固定一种自定义cell
- 
- @param block cellForRowAtIndexPath的block
- @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- @return 返回自身，用于链式调用
- */
-- (UITableView*) assemblyByReuseIdentifier:(NSString *)identifier withAssemblyBlock:(AssemblyBlock)block;
+- (DYTableViewModule*) assembly:(AssemblyBlock)block;
 
 /**
- 指定section和row进行cell设定
+ 所有cell为参数plug所指的cell
 
- @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- @param section 指定section位置
- @param row 指定row位置
- @param block cellForRowAtIndexPath的block
- @return 返回自身，用于链式调用
+ @param block 装配用block
+ @param plug 装配用cell类型
+ @return 模块本体，可在返回后继续链式调用配置
  */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section row:(int)row withAssemblyBlock:(AssemblyBlock)block;
+- (DYTableViewModule*) assembly:(AssemblyBlock)block withPlug:(Class)plug;
 
 /**
- 指定section进行cell设定。默认本section下的cell全部按照block内容进行设定
+ 满足slotBlock条件的位置装配UItableViewCell
 
- @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- @param section 指定section位置
- @param block cellForRowAtIndexPath的block
- @return 返回自身，用于链式调用
+ @param assemblyBlock 装配用block
+ @param slotBlock 装配条件block
+ @return 模块本体，可在返回后继续链式调用配置
  */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSection:(int)section withAssemblyBlock:(AssemblyBlock)block;
+- (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock;
 
 /**
- 指定row进行cell设定。默认只有一个section
+ 满足slotBlock条件的位置装配参数plug所指的cell
 
- @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- @param row 指定row位置
- @param block cellForRowAtIndexPath的block
- @return 返回自身，用于链式调用
+ @param assemblyBlock 装配用block
+ @param slotBlock 装配条件block
+ @param plug 装配用cell类型
+ @return 模块本体，可在返回后继续链式调用配置
  */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromRow:(int)row withAssemblyBlock:(AssemblyBlock)block;
+- (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock withPlug:(Class)plug;
 
-/**
- 指定具体的indexPath进行cell设定，可选择任意位置
-
- @param identifier cell的重用ID(使用cell的类名，可以是xib或者class创建)
- @param slotBlock 用于指定具体条件的block。通过对参数的indexPath进行判断，返回需要的具体位置
- @param cellBindBlock cellForRowAtIndexPath的block
- @return 返回自身，用于链式调用
- */
-- (UITableView*) addReuseIdentifier:(NSString *)identifier FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock;
-
-
-
-- (DYTableViewModule*) addPlug:(Class)plug FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock;
 
 #pragma 配置用block
 - (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;

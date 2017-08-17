@@ -21,14 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView assemblyByReuseIdentifier:@"OneTypeCellByNibTableViewCell" withAssemblyBlock:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
+    [self.tableView assembly:^(OneTypeCellByNibTableViewCell *cell, User *user, NSIndexPath *indexPath) {
         cell.headImageView.image = [UIImage imageNamed:user.img];
         cell.headImageView.backgroundColor = user.sex == 0 ? [UIColor purpleColor] : [UIColor blackColor];
         cell.nameLabel.text = user.name;
         cell.ageLabel.text = user.age;
         cell.descLabel.text = user.desc;
-    }];
-    
+    } withPlug:OneTypeCellByNibTableViewCell.class];
     
     User *user1 = [User new];
     User *user2 = [User new];
