@@ -71,7 +71,14 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     return self.heightForFooterInSection ? self.heightForFooterInSection(tableView,section) : tableView.sectionFooterHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0){
-    return self.estimatedHeightForRowAtIndexPath ? self.estimatedHeightForRowAtIndexPath(tableView,indexPath) : [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    CGFloat estimatedHeight = [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    for (DYTableViewModule *module in self.tableModuleLists) {
+        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+            estimatedHeight = module.estimatedHeight ?: (self.estimatedHeightForRowAtIndexPath ? self.estimatedHeightForRowAtIndexPath(tableView,indexPath) : [self tableView:tableView heightForRowAtIndexPath:indexPath]);
+            break;
+        }
+    }
+    return estimatedHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0){
     return self.estimatedHeightForHeaderInSection ? self.estimatedHeightForHeaderInSection(tableView,section) : [self tableView:tableView heightForHeaderInSection:section];
@@ -103,6 +110,7 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     return self.titleForDeleteConfirmationButtonForRowAtIndexPath ? self.titleForDeleteConfirmationButtonForRowAtIndexPath(tableView,indexPath) : nil;
 }
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED{
+//    return self.editActionsForRowAtIndexPath ? self.editActionsForRowAtIndexPath(tableView,indexPath) : nil;
     if (self.editActionsForRowAtIndexPath) {
         return self.editActionsForRowAtIndexPath(tableView,indexPath);
     } else {return nil;}

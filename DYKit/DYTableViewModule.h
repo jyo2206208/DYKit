@@ -19,5 +19,11 @@ typedef BOOL(^SlotBlock)(NSIndexPath *indexPath, id model);
 @property (nonatomic, copy) AssemblyBlock assemblyBlock;
 
 @property (nonatomic) CGFloat rowHeight;
+@property (nonatomic) CGFloat estimatedHeight;
+@property (nonatomic, copy) NSArray<UITableViewRowAction *> * editActions;
+@property (nonatomic) BOOL shouldShowMenu;
+@property (nonatomic) UITableViewCellEditingStyle editingStyle;
+@property (nonatomic, copy) NSString *titleForDeleteConfirmationButton;
+@property (nonatomic) NSInteger indentationLevel;
 
 @end
