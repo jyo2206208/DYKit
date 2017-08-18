@@ -52,10 +52,11 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
         }] subscribeNext:^(id  _Nullable x) {
             [reloadDataDisposable dispose];
         }];
-        
+
         [[[RACObserve(self, autoReload) skip:1] filter:^BOOL(id  _Nullable value) {
             return [value boolValue] == YES;
         }] subscribeNext:^(id  _Nullable x) {
+            @strongify(self)
             @weakify(self)
             reloadDataDisposable = [[RACObserve(self, agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
                 @strongify(self)
