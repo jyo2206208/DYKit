@@ -13,7 +13,12 @@
 @interface UITableView (DYTableViewBinder)
 
 #pragma 隐形代理
-@property (nonatomic,strong) DYTableViewAgent *agent;
+@property (nonatomic, strong) DYTableViewAgent *agent;
+
+/**
+ 是否在给data赋值后自动执行reload
+ */
+@property (nonatomic) BOOL autoReload;
 
 - (id)data;
 - (void)setData:(id)data;

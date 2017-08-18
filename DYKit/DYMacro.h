@@ -27,4 +27,28 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 #endif
 
 
+
+#define metamacro_concat(A, B) \
+metamacro_concat_(A, B)
+#define metamacro_concat_(A, B) A ## B
+#define uxy_property_basicDataType( __type, __name) \
+property (nonatomic, assign, setter=set__##__name:, getter=__##__name) __type __name;
+
+#define uxy_def_property_basicDataType( __type, __name) \
+- (__type)__##__name   \
+{   \
+NSNumber *number = [self uxy_getAssociatedObjectForKey:#__name];    \
+return metamacro_concat(metamacro_concat(__uxy_, __type), _value)( number ); \
+}   \
+- (void)set__##__name:(__type)__##__name   \
+{ \
+id value = @(__##__name);\
+[self uxy_setAssignAssociatedObject:value forKey:#__name];     \
+}
+
+#define __uxy_int_value( __nubmer ) [__nubmer intValue]
+#define __uxy_BOOL_value( __nubmer ) [__nubmer boolValue]
+#define __uxy_NSTimeInterval_value( __nubmer ) [__nubmer doubleValue]
+
+
 #endif /* DYMacro_h */

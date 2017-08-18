@@ -12,6 +12,18 @@
 
 #pragma 隐形代理
 DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
+//DYSYNTH_DYNAMIC_PROPERTY_OBJECT(autoReload, setAutoReload, RETAIN, BOOL)
+
+- (BOOL)autoReload
+{
+    return [objc_getAssociatedObject(self, @selector(autoReload)) boolValue];
+}
+
+-(void)setAutoReload:(BOOL)autoReload{
+    objc_setAssociatedObject(self, @selector(autoReload), @(autoReload), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
 
 - (id)data{return self.agent.data;}
 - (void)setData:(id)data{self.agent.data = data;}
@@ -38,10 +50,29 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
         self.agent = [[DYTableViewAgent alloc] init];
         self.dataSource = self.agent;
         self.delegate = self.agent;
+        self.autoReload = YES;
+        
+        
         @weakify(self)
-        [[RACObserve(self, agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
+        RACDisposable __block *reloadDataDisposable = [[RACObserve(self, agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
             @strongify(self)
             [self reloadData];
+        }];
+        
+        [[[RACObserve(self, autoReload) skip:1] filter:^BOOL(id  _Nullable value) {
+            return [value boolValue] == NO;
+        }] subscribeNext:^(id  _Nullable x) {
+            [reloadDataDisposable dispose];
+        }];
+        
+        [[[RACObserve(self, autoReload) skip:1] filter:^BOOL(id  _Nullable value) {
+            return [value boolValue] == YES;
+        }] subscribeNext:^(id  _Nullable x) {
+            @weakify(self)
+            reloadDataDisposable = [[RACObserve(self, agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
+                @strongify(self)
+                [self reloadData];
+            }];
         }];
     }
     [self dyRegisterForCellReuseIdentifier:NSStringFromClass(plug)];
@@ -57,6 +88,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
         @strongify(self)
         [self.agent.tableModuleLists replaceObjectAtIndex:count withObject:module];
     }];
+    
     return module;
 }
 
