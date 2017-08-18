@@ -55,11 +55,6 @@
     @weakify(self)
     newDataItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         @strongify(self)
-        if (self.tableView.autoReload) {
-            NSLog(@"YES");
-        } else {
-            NSLog(@"NO");
-        }
         self.tableView.data = dataBlock();
         return [RACSignal empty];
     }];
