@@ -11,10 +11,10 @@
 @implementation UITableView (DYTableViewBinder)
 
 #pragma 隐形代理
-DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent *)
+DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
 
-- (id)dy_data{return self.dy_agent.data;}
-- (void)setDy_data:(id)dy_data{self.dy_agent.data = dy_data;}
+- (id)data{return self.agent.data;}
+- (void)setData:(id)data{self.agent.data = data;}
 
 #pragma 主要装配方法
 - (DYTableViewModule*) assembly:(AssemblyBlock)block{
@@ -34,12 +34,12 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 }
 
 - (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock withPlug:(Class)plug{
-    if (!self.dy_agent) {
-        self.dy_agent = [[DYTableViewAgent alloc] init];
-        self.dataSource = self.dy_agent;
-        self.delegate = self.dy_agent;
+    if (!self.agent) {
+        self.agent = [[DYTableViewAgent alloc] init];
+        self.dataSource = self.agent;
+        self.delegate = self.agent;
         @weakify(self)
-        [[RACObserve(self, dy_agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
+        [[RACObserve(self, agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
             @strongify(self)
             [self reloadData];
         }];
@@ -50,12 +50,12 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
     module.slotBlock = slotBlock;
     module.assemblyBlock = assemblyBlock;
     
-    NSUInteger __block count = self.dy_agent.tableModuleLists.count;
-    [self.dy_agent.tableModuleLists addObject:module];
+    NSUInteger __block count = self.agent.tableModuleLists.count;
+    [self.agent.tableModuleLists addObject:module];
     @weakify(self)
     [RACObserve(module, self) subscribeNext:^(id  _Nullable x) {
         @strongify(self)
-        [self.dy_agent.tableModuleLists replaceObjectAtIndex:count withObject:module];
+        [self.agent.tableModuleLists replaceObjectAtIndex:count withObject:module];
     }];
     return module;
 }
@@ -69,91 +69,91 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 }
 
 #pragma 配置用block
-- (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.heightForRowAtIndexPath = block;return self;}
-- (UITableView*)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block{self.dy_agent.editActionsForRowAtIndexPath = block;return self;}
-- (UITableView*)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.shouldHighlightRowAtIndexPath = block;return self;}
-- (UITableView*)setCanEditRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.canEditRowAtIndexPath = block;return self;}
-- (UITableView*)setNumberOfRowsInSection:(NSIntegerTableViewIndexPath)block{self.dy_agent.numberOfRowsInSection = block;return self;}
-//- (void)setCellForRowAtIndexPath:(UITableViewCellTableViewIndexPath)block{self.dy_agent.cellForRowAtIndexPath = block;}
-- (UITableView*)setNumberOfSectionsInTableView:(NSIntegerUITableView)block{self.dy_agent.numberOfSectionsInTableView = block;return self;}
-- (UITableView*)setTitleForHeaderInSection:(NSStringTableViewNSInteger)block{self.dy_agent.titleForHeaderInSection = block;return self;}
-- (UITableView*)setTitleForFooterInSection:(NSStringTableViewNSInteger)block{self.dy_agent.titleForFooterInSection = block;return self;}
-- (UITableView*)setCanMoveRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.canMoveRowAtIndexPath = block;return self;}
-- (UITableView*)setSectionIndexTitlesForTableView:(SectionIndexTitlesForTableView)block{self.dy_agent.sectionIndexTitlesForTableView = block;return self;}
-- (UITableView*)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block{self.dy_agent.sectionForSectionIndexTitle = block;return self;}
-- (UITableView*)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.heightForHeaderInSection = block;return self;}
-- (UITableView*)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.heightForFooterInSection = block;return self;}
-- (UITableView*)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.estimatedHeightForRowAtIndexPath = block;return self;}
-- (UITableView*)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForHeaderInSection = block;return self;}
-- (UITableView*)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForFooterInSection = block;return self;}
-- (UITableView*)setViewForHeaderInSection:(UIViewTableViewNSInteger)block{self.dy_agent.viewForHeaderInSection = block;return self;}
-- (UITableView*)setViewForFooterInSection:(UIViewTableViewNSInteger)block{self.dy_agent.viewForFooterInSection = block;return self;}
-- (UITableView*)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{self.dy_agent.willSelectRowAtIndexPath = block;return self;}
-- (UITableView*)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{self.dy_agent.willDeselectRowAtIndexPath = block;return self;}
-- (UITableView*)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block{self.dy_agent.editingStyleForRowAtIndexPath = block;return self;}
-- (UITableView*)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block{self.dy_agent.titleForDeleteConfirmationButtonForRowAtIndexPath = block;return self;}
-- (UITableView*)setShouldIndentWhileEditingRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.shouldIndentWhileEditingRowAtIndexPath = block;return self;}
-- (UITableView*)setTargetIndexPathForMoveFromRowAtIndexPath:(NSIndexPathUITableViewNSIndexPathNSIndexPath)block{self.dy_agent.targetIndexPathForMoveFromRowAtIndexPath = block;return self;}
-- (UITableView*)setIndentationLevelForRowAtIndexPath:(NSIntegerUITableViewNSIndexPath)block{self.dy_agent.indentationLevelForRowAtIndexPath = block;return self;}
-- (UITableView*)setShouldShowMenuForRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.shouldShowMenuForRowAtIndexPath = block;return self;}
-- (UITableView*)setCanPerformAction:(BOOLUITableViewSELNSIndexPath)block{self.dy_agent.canPerformAction = block;return self;}
-- (UITableView*)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block{self.dy_agent.canFocusRowAtIndexPath = block;return self;}
-- (UITableView*)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block{self.dy_agent.shouldUpdateFocusInContext = block;return self;}
-- (UITableView*)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block{self.dy_agent.indexPathForPreferredFocusedViewInTableView = block;return self;}
+- (UITableView*)setHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.agent.heightForRowAtIndexPath = block;return self;}
+- (UITableView*)setEditActionsForRowAtIndexPath:(EditActionsForRowAtIndexPath)block{self.agent.editActionsForRowAtIndexPath = block;return self;}
+- (UITableView*)setShouldHighlightRowAtIndexPath:(BOOLTableViewIndexPath)block{self.agent.shouldHighlightRowAtIndexPath = block;return self;}
+- (UITableView*)setCanEditRowAtIndexPath:(BOOLTableViewIndexPath)block{self.agent.canEditRowAtIndexPath = block;return self;}
+- (UITableView*)setNumberOfRowsInSection:(NSIntegerTableViewIndexPath)block{self.agent.numberOfRowsInSection = block;return self;}
+//- (void)setCellForRowAtIndexPath:(UITableViewCellTableViewIndexPath)block{self.agent.cellForRowAtIndexPath = block;}
+- (UITableView*)setNumberOfSectionsInTableView:(NSIntegerUITableView)block{self.agent.numberOfSectionsInTableView = block;return self;}
+- (UITableView*)setTitleForHeaderInSection:(NSStringTableViewNSInteger)block{self.agent.titleForHeaderInSection = block;return self;}
+- (UITableView*)setTitleForFooterInSection:(NSStringTableViewNSInteger)block{self.agent.titleForFooterInSection = block;return self;}
+- (UITableView*)setCanMoveRowAtIndexPath:(BOOLTableViewIndexPath)block{self.agent.canMoveRowAtIndexPath = block;return self;}
+- (UITableView*)setSectionIndexTitlesForTableView:(SectionIndexTitlesForTableView)block{self.agent.sectionIndexTitlesForTableView = block;return self;}
+- (UITableView*)setSectionForSectionIndexTitle:(NSIntegerUITableViewNSStringNSInteger)block{self.agent.sectionForSectionIndexTitle = block;return self;}
+- (UITableView*)setHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.agent.heightForHeaderInSection = block;return self;}
+- (UITableView*)setHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.agent.heightForFooterInSection = block;return self;}
+- (UITableView*)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.agent.estimatedHeightForRowAtIndexPath = block;return self;}
+- (UITableView*)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.agent.estimatedHeightForHeaderInSection = block;return self;}
+- (UITableView*)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.agent.estimatedHeightForFooterInSection = block;return self;}
+- (UITableView*)setViewForHeaderInSection:(UIViewTableViewNSInteger)block{self.agent.viewForHeaderInSection = block;return self;}
+- (UITableView*)setViewForFooterInSection:(UIViewTableViewNSInteger)block{self.agent.viewForFooterInSection = block;return self;}
+- (UITableView*)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{self.agent.willSelectRowAtIndexPath = block;return self;}
+- (UITableView*)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{self.agent.willDeselectRowAtIndexPath = block;return self;}
+- (UITableView*)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block{self.agent.editingStyleForRowAtIndexPath = block;return self;}
+- (UITableView*)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block{self.agent.titleForDeleteConfirmationButtonForRowAtIndexPath = block;return self;}
+- (UITableView*)setShouldIndentWhileEditingRowAtIndexPath:(BOOLTableViewIndexPath)block{self.agent.shouldIndentWhileEditingRowAtIndexPath = block;return self;}
+- (UITableView*)setTargetIndexPathForMoveFromRowAtIndexPath:(NSIndexPathUITableViewNSIndexPathNSIndexPath)block{self.agent.targetIndexPathForMoveFromRowAtIndexPath = block;return self;}
+- (UITableView*)setIndentationLevelForRowAtIndexPath:(NSIntegerUITableViewNSIndexPath)block{self.agent.indentationLevelForRowAtIndexPath = block;return self;}
+- (UITableView*)setShouldShowMenuForRowAtIndexPath:(BOOLTableViewIndexPath)block{self.agent.shouldShowMenuForRowAtIndexPath = block;return self;}
+- (UITableView*)setCanPerformAction:(BOOLUITableViewSELNSIndexPath)block{self.agent.canPerformAction = block;return self;}
+- (UITableView*)setCanFocusRowAtIndexPath:(BOOLTableViewIndexPath)block{self.agent.canFocusRowAtIndexPath = block;return self;}
+- (UITableView*)setShouldUpdateFocusInContext:(BOOLUITableViewFocusUpdateContext)block{self.agent.shouldUpdateFocusInContext = block;return self;}
+- (UITableView*)setIndexPathForPreferredFocusedViewInTableView:(NSIndexPathUITableView)block{self.agent.indexPathForPreferredFocusedViewInTableView = block;return self;}
 
 #pragma delegate方法
 - (RACSignal*)accessoryButtonTappedForRowWithIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)];
 }
 - (RACSignal*)didEndDisplayingCellSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)];
 }
 - (RACSignal*)didEndDisplayingHeaderViewSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndDisplayingHeaderView:forSection:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didEndDisplayingHeaderView:forSection:)];
 }
 - (RACSignal*)didEndDisplayingFooterViewSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndDisplayingFooterView:forSection:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didEndDisplayingFooterView:forSection:)];
 }
 - (RACSignal*)didHighlightRowAtIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didHighlightRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didHighlightRowAtIndexPath:)];
 }
 - (RACSignal*)didUnhighlightRowAtIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didUnhighlightRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didUnhighlightRowAtIndexPath:)];
 }
 - (RACSignal*)didSelectRowAtIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)];
 }
 - (RACSignal*)didDeselectRowAtIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didDeselectRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didDeselectRowAtIndexPath:)];
 }
 - (RACSignal*)didEndEditingRowAtIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didEndEditingRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didEndEditingRowAtIndexPath:)];
 }
 - (RACSignal*)didUpdateFocusInContextSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:didUpdateFocusInContext:withAnimationCoordinator:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:didUpdateFocusInContext:withAnimationCoordinator:)];
 }
 - (RACSignal*)performActionSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:performAction:forRowAtIndexPath:withSender:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:performAction:forRowAtIndexPath:withSender:)];
 }
 - (RACSignal*)willBeginEditingRowAtIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:willBeginEditingRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:willBeginEditingRowAtIndexPath:)];
 }
 - (RACSignal*)willDisplayCellSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)];
 }
 - (RACSignal*)willDisplayHeaderViewSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayHeaderView:forSection:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:willDisplayHeaderView:forSection:)];
 }
 - (RACSignal*)willDisplayFooterViewSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayFooterView:forSection:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:willDisplayFooterView:forSection:)];
 }
 
 #pragma DataSource方法
 - (RACSignal*)commitEditingStyleSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)];
 }
 - (RACSignal*)moveRowAtIndexPathSignal{
-    return [self.dy_agent rac_signalForSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)];
+    return [self.agent rac_signalForSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)];
 }
 
 @end

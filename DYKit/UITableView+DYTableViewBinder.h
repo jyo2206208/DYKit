@@ -13,10 +13,10 @@
 @interface UITableView (DYTableViewBinder)
 
 #pragma 隐形代理
-@property (nonatomic,strong) DYTableViewAgent *dy_agent;
+@property (nonatomic,strong) DYTableViewAgent *agent;
 
-- (id)dy_data;
-- (void)setDy_data:(id)dy_data;
+- (id)data;
+- (void)setData:(id)data;
 
 #pragma 主要装配方法
 /**

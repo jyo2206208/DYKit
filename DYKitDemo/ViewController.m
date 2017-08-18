@@ -35,7 +35,7 @@
         cell.textLabel.text = text;
     }];
     
-    self.homeTableView.dy_data = @[@"固定一种自定义cell",
+    self.homeTableView.data = @[@"固定一种自定义cell",
                                    @"指定section和row(或具体indexPath)设定cell",
                                    @"指定section进行cell设定",
                                    @"指定row进行cell设定",
