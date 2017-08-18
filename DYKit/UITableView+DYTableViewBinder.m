@@ -10,20 +10,9 @@
 
 @implementation UITableView (DYTableViewBinder)
 
-#pragma 隐形代理
+#pragma 属性
 DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
-//DYSYNTH_DYNAMIC_PROPERTY_OBJECT(autoReload, setAutoReload, RETAIN, BOOL)
-
-- (BOOL)autoReload
-{
-    return [objc_getAssociatedObject(self, @selector(autoReload)) boolValue];
-}
-
--(void)setAutoReload:(BOOL)autoReload{
-    objc_setAssociatedObject(self, @selector(autoReload), @(autoReload), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-
+DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 
 - (id)data{return self.agent.data;}
 - (void)setData:(id)data{self.agent.data = data;}
@@ -51,7 +40,6 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
         self.dataSource = self.agent;
         self.delegate = self.agent;
         self.autoReload = YES;
-        
         
         @weakify(self)
         RACDisposable __block *reloadDataDisposable = [[RACObserve(self, agent.data) skip:1] subscribeNext:^(id  _Nullable x) {

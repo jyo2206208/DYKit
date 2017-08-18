@@ -12,7 +12,11 @@
 
 @interface UITableView (DYTableViewBinder)
 
-#pragma 隐形代理
+#pragma 属性
+
+/**
+ 隐形代理
+ */
 @property (nonatomic, strong) DYTableViewAgent *agent;
 
 /**
