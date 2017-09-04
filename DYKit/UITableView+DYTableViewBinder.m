@@ -19,15 +19,17 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 
 #pragma 主要装配方法
 - (DYTableViewModule*) assembly:(AssemblyBlock)block{
-    return [self assembly:block fromSlot:^BOOL(NSIndexPath *indexPath, id model) {
-        return YES;
-    } withPlug:UITableViewCell.class];
+    return [self assembly:block withPlug:UITableViewCell.class];
 }
 
 - (DYTableViewModule*) assembly:(AssemblyBlock)block withPlug:(Class)plug{
-    return [self assembly:block fromSlot:^BOOL(NSIndexPath *indexPath, id model) {
-        return YES;
-    } withPlug:plug];
+    [self agentInitialize];
+    [self dyRegisterForCellReuseIdentifier:NSStringFromClass(plug)];
+    DYTableViewModule *module = [[DYTableViewModule alloc] init];
+    module.reuseIdentifier = NSStringFromClass(plug);
+    module.assemblyBlock = block;
+    self.agent.defaultTableModule = module;
+    return module;
 }
 
 - (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock{
@@ -35,6 +37,25 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 }
 
 - (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock withPlug:(Class)plug{
+    [self agentInitialize];
+    [self dyRegisterForCellReuseIdentifier:NSStringFromClass(plug)];
+    DYTableViewModule *module = [[DYTableViewModule alloc] init];
+    module.reuseIdentifier = NSStringFromClass(plug);
+    module.slotBlock = slotBlock;
+    module.assemblyBlock = assemblyBlock;
+    
+    NSUInteger __block count = self.agent.tableModuleLists.count;
+    [self.agent.tableModuleLists addObject:module];
+    @weakify(self)
+    [RACObserve(module, self) subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        [self.agent.tableModuleLists replaceObjectAtIndex:count withObject:module];
+    }];
+    
+    return module;
+}
+
+- (void)agentInitialize{
     if (!self.agent) {
         self.agent = [[DYTableViewAgent alloc] init];
         self.dataSource = self.agent;
@@ -52,7 +73,7 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
         }] subscribeNext:^(id  _Nullable x) {
             [reloadDataDisposable dispose];
         }];
-
+        
         [[[RACObserve(self, autoReload) skip:1] filter:^BOOL(id  _Nullable value) {
             return [value boolValue] == YES;
         }] subscribeNext:^(id  _Nullable x) {
@@ -64,21 +85,6 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
             }];
         }];
     }
-    [self dyRegisterForCellReuseIdentifier:NSStringFromClass(plug)];
-    DYTableViewModule *module = [[DYTableViewModule alloc] init];
-    module.reuseIdentifier = NSStringFromClass(plug);
-    module.slotBlock = slotBlock;
-    module.assemblyBlock = assemblyBlock;
-    
-    NSUInteger __block count = self.agent.tableModuleLists.count;
-    [self.agent.tableModuleLists addObject:module];
-    @weakify(self)
-    [RACObserve(module, self) subscribeNext:^(id  _Nullable x) {
-        @strongify(self)
-        [self.agent.tableModuleLists replaceObjectAtIndex:count withObject:module];
-    }];
-    
-    return module;
 }
 
 - (void)dyRegisterForCellReuseIdentifier:(NSString *)identifier{

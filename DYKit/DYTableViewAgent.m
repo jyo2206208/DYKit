@@ -23,10 +23,16 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         if (module.slotBlock(indexPath,self.data[indexPath.row])) {
             cell = [tableView dequeueReusableCellWithIdentifier:module.reuseIdentifier];
             module.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+            break;
         }
     }
     if (!cell) {
-        NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
+        if (self.defaultTableModule) {
+            cell = [tableView dequeueReusableCellWithIdentifier:self.defaultTableModule.reuseIdentifier];
+            self.defaultTableModule.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+        } else {
+            NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
+        }
     }
     return cell;
 }

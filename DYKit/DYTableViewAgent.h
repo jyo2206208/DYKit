@@ -17,8 +17,9 @@
 
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, copy) id data;
+@property (nonatomic, copy) NSArray *data;
 @property (nonatomic, strong) NSMutableArray<DYTableViewModule*> *tableModuleLists;
+@property (nonatomic, strong) DYTableViewModule *defaultTableModule;
 
 
 typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);

@@ -30,8 +30,6 @@
     
     [self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;
-    } fromSlot:^BOOL(NSIndexPath *indexPath, NSString *text) {
-        return text.length >= 3;
     }];
     
     [[self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
