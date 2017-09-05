@@ -23,16 +23,14 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         if (module.slotBlock(indexPath,self.data[indexPath.row])) {
             cell = [tableView dequeueReusableCellWithIdentifier:module.reuseIdentifier];
             module.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
-            break;
+            return cell;
         }
     }
-    if (!cell) {
-        if (self.defaultTableModule) {
-            cell = [tableView dequeueReusableCellWithIdentifier:self.defaultTableModule.reuseIdentifier];
-            self.defaultTableModule.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
-        } else {
-            NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
-        }
+    if (self.defaultTableModule) {
+        cell = [tableView dequeueReusableCellWithIdentifier:self.defaultTableModule.reuseIdentifier];
+        self.defaultTableModule.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+    } else {
+        NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
     }
     return cell;
 }
@@ -61,14 +59,26 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 
 #pragma delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat height = tableView.rowHeight;
+    //第一优先级 用户局部定制
     for (DYTableViewModule *module in self.tableModuleLists) {
         if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            height = module.rowHeight ?: (self.heightForRowAtIndexPath ? self.heightForRowAtIndexPath(tableView, indexPath) : tableView.rowHeight);
-            break;
+            if (module.rowHeight) {
+                return module.rowHeight;
+            }
         }
     }
-    return height;
+    //第二优先级 用户局部block定制
+    if (self.heightForRowAtIndexPath) {
+        return self.heightForRowAtIndexPath(tableView, indexPath);
+    }
+    //第三优先级 默认全局定制
+    if (self.defaultTableModule) {
+        if (self.defaultTableModule.rowHeight) {
+            return self.defaultTableModule.rowHeight;
+        }
+    }
+    //第四优先级 默认值
+    return tableView.rowHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return self.heightForHeaderInSection ? self.heightForHeaderInSection(tableView,section) : tableView.sectionHeaderHeight;
