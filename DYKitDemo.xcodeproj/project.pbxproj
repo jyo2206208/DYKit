@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DAE2CF01F5FC97200EE9905 /* EditActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAE2CEE1F5FC97200EE9905 /* EditActionsViewController.m */; };
+		1DAE2CF11F5FC97200EE9905 /* EditActionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE2CEF1F5FC97200EE9905 /* EditActionsViewController.xib */; };
 		8D8A3769464DEA332C057D2C /* libPods-DYKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E844F4B5924AAEC7BA2DDF /* libPods-DYKitDemo.a */; };
 		E3518E981F106B86008534B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3518E971F106B86008534B1 /* main.m */; };
 		E3518E9B1F106B86008534B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3518E9A1F106B86008534B1 /* AppDelegate.m */; };
@@ -52,6 +54,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1DAE2CED1F5FC97200EE9905 /* EditActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditActionsViewController.h; sourceTree = "<group>"; };
+		1DAE2CEE1F5FC97200EE9905 /* EditActionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditActionsViewController.m; sourceTree = "<group>"; };
+		1DAE2CEF1F5FC97200EE9905 /* EditActionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditActionsViewController.xib; sourceTree = "<group>"; };
 		1E88DE23D6E7CA445E389098 /* Pods-DYKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DYKitDemo/Pods-DYKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		72A92E059309EAC795189F22 /* Pods-DYKitDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYKitDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DYKitDemoTests/Pods-DYKitDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		73E844F4B5924AAEC7BA2DDF /* libPods-DYKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DYKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +261,9 @@
 				E36E5FF11F442BAB0029336A /* DataSlotForHeightViewController.h */,
 				E36E5FF21F442BAB0029336A /* DataSlotForHeightViewController.m */,
 				E36E5FF31F442BAB0029336A /* DataSlotForHeightViewController.xib */,
+				1DAE2CED1F5FC97200EE9905 /* EditActionsViewController.h */,
+				1DAE2CEE1F5FC97200EE9905 /* EditActionsViewController.m */,
+				1DAE2CEF1F5FC97200EE9905 /* EditActionsViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -383,6 +391,7 @@
 				E3518EA31F106B86008534B1 /* Assets.xcassets in Resources */,
 				E35F5CEC1F205D52009ADC93 /* OneTypeCellViewController.xib in Resources */,
 				E3DF6D2A1F277426000D3E29 /* DataSlotViewController.xib in Resources */,
+				1DAE2CF11F5FC97200EE9905 /* EditActionsViewController.xib in Resources */,
 				E35F5CFB1F209E72009ADC93 /* CellWithRowViewController.xib in Resources */,
 				E3C024951F11831D0043DD8F /* OneTypeCellByNibTableViewCell.xib in Resources */,
 				E3518EA11F106B86008534B1 /* Main.storyboard in Resources */,
@@ -510,6 +519,7 @@
 				E35F5CEB1F205D52009ADC93 /* OneTypeCellViewController.m in Sources */,
 				E36E5FF41F442BAB0029336A /* DataSlotForHeightViewController.m in Sources */,
 				E3C024C61F127BFD0043DD8F /* BlueTableViewCell.m in Sources */,
+				1DAE2CF01F5FC97200EE9905 /* EditActionsViewController.m in Sources */,
 				E3C024941F11831D0043DD8F /* OneTypeCellByNibTableViewCell.m in Sources */,
 				E3518E9B1F106B86008534B1 /* AppDelegate.m in Sources */,
 				E35F5CF01F207B06009ADC93 /* CellWithSectionAndRowViewController.m in Sources */,

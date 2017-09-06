@@ -59,17 +59,17 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 
 #pragma delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //第一优先级 用户局部定制
+    //第一优先级 用户局部block定制
+    if (self.heightForRowAtIndexPath) {
+        return self.heightForRowAtIndexPath(tableView, indexPath);
+    }
+    //第二优先级 用户局部定制
     for (DYTableViewModule *module in self.tableModuleLists) {
         if (module.slotBlock(indexPath,self.data[indexPath.row])) {
             if (module.rowHeight) {
                 return module.rowHeight;
             }
         }
-    }
-    //第二优先级 用户局部block定制
-    if (self.heightForRowAtIndexPath) {
-        return self.heightForRowAtIndexPath(tableView, indexPath);
     }
     //第三优先级 默认全局定制
     if (self.defaultTableModule) {
@@ -87,14 +87,26 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     return self.heightForFooterInSection ? self.heightForFooterInSection(tableView,section) : tableView.sectionFooterHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0){
-    CGFloat estimatedHeight = [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    //第一优先级 用户局部block定制
+    if (self.estimatedHeightForRowAtIndexPath) {
+        return self.estimatedHeightForRowAtIndexPath(tableView, indexPath);
+    }
+    //第二优先级 用户局部定制
     for (DYTableViewModule *module in self.tableModuleLists) {
         if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            estimatedHeight = module.estimatedHeight ?: (self.estimatedHeightForRowAtIndexPath ? self.estimatedHeightForRowAtIndexPath(tableView,indexPath) : [self tableView:tableView heightForRowAtIndexPath:indexPath]);
-            break;
+            if (module.estimatedHeight) {
+                return module.estimatedHeight;
+            }
         }
     }
-    return estimatedHeight;
+    //第三优先级 默认全局定制
+    if (self.defaultTableModule) {
+        if (self.defaultTableModule.estimatedHeight) {
+            return self.defaultTableModule.estimatedHeight;
+        }
+    }
+    //第四优先级 默认值
+    return [self tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0){
     return self.estimatedHeightForHeaderInSection ? self.estimatedHeightForHeaderInSection(tableView,section) : [self tableView:tableView heightForHeaderInSection:section];
@@ -117,20 +129,39 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 - (nullable NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0){
     return self.willDeselectRowAtIndexPath ? self.willDeselectRowAtIndexPath(tableView,indexPath) : indexPath;
 }
+
+
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
     if ([self tableView:tableView canEditRowAtIndexPath:indexPath ]) {
         return self.editingStyleForRowAtIndexPath ? self.editingStyleForRowAtIndexPath(tableView,indexPath) : UITableViewCellEditingStyleDelete;
-    } else {return UITableViewCellEditingStyleNone;}
+    } else {
+        return UITableViewCellEditingStyleNone;
+    }
 }
+
+
+
+
 - (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED{
     return self.titleForDeleteConfirmationButtonForRowAtIndexPath ? self.titleForDeleteConfirmationButtonForRowAtIndexPath(tableView,indexPath) : nil;
 }
+
+
+
+
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED{
 //    return self.editActionsForRowAtIndexPath ? self.editActionsForRowAtIndexPath(tableView,indexPath) : nil;
     if (self.editActionsForRowAtIndexPath) {
         return self.editActionsForRowAtIndexPath(tableView,indexPath);
     } else {return nil;}
 }
+
+
+
+
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.shouldIndentWhileEditingRowAtIndexPath ? self.shouldIndentWhileEditingRowAtIndexPath(tableView,indexPath) : YES;
 }
