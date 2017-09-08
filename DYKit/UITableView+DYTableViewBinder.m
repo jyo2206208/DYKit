@@ -11,16 +11,7 @@
 @implementation UITableView (DYTableViewBinder)
 
 #pragma 属性
-//DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
-- (void)setAgent:(DYTableViewAgent *)agent{
-    objc_setAssociatedObject(self, _cmd, agent, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (DYTableViewAgent *)agent{
-        return objc_getAssociatedObject(self, @selector(setAgent:));
-}
-
-
+DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
 DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 
 - (id)data{return self.agent.data;}
