@@ -232,11 +232,49 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
     return self.targetIndexPathForMoveFromRowAtIndexPath ? self.targetIndexPathForMoveFromRowAtIndexPath(tableView,sourceIndexPath,proposedDestinationIndexPath) : proposedDestinationIndexPath;
 }
-//- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return self.indentationLevelForRowAtIndexPath ? self.indentationLevelForRowAtIndexPath(tableView,indexPath) : 0;
-//}
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //第一优先级 用户局部block定制
+    if (self.indentationLevelForRowAtIndexPath) {
+        return self.indentationLevelForRowAtIndexPath(tableView, indexPath);
+    }
+    //第二优先级 用户局部定制
+    for (DYTableViewModule *module in self.tableModuleLists) {
+        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+            if (module.indentationLevel) {
+                return module.indentationLevel;
+            }
+        }
+    }
+    //第三优先级 默认全局定制
+    if (self.defaultTableModule) {
+        if (self.defaultTableModule.indentationLevel) {
+            return self.defaultTableModule.indentationLevel;
+        }
+    }
+    //第四优先级 默认值
+    return 0;
+}
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(5_0){
-    return self.shouldShowMenuForRowAtIndexPath ? self.shouldShowMenuForRowAtIndexPath(tableView,indexPath) : NO;
+    //第一优先级 用户局部block定制
+    if (self.shouldShowMenuForRowAtIndexPath) {
+        return self.shouldShowMenuForRowAtIndexPath(tableView, indexPath);
+    }
+    //第二优先级 用户局部定制
+    for (DYTableViewModule *module in self.tableModuleLists) {
+        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+            if (module.shouldShowMenu) {
+                return module.shouldShowMenu;
+            }
+        }
+    }
+    //第三优先级 默认全局定制
+    if (self.defaultTableModule) {
+        if (self.defaultTableModule.shouldShowMenu) {
+            return self.defaultTableModule.shouldShowMenu;
+        }
+    }
+    //第四优先级 默认值
+    return NO;
 }
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender NS_AVAILABLE_IOS(5_0){
     return self.canPerformAction ? self.canPerformAction(tableView,action,indexPath) : NO;

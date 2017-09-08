@@ -118,7 +118,7 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 - (UITableView*)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{[self agentInitialize];self.agent.willSelectRowAtIndexPath = block;return self;}
 - (UITableView*)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{[self agentInitialize];self.agent.willDeselectRowAtIndexPath = block;return self;}
 - (UITableView*)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block{[self agentInitialize];self.agent.editingStyleForRowAtIndexPath = block;return self;}
-- (UITableView*)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block{[self agentInitialize];self.agent.titleForDeleteConfirmationButtonForRowAtIndexPath = block;return self;}
+//- (UITableView*)setTitleForDeleteConfirmationButtonForRowAtIndexPath:(NSStringTableViewIndexPath)block{[self agentInitialize];self.agent.titleForDeleteConfirmationButtonForRowAtIndexPath = block;return self;}
 - (UITableView*)setShouldIndentWhileEditingRowAtIndexPath:(BOOLTableViewIndexPath)block{[self agentInitialize];self.agent.shouldIndentWhileEditingRowAtIndexPath = block;return self;}
 - (UITableView*)setTargetIndexPathForMoveFromRowAtIndexPath:(NSIndexPathUITableViewNSIndexPathNSIndexPath)block{[self agentInitialize];self.agent.targetIndexPathForMoveFromRowAtIndexPath = block;return self;}
 - (UITableView*)setIndentationLevelForRowAtIndexPath:(NSIntegerUITableViewNSIndexPath)block{[self agentInitialize];self.agent.indentationLevelForRowAtIndexPath = block;return self;}
