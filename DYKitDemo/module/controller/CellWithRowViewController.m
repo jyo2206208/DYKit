@@ -20,6 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView setHeightForRowAtIndexPath:^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
+        return indexPath.row == 1 ? 20 : 40;
+    }];
+    
     [self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;
     }];
@@ -31,9 +35,7 @@
         return indexPath.row == 5;
     } withPlug:BlueTableViewCell.class] setRowHeight:100];
     
-    [self.tableView setHeightForRowAtIndexPath:^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
-        return indexPath.row == 1 ? 20 : 40;
-    }];
+    
     
     self.tableView.data = @[@"刘德华",@"张学友",@"黎明",@"郭富城",@"郭德纲",@"郭敬明",@"黄晓明",@"柴静",@"宋祖德",@"大S",@"小S",@"欧阳娜娜",@"王力宏",@"周杰伦",@"机器猫",@"大熊",@"(●—●)",@"美少女战士",@"孙悟空",@"贝吉塔"];
 }
