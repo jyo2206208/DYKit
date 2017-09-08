@@ -38,7 +38,26 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     return self.numberOfSectionsInTableView ? self.numberOfSectionsInTableView(tableView) : 1;
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return self.canEditRowAtIndexPath ? self.canEditRowAtIndexPath(tableView, indexPath) : tableView.editing;
+    //第一优先级 用户局部block定制
+    if (self.canEditRowAtIndexPath) {
+        return self.canEditRowAtIndexPath(tableView, indexPath);
+    }
+    //第二优先级 用户局部定制
+    for (DYTableViewModule *module in self.tableModuleLists) {
+        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+            if (module.editing) {
+                return module.editing;
+            }
+        }
+    }
+    //第三优先级 默认全局定制
+    if (self.defaultTableModule) {
+        if (self.defaultTableModule.editing) {
+            return self.defaultTableModule.editing;
+        }
+    }
+    //第四优先级 默认值
+    return tableView.editing;
 }
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return self.titleForHeaderInSection ? self.titleForHeaderInSection(tableView,section) : nil;
@@ -153,10 +172,26 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 
 
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED{
-//    return self.editActionsForRowAtIndexPath ? self.editActionsForRowAtIndexPath(tableView,indexPath) : nil;
+    //第一优先级 用户局部block定制
     if (self.editActionsForRowAtIndexPath) {
         return self.editActionsForRowAtIndexPath(tableView,indexPath);
-    } else {return nil;}
+    }
+    //第二优先级 用户局部定制
+    for (DYTableViewModule *module in self.tableModuleLists) {
+        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+            if (module.editActions) {
+                return module.editActions;
+            }
+        }
+    }
+    //第三优先级 默认全局定制
+    if (self.defaultTableModule) {
+        if (self.defaultTableModule.editActions) {
+            return self.defaultTableModule.editActions;
+        }
+    }
+    //第四优先级 默认值
+    return nil;
 }
 
 

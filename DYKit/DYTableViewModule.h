@@ -26,4 +26,6 @@ typedef BOOL(^SlotBlock)(NSIndexPath *indexPath, id model);
 @property (nonatomic, copy) NSString *titleForDeleteConfirmationButton;
 @property (nonatomic) NSInteger indentationLevel;
 
+@property (nonatomic) BOOL editing;
+
 @end

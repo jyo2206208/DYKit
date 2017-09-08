@@ -25,15 +25,6 @@
 }
 
 - (void)testExample {
-    CGFloat height;
-//    NSLog(@"%f",height);
-//    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:2 inSection:1];
-//    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:2 inSection:1];
-//    if ([indexPath1 isEqual:indexPath2]) {
-//        NSLog(@"yes");
-//    } else {
-//        NSLog(@"no");
-//    }
 }
 
 - (void)testPerformanceExample {

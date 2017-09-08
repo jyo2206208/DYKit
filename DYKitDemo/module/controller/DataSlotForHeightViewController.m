@@ -28,6 +28,8 @@
         return array;
     };
     
+    
+    
     [self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;
     }];

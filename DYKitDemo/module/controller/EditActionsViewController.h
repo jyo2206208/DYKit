@@ -2,7 +2,7 @@
 //  EditActionsViewController.h
 //  DYKitDemo
 //
-//  Created by farfetch on 2017/9/6.
+//  Created by DuYe on 2017/9/6.
 //  Copyright © 2017年 DuYe. All rights reserved.
 //
 
