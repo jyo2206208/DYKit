@@ -180,14 +180,26 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     for (DYTableViewModule *module in self.tableModuleLists) {
         if (module.slotBlock(indexPath,self.data[indexPath.row])) {
             if (module.editActions) {
-                return module.editActions;
+                NSMutableArray<UITableViewRowAction *> *array = [[NSMutableArray alloc] init];
+                for (DYTableViewRowAction *dyAction in module.editActions) {
+                    [array addObject:[UITableViewRowAction rowActionWithStyle:dyAction.accessibilityPerformMagicTap title:dyAction.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                        dyAction.handler(action, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+                    }]];
+                }
+                return array;
             }
         }
     }
     //第三优先级 默认全局定制
     if (self.defaultTableModule) {
         if (self.defaultTableModule.editActions) {
-            return self.defaultTableModule.editActions;
+            NSMutableArray<UITableViewRowAction *> *array = [[NSMutableArray alloc] init];
+            for (DYTableViewRowAction *dyAction in self.defaultTableModule.editActions) {
+                [array addObject:[UITableViewRowAction rowActionWithStyle:dyAction.accessibilityPerformMagicTap title:dyAction.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                    dyAction.handler(action, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+                }]];
+            }
+            return array;
         }
     }
     //第四优先级 默认值

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DYTableViewAgent.h"
 #import "objc/runtime.h"
+#import "DYTableViewRowAction.h"
 
 @interface UITableView (DYTableViewBinder)
 

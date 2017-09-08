@@ -19,12 +19,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UITableViewRowAction *firstAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"第一" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        NSLog(@"第一个按钮被点击了");
+    DYTableViewRowAction *firstAction = [DYTableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"第一" handler:^(UITableViewRowAction * _Nonnull action, NSString *text, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"按钮第一的数据为：%@",text);
     }];
-    UITableViewRowAction *secondAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"第二" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        NSLog(@"第二个按钮被点击了");
+    
+    DYTableViewRowAction *secondAction = [DYTableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"第二" handler:^(UITableViewRowAction * _Nonnull action, NSString *text, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"按钮第二的数据为：%@",text);
     }];
+    
     
     [[self.tableView assembly:^(UITableViewCell *cell, NSString *text, NSIndexPath *indexPath) {
         cell.textLabel.text = text;

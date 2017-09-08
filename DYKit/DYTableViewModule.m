@@ -10,7 +10,7 @@
 
 @implementation DYTableViewModule
 
-- (void)setEditActions:(NSArray<UITableViewRowAction *> *)editActions{
+- (void)setEditActions:(NSArray<DYTableViewRowAction *> *)editActions{
     _editing = YES;
     _editActions = editActions;
 }
