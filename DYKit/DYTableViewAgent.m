@@ -152,21 +152,38 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
     if ([self tableView:tableView canEditRowAtIndexPath:indexPath ]) {
-        return self.editingStyleForRowAtIndexPath ? self.editingStyleForRowAtIndexPath(tableView,indexPath) : UITableViewCellEditingStyleDelete;
-    } else {
-        return UITableViewCellEditingStyleNone;
+        //第一优先级 用户局部block定制
+        if (self.editingStyleForRowAtIndexPath) {
+            return self.editingStyleForRowAtIndexPath(tableView, indexPath);
+        }
+        //第二优先级 用户局部定制
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                if (module.editingStyle) {
+                    return module.editingStyle;
+                }
+            }
+        }
+        //第三优先级 默认全局定制
+        if (self.defaultTableModule) {
+            if (self.defaultTableModule.editingStyle) {
+                return self.defaultTableModule.editingStyle;
+            }
+        }
+        
+        return UITableViewCellEditingStyleDelete;
     }
+    //第四优先级 默认值
+    return UITableViewCellEditingStyleNone;
 }
 
 
 
 
-- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED{
-    return self.titleForDeleteConfirmationButtonForRowAtIndexPath ? self.titleForDeleteConfirmationButtonForRowAtIndexPath(tableView,indexPath) : nil;
-}
+//- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED{
+//    return self.titleForDeleteConfirmationButtonForRowAtIndexPath ? self.titleForDeleteConfirmationButtonForRowAtIndexPath(tableView,indexPath) : nil;
+//}
 
 
 
@@ -215,9 +232,9 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
     return self.targetIndexPathForMoveFromRowAtIndexPath ? self.targetIndexPathForMoveFromRowAtIndexPath(tableView,sourceIndexPath,proposedDestinationIndexPath) : proposedDestinationIndexPath;
 }
-- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return self.indentationLevelForRowAtIndexPath ? self.indentationLevelForRowAtIndexPath(tableView,indexPath) : 0;
-}
+//- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return self.indentationLevelForRowAtIndexPath ? self.indentationLevelForRowAtIndexPath(tableView,indexPath) : 0;
+//}
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(5_0){
     return self.shouldShowMenuForRowAtIndexPath ? self.shouldShowMenuForRowAtIndexPath(tableView,indexPath) : NO;
 }
