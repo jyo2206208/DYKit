@@ -15,27 +15,45 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
 
 #pragma dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : (self.data ? [self.data count] : 0);
+    return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : (self.data ? [self.data count] : (self.sectionData ? self.sectionData[section].count : 0));
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
     for (DYTableViewModule *module in self.tableModuleLists) {
-        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            cell = [tableView dequeueReusableCellWithIdentifier:module.reuseIdentifier];
-            module.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
-            return cell;
+        if (self.data) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                cell = [tableView dequeueReusableCellWithIdentifier:module.reuseIdentifier];
+                module.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+                return cell;
+            }
         }
+        
+        if (self.sectionData) {
+            if (module.slotBlock(indexPath,self.sectionData[indexPath.section][indexPath.row])) {
+                cell = [tableView dequeueReusableCellWithIdentifier:module.reuseIdentifier];
+                module.assemblyBlock(cell, self.sectionData[indexPath.section][indexPath.row], indexPath);
+                return cell;
+            }
+        }
+        
     }
     if (self.defaultTableModule) {
         cell = [tableView dequeueReusableCellWithIdentifier:self.defaultTableModule.reuseIdentifier];
-        self.defaultTableModule.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+        if (self.data) {
+            self.defaultTableModule.assemblyBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+        }
+        
+        if (self.sectionData) {
+            self.defaultTableModule.assemblyBlock(cell, self.sectionData[indexPath.section][indexPath.row], indexPath);
+        }
+        
     } else {
         NSLog(@"section %ld , row %ld 的cell数据绑定缺失",(long)indexPath.section,(long)indexPath.row);
     }
     return cell;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.numberOfSectionsInTableView ? self.numberOfSectionsInTableView(tableView) : 1;
+    return self.numberOfSectionsInTableView ? self.numberOfSectionsInTableView(tableView) : (self.sectionData ? self.sectionData.count : 1);
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     //第一优先级 用户局部block定制

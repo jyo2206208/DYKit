@@ -18,7 +18,7 @@
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, copy) NSArray *data;
-@property (nonatomic, copy) NSArray *sectionData;
+@property (nonatomic, copy) NSArray<NSArray *> *sectionData;
 @property (nonatomic, strong) NSMutableArray<DYTableViewModule*> *tableModuleLists;
 @property (nonatomic, strong) DYTableViewModule *defaultTableModule;
 

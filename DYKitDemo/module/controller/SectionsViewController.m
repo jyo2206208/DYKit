@@ -23,12 +23,9 @@
         cell.textLabel.text = text;
     }];
     
-    
-    
-    
-    
-    
-    
+    [[self.tableView setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
+        return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
+    }] setSectionHeaderHeight:50];
     
     
     
