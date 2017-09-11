@@ -18,11 +18,14 @@
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, copy) NSArray *data;
-@property (nonatomic, copy) NSArray<NSArray *> *sectionData;
 @property (nonatomic, strong) NSMutableArray<DYTableViewModule*> *tableModuleLists;
 @property (nonatomic, strong) DYTableViewModule *defaultTableModule;
 
+typedef NSArray* (^GetSectionData)(id model,NSInteger section);
+@property (nonatomic, copy) GetSectionData getSectionData;
 
+
+#pragma 下面是自带的配置
 typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
 @property (nonatomic, copy) CGFloatTableViewIndexPath heightForRowAtIndexPath;
 @property (nonatomic, copy) CGFloatTableViewIndexPath estimatedHeightForRowAtIndexPath;

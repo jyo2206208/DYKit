@@ -28,8 +28,7 @@
 - (NSArray *)data;
 - (void)setData:(NSArray *)data;
 
-- (NSArray *)sectionData;
-- (void)setSectionData:(NSArray *)sectionData;
+- (UITableView*)setSectionData:(GetSectionData)block;
 
 #pragma 主要装配方法
 /**

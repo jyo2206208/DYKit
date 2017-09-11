@@ -23,15 +23,18 @@
         cell.textLabel.text = text;
     }];
     
-    [[self.tableView setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
+    [[[self.tableView setSectionData:^NSArray *(NSDictionary *model, NSInteger section) {
+        return model[@"data"];
+    }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
         return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
-    }] setSectionHeaderHeight:50];
+    }] setSectionHeaderHeight:30];
     
     
     
-    self.tableView.sectionData = @[@[@"刘德华",@"张学友",@"黎明",@"郭富城",@"郭德纲",@"郭敬明",@"黄晓明",@"柴静",@"宋祖德"],
-                                   @[@"大S",@"小S",@"欧阳娜娜",@"王力宏",@"周杰伦"],
-                                   @[@"机器猫",@"大熊",@"(●—●)",@"美少女战士",@"孙悟空",@"贝吉塔"]];
+    self.tableView.data = @[@{@"name":@"港台明星",@"data":@[@"刘德华",@"张学友",@"黎明",@"郭富城",@"蔡康永"]},
+                                   @{@"name":@"大陆明星",@"data":@[@"薛之谦",@"杨幂",@"王宝强",@"黄渤"]},
+                                   @{@"name":@"动漫明星",@"data":@[@"机器猫",@"大熊",@"(●—●)",@"美少女战士",@"孙悟空",@"贝吉塔"]},
+                                   ];
 }
 
 @end

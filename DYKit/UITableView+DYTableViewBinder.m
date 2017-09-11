@@ -17,8 +17,10 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 - (NSArray *)data{return self.agent.data;}
 - (void)setData:(NSArray *)data{self.agent.data = data;}
 
-- (NSArray *)sectionData{return self.agent.sectionData;}
-- (void)setSectionData:(NSArray *)sectionData{self.agent.sectionData = sectionData;}
+- (UITableView*)setSectionData:(GetSectionData)block{
+    self.agent.getSectionData = block;
+    return self;
+}
 
 #pragma 主要装配方法
 - (DYTableViewModule*) assembly:(AssemblyBlock)block{
@@ -28,11 +30,9 @@ DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 - (DYTableViewModule*) assembly:(AssemblyBlock)block withPlug:(Class)plug{
     [self agentInitialize];
     [self dyRegisterForCellReuseIdentifier:NSStringFromClass(plug)];
-    DYTableViewModule *module = [[DYTableViewModule alloc] init];
-    module.reuseIdentifier = NSStringFromClass(plug);
-    module.assemblyBlock = block;
-    self.agent.defaultTableModule = module;
-    return module;
+    self.agent.defaultTableModule.reuseIdentifier = NSStringFromClass(plug);
+    self.agent.defaultTableModule.assemblyBlock = block;
+    return self.agent.defaultTableModule;
 }
 
 - (DYTableViewModule*) assembly:(AssemblyBlock)assemblyBlock fromSlot:(SlotBlock)slotBlock{
