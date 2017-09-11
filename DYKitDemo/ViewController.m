@@ -15,6 +15,7 @@
 #import "DataSlotViewController.h"
 #import "DataSlotForHeightViewController.h"
 #import "EditActionsViewController.h"
+#import "SectionsViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *homeTableView;
@@ -42,7 +43,8 @@
                                    @"指定row进行cell设定",
                                    @"指定数据条件进行cell设定",
                                    @"指定模块进行高度设定",
-                                   @"左滑出现按钮"];
+                                   @"左滑出现按钮",
+                                @"多section的情况"];
     
     @weakify(self)
     [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
@@ -106,6 +108,15 @@
     }] subscribeNext:^(id  _Nullable x) {
         @strongify(self)
         [self.navigationController pushViewController:[[EditActionsViewController alloc] init] animated:YES];
+    }];
+    
+    [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
+        return @(indexPath.row);
+    }] filter:^BOOL(id  _Nullable value) {
+        return [value intValue] == 7;
+    }] subscribeNext:^(id  _Nullable x) {
+        @strongify(self)
+        [self.navigationController pushViewController:[[SectionsViewController alloc] init] animated:YES];
     }];
     
     

@@ -14,8 +14,11 @@
 DYSYNTH_DYNAMIC_PROPERTY_OBJECT(agent, setAgent, RETAIN, DYTableViewAgent *)
 DYSYNTH_DYNAMIC_PROPERTY_CTYPE(autoReload, setAutoReload, BOOL)
 
-- (id)data{return self.agent.data;}
-- (void)setData:(id)data{self.agent.data = data;}
+- (NSArray *)data{return self.agent.data;}
+- (void)setData:(NSArray *)data{self.agent.data = data;}
+
+- (NSArray *)sectionData{return self.agent.sectionData;}
+- (void)setSectionData:(NSArray *)sectionData{self.agent.sectionData = sectionData;}
 
 #pragma 主要装配方法
 - (DYTableViewModule*) assembly:(AssemblyBlock)block{

@@ -25,8 +25,11 @@
  */
 @property (nonatomic) BOOL autoReload;
 
-- (id)data;
-- (void)setData:(id)data;
+- (NSArray *)data;
+- (void)setData:(NSArray *)data;
+
+- (NSArray *)sectionData;
+- (void)setSectionData:(NSArray *)sectionData;
 
 #pragma 主要装配方法
 /**
