@@ -38,16 +38,22 @@
         return indexPath.section == 1 && indexPath.row == 0;
     } withPlug:OneTypeCellByNibTableViewCell.class];
     
-    [[[[self.tableView setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
-        switch (section) {
-            case 0: return 14; break;
-            default: return 7; break;
-        }
-    }] setNumberOfSectionsInTableView:^NSInteger(UITableView *tableView) {
-        return 2;
+//    [[[[self.tableView setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
+//        switch (section) {
+//            case 0: return 14; break;
+//            default: return 7; break;
+//        }
+//    }] setNumberOfSectionsInTableView:^NSInteger(UITableView *tableView) {
+//        return 2;
+//    }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
+//        return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
+//    }] setSectionHeaderHeight:50];
+    
+    [[[self.tableView setSectionData:^NSArray *(id model, NSInteger section) {
+        return model;
     }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
         return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
-    }] setSectionHeaderHeight:50];
+    }] setSectionHeaderHeight:30];
     
     
     User *user1 = [User new];
@@ -58,7 +64,8 @@
     user1.desc = @"她喜欢黑色";
     user1.sex = 0;
     
-    self.tableView.data = @[@"刘德华",@"张学友",@"黎明",@"郭富城",@"郭德纲",@"郭敬明",@"黄晓明",@"柴静",@"宋祖德",@"大S",@"小S",@"欧阳娜娜",@"王力宏",@"周杰伦",user1,@"机器猫",@"大熊",@"(●—●)",@"美少女战士",@"孙悟空",@"贝吉塔"];
+    self.tableView.data = @[@[@"刘德华",@"张学友",@"黎明",@"郭富城",@"郭德纲",@"郭敬明",@"黄晓明",@"柴静",@"宋祖德",@"大S",@"小S",@"欧阳娜娜",@"王力宏",@"周杰伦"],
+                            @[user1,@"机器猫",@"大熊",@"(●—●)",@"美少女战士",@"孙悟空",@"贝吉塔"]];
     
 }
 

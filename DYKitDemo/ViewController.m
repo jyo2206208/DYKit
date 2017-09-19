@@ -119,7 +119,5 @@
         [self.navigationController pushViewController:[[SectionsViewController alloc] init] animated:YES];
     }];
     
-    
-    
 }
 @end

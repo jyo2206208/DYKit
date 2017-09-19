@@ -83,18 +83,26 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         return self.canEditRowAtIndexPath(tableView, indexPath);
     }
     //第二优先级 用户局部定制
-    for (DYTableViewModule *module in self.tableModuleLists) {
-        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            if (module.editing) {
-                return module.editing;
+    if (self.getSectionData) {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.getSectionData(self.data[indexPath.section],indexPath.section)[indexPath.row])) {
+                if (module.editing) {
+                    return module.editing;
+                }
+            }
+        }
+    } else {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                if (module.editing) {
+                    return module.editing;
+                }
             }
         }
     }
     //第三优先级 默认全局定制
     if (self.defaultTableModule) {
-        if (self.defaultTableModule.editing) {
-            return self.defaultTableModule.editing;
-        }
+        return self.defaultTableModule.editing;
     }
     //第四优先级 默认值
     return tableView.editing;
@@ -123,10 +131,20 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         return self.heightForRowAtIndexPath(tableView, indexPath);
     }
     //第二优先级 用户局部定制
-    for (DYTableViewModule *module in self.tableModuleLists) {
-        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            if (module.rowHeight) {
-                return module.rowHeight;
+    if (self.getSectionData) {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.getSectionData(self.data[indexPath.section],indexPath.section)[indexPath.row])) {
+                if (module.rowHeight) {
+                    return module.rowHeight;
+                }
+            }
+        }
+    } else {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                if (module.rowHeight) {
+                    return module.rowHeight;
+                }
             }
         }
     }
@@ -151,10 +169,20 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         return self.estimatedHeightForRowAtIndexPath(tableView, indexPath);
     }
     //第二优先级 用户局部定制
-    for (DYTableViewModule *module in self.tableModuleLists) {
-        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            if (module.estimatedHeight) {
-                return module.estimatedHeight;
+    if (self.getSectionData) {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.getSectionData(self.data[indexPath.section],indexPath.section)[indexPath.row])) {
+                if (module.estimatedHeight) {
+                    return module.estimatedHeight;
+                }
+            }
+        }
+    } else {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                if (module.estimatedHeight) {
+                    return module.estimatedHeight;
+                }
             }
         }
     }
@@ -189,8 +217,6 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     return self.willDeselectRowAtIndexPath ? self.willDeselectRowAtIndexPath(tableView,indexPath) : indexPath;
 }
 
-
-
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([self tableView:tableView canEditRowAtIndexPath:indexPath ]) {
         //第一优先级 用户局部block定制
@@ -198,10 +224,20 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
             return self.editingStyleForRowAtIndexPath(tableView, indexPath);
         }
         //第二优先级 用户局部定制
-        for (DYTableViewModule *module in self.tableModuleLists) {
-            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-                if (module.editingStyle) {
-                    return module.editingStyle;
+        if (self.getSectionData) {
+            for (DYTableViewModule *module in self.tableModuleLists) {
+                if (module.slotBlock(indexPath,self.getSectionData(self.data[indexPath.section],indexPath.section)[indexPath.row])) {
+                    if (module.editingStyle) {
+                        return module.editingStyle;
+                    }
+                }
+            }
+        } else {
+            for (DYTableViewModule *module in self.tableModuleLists) {
+                if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                    if (module.editingStyle) {
+                        return module.editingStyle;
+                    }
                 }
             }
         }
@@ -234,16 +270,32 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         return self.editActionsForRowAtIndexPath(tableView,indexPath);
     }
     //第二优先级 用户局部定制
-    for (DYTableViewModule *module in self.tableModuleLists) {
-        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            if (module.editActions) {
-                NSMutableArray<UITableViewRowAction *> *array = [[NSMutableArray alloc] init];
-                for (DYTableViewRowAction *dyAction in module.editActions) {
-                    [array addObject:[UITableViewRowAction rowActionWithStyle:dyAction.accessibilityPerformMagicTap title:dyAction.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                        dyAction.handler(action, self.data[indexPath.row], indexPath);
-                    }]];
+    if (self.getSectionData) {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.getSectionData(self.data[indexPath.section],indexPath.section)[indexPath.row])) {
+                if (module.editActions) {
+                    NSMutableArray<UITableViewRowAction *> *array = [[NSMutableArray alloc] init];
+                    for (DYTableViewRowAction *dyAction in module.editActions) {
+                        [array addObject:[UITableViewRowAction rowActionWithStyle:dyAction.accessibilityPerformMagicTap title:dyAction.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                            dyAction.handler(action, self.data[indexPath.row], indexPath);
+                        }]];
+                    }
+                    return array;
                 }
-                return array;
+            }
+        }
+    } else {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                if (module.editActions) {
+                    NSMutableArray<UITableViewRowAction *> *array = [[NSMutableArray alloc] init];
+                    for (DYTableViewRowAction *dyAction in module.editActions) {
+                        [array addObject:[UITableViewRowAction rowActionWithStyle:dyAction.accessibilityPerformMagicTap title:dyAction.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                            dyAction.handler(action, self.data[indexPath.row], indexPath);
+                        }]];
+                    }
+                    return array;
+                }
             }
         }
     }
@@ -263,9 +315,6 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
     return nil;
 }
 
-
-
-
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.shouldIndentWhileEditingRowAtIndexPath ? self.shouldIndentWhileEditingRowAtIndexPath(tableView,indexPath) : YES;
 }
@@ -278,10 +327,20 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         return self.indentationLevelForRowAtIndexPath(tableView, indexPath);
     }
     //第二优先级 用户局部定制
-    for (DYTableViewModule *module in self.tableModuleLists) {
-        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            if (module.indentationLevel) {
-                return module.indentationLevel;
+    if (self.getSectionData) {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.getSectionData(self.data[indexPath.section],indexPath.section)[indexPath.row])) {
+                if (module.indentationLevel) {
+                    return module.indentationLevel;
+                }
+            }
+        }
+    } else {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                if (module.indentationLevel) {
+                    return module.indentationLevel;
+                }
             }
         }
     }
@@ -300,10 +359,20 @@ DYN_LAZY(tableModuleLists, NSMutableArray)
         return self.shouldShowMenuForRowAtIndexPath(tableView, indexPath);
     }
     //第二优先级 用户局部定制
-    for (DYTableViewModule *module in self.tableModuleLists) {
-        if (module.slotBlock(indexPath,self.data[indexPath.row])) {
-            if (module.shouldShowMenu) {
-                return module.shouldShowMenu;
+    if (self.getSectionData) {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.getSectionData(self.data[indexPath.section],indexPath.section)[indexPath.row])) {
+                if (module.shouldShowMenu) {
+                    return module.shouldShowMenu;
+                }
+            }
+        }
+    } else {
+        for (DYTableViewModule *module in self.tableModuleLists) {
+            if (module.slotBlock(indexPath,self.data[indexPath.row])) {
+                if (module.shouldShowMenu) {
+                    return module.shouldShowMenu;
+                }
             }
         }
     }

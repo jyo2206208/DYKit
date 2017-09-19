@@ -362,6 +362,7 @@
 				TargetAttributes = {
 					E3518E921F106B86008534B1 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = MU3P497PKC;
 						ProvisioningStyle = Automatic;
 					};
 					E3518EAB1F106B86008534B1 = {
@@ -683,6 +684,7 @@
 			baseConfigurationReference = 1E88DE23D6E7CA445E389098 /* Pods-DYKitDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MU3P497PKC;
 				INFOPLIST_FILE = DYKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -696,6 +698,7 @@
 			baseConfigurationReference = FCC7EA0B3413388469B9EEBA /* Pods-DYKitDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MU3P497PKC;
 				INFOPLIST_FILE = DYKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
