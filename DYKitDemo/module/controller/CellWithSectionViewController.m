@@ -44,16 +44,8 @@
         return indexPath.section == 2;
     } withPlug:BlueTableViewCell.class];
     
-    
-    [[[[[self.tableView setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
-        switch (section) {
-            case 0: return 14; break;
-            case 1: return 3; break;
-            case 2: return 6; break;
-            default: return 0; break;
-        }
-    }] setNumberOfSectionsInTableView:^NSInteger(UITableView *tableView) {
-        return 3;
+    [[[[self.tableView setSectionData:^NSArray *(NSDictionary *model, NSInteger section) {
+        return model[@"data"];
     }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
         return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
     }] setHeightForRowAtIndexPath:^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
@@ -83,7 +75,10 @@
     user3.desc = @"平淡无奇的中学化学老师";
     user3.sex = 1;
     
-    self.tableView.data = @[@"刘德华",@"张学友",@"黎明",@"郭富城",@"郭德纲",@"郭敬明",@"黄晓明",@"柴静",@"宋祖德",@"大S",@"小S",@"欧阳娜娜",@"王力宏",@"周杰伦",user1,user2,user3,@"机器猫",@"大熊",@"(●—●)",@"美少女战士",@"孙悟空",@"贝吉塔"];
+    self.tableView.data = @[@{@"name":@"港台明星",@"data":@[@"刘德华",@"张学友",@"黎明",@"郭富城",@"郭德纲",@"郭敬明",@"黄晓明",@"柴静",@"宋祖德",@"大S",@"小S",@"欧阳娜娜",@"王力宏",@"周杰伦"]},
+                            @{@"name":@"大陆明星",@"data":@[user1,user2,user3]},
+                            @{@"name":@"动漫明星",@"data":@[@"机器猫",@"大熊",@"(●—●)",@"美少女战士",@"孙悟空",@"贝吉塔"]},
+                            ];
     
 }
 

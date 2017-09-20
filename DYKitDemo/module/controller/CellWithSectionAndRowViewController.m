@@ -38,17 +38,6 @@
         return indexPath.section == 1 && indexPath.row == 0;
     } withPlug:OneTypeCellByNibTableViewCell.class];
     
-//    [[[[self.tableView setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
-//        switch (section) {
-//            case 0: return 14; break;
-//            default: return 7; break;
-//        }
-//    }] setNumberOfSectionsInTableView:^NSInteger(UITableView *tableView) {
-//        return 2;
-//    }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {
-//        return [NSString stringWithFormat:@"这是第%ld个section", (long)section];
-//    }] setSectionHeaderHeight:50];
-    
     [[[self.tableView setSectionData:^NSArray *(id model, NSInteger section) {
         return model;
     }] setTitleForHeaderInSection:^NSString *(UITableView *tableView, NSInteger section) {

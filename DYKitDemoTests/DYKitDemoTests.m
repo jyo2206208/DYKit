@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "ReactiveObjC.h"
 
 @interface DYKitDemoTests : XCTestCase
 
@@ -25,6 +26,7 @@
 }
 
 - (void)testExample {
+
 }
 
 - (void)testPerformanceExample {
