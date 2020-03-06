@@ -15,14 +15,14 @@
 
 #pragma dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : (self.data ? [self.data count] : 0);
+    return self.numberOfRowsInSection ? self.numberOfRowsInSection(tableView,section) : 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
     for (CellInfo *cellInfo in self.cellInfoList) {
-        if (cellInfo.slotBlock(indexPath,self.data[indexPath.row])) {
+        if (cellInfo.slotBlock(indexPath, self.modelOfCellAtIndexPath(indexPath))) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellInfo.reuseIdentifier];
-            cellInfo.cellBindBlock(cell, self.data[[self getFlattenRow:tableView IndexPath:indexPath]], indexPath);
+            cellInfo.cellBindBlock(cell, self.modelOfCellAtIndexPath(indexPath), indexPath);
         }
     }
     if (!cell) {
@@ -73,10 +73,12 @@
     return self.estimatedHeightForFooterInSection ? self.estimatedHeightForFooterInSection(tableView,section) : [self tableView:tableView heightForFooterInSection:section];
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return self.viewForHeaderInSection ? self.viewForHeaderInSection(tableView,section) : nil;
+    id model = self.modelOfHeaderAtSection ? self.modelOfHeaderAtSection(section) : nil;
+    return self.viewForHeaderInSection ? self.viewForHeaderInSection(tableView,section,model) : nil;
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    return self.viewForFooterInSection ? self.viewForFooterInSection(tableView,section) : nil;
+     id model = self.modelOfFooterAtSection ? self.modelOfFooterAtSection(section) : nil;
+    return self.viewForFooterInSection ? self.viewForFooterInSection(tableView,section,model) : nil;
 }
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(6_0){
     return self.shouldHighlightRowAtIndexPath ? self.shouldHighlightRowAtIndexPath(tableView,indexPath) : YES;

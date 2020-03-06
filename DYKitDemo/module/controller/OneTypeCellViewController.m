@@ -53,7 +53,16 @@
     user3.desc = @"平淡无奇的中学化学老师";
     user3.sex = 1;
     
-    self.tableView.dy_data = @[user1,user2,user3];
+    NSArray  *dy_data = @[user1,user2,user3];
+    self.tableView.modelOfCellAtIndexPath = ^id(NSIndexPath *indexPath) {
+        NSInteger index = indexPath.row;
+        return dy_data[index];
+    };
+    [self.tableView setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
+        return dy_data.count;
+    }];
+    
+    self.tableView.reload = @"";
 }
 
 @end

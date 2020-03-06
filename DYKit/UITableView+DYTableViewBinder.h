@@ -15,8 +15,11 @@
 #pragma 隐形代理
 @property (nonatomic,strong) DYTableViewAgent *dy_agent;
 
-- (id)dy_data;
-- (void)setDy_data:(id)dy_data;
+@property (nonatomic, strong) id reload;
+
+@property (nonatomic, strong) id(^modelOfCellAtIndexPath)(NSIndexPath *indexPath);
+@property (nonatomic, strong) id(^modelOfHeaderAtSection)(NSInteger section);
+@property (nonatomic, strong) id(^modelOfFooterAtSection)(NSInteger section);
 
 #pragma 主要配置方法
 /**
@@ -95,8 +98,8 @@
 //- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath;
 //- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection;
 //- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection;
-//- (UIViewTableViewNSInteger)viewForHeaderInSection;
-//- (UIViewTableViewNSInteger)viewForFooterInSection;
+//- (UIViewTableViewHeaderFooterBlock)viewForHeaderInSection;
+//- (UIViewTableViewHeaderFooterBlock)viewForFooterInSection;
 //- (NSIndexPathUITableViewNSIndexPath)willSelectRowAtIndexPath;
 //- (NSIndexPathUITableViewNSIndexPath)willDeselectRowAtIndexPath;
 //- (UITableViewCellEditingStyleUITableViewNSIndexPath)editingStyleForRowAtIndexPath;
@@ -126,8 +129,8 @@
 - (UITableView*)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block;
 - (UITableView*)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block;
 - (UITableView*)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block;
-- (UITableView*)setViewForHeaderInSection:(UIViewTableViewNSInteger)block;
-- (UITableView*)setViewForFooterInSection:(UIViewTableViewNSInteger)block;
+- (UITableView*)setViewForHeaderInSection:(UIViewTableViewHeaderFooterBlock)block;
+- (UITableView*)setViewForFooterInSection:(UIViewTableViewHeaderFooterBlock)block;
 - (UITableView*)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
 - (UITableView*)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block;
 - (UITableView*)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block;

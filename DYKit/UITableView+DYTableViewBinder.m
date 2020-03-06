@@ -8,13 +8,37 @@
 
 #import "UITableView+DYTableViewBinder.h"
 
+
+
 @implementation UITableView (DYTableViewBinder)
 
 #pragma 隐形代理
 DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent *)
+DYSYNTH_DYNAMIC_PROPERTY_OBJECT(reload, setReload, RETAIN, id)
 
-- (id)dy_data{return self.dy_agent.data;}
-- (void)setDy_data:(id)dy_data{self.dy_agent.data = dy_data;}
+- (id (^)(NSIndexPath *))modelOfCellAtIndexPath {
+    return self.dy_agent.modelOfCellAtIndexPath;
+}
+
+- (id (^)(NSInteger))modelOfHeaderAtSection {
+    return self.dy_agent.modelOfHeaderAtSection;
+}
+
+- (id (^)(NSInteger))modelOfFooterAtSection {
+    return self.dy_agent.modelOfFooterAtSection;
+}
+
+- (void)setModelOfCellAtIndexPath:(id (^)(NSIndexPath *))modelOfCellAtIndexPath {
+    self.dy_agent.modelOfCellAtIndexPath = modelOfCellAtIndexPath;
+}
+
+- (void)setModelOfHeaderAtSection:(id (^)(NSInteger))modelOfHeaderAtSection {
+    self.dy_agent.modelOfHeaderAtSection = modelOfHeaderAtSection;
+}
+
+- (void)setModelOfFooterAtSection:(id (^)(NSInteger))modelOfFooterAtSection {
+    self.dy_agent.modelOfFooterAtSection = modelOfFooterAtSection;
+}
 
 #pragma 主要配置方法
 - (UITableView*) assemblyWithAssemblyBlock:(AssemblyBlock)block{
@@ -50,7 +74,7 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
         self.dataSource = self.dy_agent;
         self.delegate = self.dy_agent;
         @weakify(self)
-        [[RACObserve(self, dy_agent.data) skip:1] subscribeNext:^(id  _Nullable x) {
+        [[RACObserve(self, reload) skip:1] subscribeNext:^(id  _Nullable x) {
             @strongify(self)
             [self reloadData];
         }];
@@ -94,8 +118,8 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 //- (CGFloatTableViewIndexPath)estimatedHeightForRowAtIndexPath{return self.dy_agent.estimatedHeightForRowAtIndexPath;}
 //- (CGFloatTableViewNSInteger)estimatedHeightForHeaderInSection{return self.dy_agent.estimatedHeightForHeaderInSection;}
 //- (CGFloatTableViewNSInteger)estimatedHeightForFooterInSection{return self.dy_agent.estimatedHeightForFooterInSection;}
-//- (UIViewTableViewNSInteger)viewForHeaderInSection{return self.dy_agent.viewForHeaderInSection;}
-//- (UIViewTableViewNSInteger)viewForFooterInSection{return self.dy_agent.viewForFooterInSection;}
+//- (UIViewTableViewHeaderFooterBlock)viewForHeaderInSection{return self.dy_agent.viewForHeaderInSection;}
+//- (UIViewTableViewHeaderFooterBlock)viewForFooterInSection{return self.dy_agent.viewForFooterInSection;}
 //- (NSIndexPathUITableViewNSIndexPath)willSelectRowAtIndexPath{return self.dy_agent.willSelectRowAtIndexPath;}
 //- (NSIndexPathUITableViewNSIndexPath)willDeselectRowAtIndexPath{return self.dy_agent.willDeselectRowAtIndexPath;}
 //- (UITableViewCellEditingStyleUITableViewNSIndexPath)editingStyleForRowAtIndexPath{return self.dy_agent.editingStyleForRowAtIndexPath;}
@@ -125,8 +149,8 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent 
 - (UITableView*)setEstimatedHeightForRowAtIndexPath:(CGFloatTableViewIndexPath)block{self.dy_agent.estimatedHeightForRowAtIndexPath = block;return self;}
 - (UITableView*)setEstimatedHeightForHeaderInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForHeaderInSection = block;return self;}
 - (UITableView*)setEstimatedHeightForFooterInSection:(CGFloatTableViewNSInteger)block{self.dy_agent.estimatedHeightForFooterInSection = block;return self;}
-- (UITableView*)setViewForHeaderInSection:(UIViewTableViewNSInteger)block{self.dy_agent.viewForHeaderInSection = block;return self;}
-- (UITableView*)setViewForFooterInSection:(UIViewTableViewNSInteger)block{self.dy_agent.viewForFooterInSection = block;return self;}
+- (UITableView*)setViewForHeaderInSection:(UIViewTableViewHeaderFooterBlock)block{self.dy_agent.viewForHeaderInSection = block;return self;}
+- (UITableView*)setViewForFooterInSection:(UIViewTableViewHeaderFooterBlock)block{self.dy_agent.viewForFooterInSection = block;return self;}
 - (UITableView*)setWillSelectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{self.dy_agent.willSelectRowAtIndexPath = block;return self;}
 - (UITableView*)setWillDeselectRowAtIndexPath:(NSIndexPathUITableViewNSIndexPath)block{self.dy_agent.willDeselectRowAtIndexPath = block;return self;}
 - (UITableView*)setEditingStyleForRowAtIndexPath:(UITableViewCellEditingStyleUITableViewNSIndexPath)block{self.dy_agent.editingStyleForRowAtIndexPath = block;return self;}

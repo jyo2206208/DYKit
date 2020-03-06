@@ -40,7 +40,12 @@ typedef BOOL(^SlotBlock)(NSIndexPath *indexPath, id model);
 
 @interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, copy) id data;
+@property (nonatomic, strong) id reload;
+
+@property (nonatomic, strong, nonnull) id(^modelOfCellAtIndexPath)(NSIndexPath *indexPath);
+@property (nonatomic, strong) id(^modelOfHeaderAtSection)(NSInteger section);
+@property (nonatomic, strong) id(^modelOfFooterAtSection)(NSInteger section);
+
 @property (nonatomic, copy) AssemblyBlock cellBindBlock;
 @property (nonatomic, strong) NSMutableArray<CellInfo*> *cellInfoList;
 
@@ -87,9 +92,9 @@ typedef NSArray<NSString *> *(^SectionIndexTitlesForTableView)(UITableView *tabl
 typedef NSInteger (^NSIntegerUITableViewNSStringNSInteger)(UITableView *tableView,NSString *title,NSInteger index);
 @property (nonatomic, copy) NSIntegerUITableViewNSStringNSInteger sectionForSectionIndexTitle;
 
-typedef UIView *(^UIViewTableViewNSInteger)(UITableView *tableView,NSInteger section);
-@property (nonatomic, copy) UIViewTableViewNSInteger viewForHeaderInSection;
-@property (nonatomic, copy) UIViewTableViewNSInteger viewForFooterInSection;
+typedef UIView *(^UIViewTableViewHeaderFooterBlock)(UITableView *tableView,NSInteger section,id model);
+@property (nonatomic, copy) UIViewTableViewHeaderFooterBlock viewForHeaderInSection;
+@property (nonatomic, copy) UIViewTableViewHeaderFooterBlock viewForFooterInSection;
 
 typedef NSIndexPath *(^NSIndexPathUITableViewNSIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
 @property (nonatomic, copy) NSIndexPathUITableViewNSIndexPath willSelectRowAtIndexPath;

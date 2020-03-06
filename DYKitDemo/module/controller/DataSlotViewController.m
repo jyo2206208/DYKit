@@ -33,7 +33,7 @@
     
     
     
-    RAC(self,tableView.dy_data) = [RACSignal return:@[@"0",@"01",@"012",@"0123",@"01234",@"a",@"bb",@"ccc",@"dddd"]];
+//    RAC(self,tableView.dy_data) = [RACSignal return:@[@"0",@"01",@"012",@"0123",@"01234",@"a",@"bb",@"ccc",@"dddd"]];
     
     
 }

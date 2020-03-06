@@ -8,6 +8,12 @@ DEPENDENCIES:
   - MLeaksFinder
   - ReactiveObjC
 
+SPEC REPOS:
+  trunk:
+    - FBRetainCycleDetector
+    - MLeaksFinder
+    - ReactiveObjC
+
 SPEC CHECKSUMS:
   FBRetainCycleDetector: f0c7b290bf48ae77f6ae060843ce34ae341781eb
   MLeaksFinder: 0850e2f2abc7227adc4d4e2d1992b431264eb4d5
@@ -15,4 +21,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d546f13f20fd10121b1b33f0cf519399c8849bb7
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.8.4

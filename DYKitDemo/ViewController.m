@@ -34,11 +34,20 @@
         cell.textLabel.text = text;
     }];
     
-    self.homeTableView.dy_data = @[@"固定一种自定义cell",
+    NSArray *dy_data = @[@"固定一种自定义cell",
                                    @"指定section和row(或具体indexPath)设定cell",
                                    @"指定section进行cell设定",
                                    @"指定row进行cell设定",
                                    @"指定数据条件进行cell设定"];
+    
+    self.homeTableView.modelOfCellAtIndexPath = ^id(NSIndexPath *indexPath) {
+        NSInteger index = indexPath.row;
+        return dy_data[index];
+    };
+    
+    [self.homeTableView setNumberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
+        return dy_data.count;
+    }];
     
     @weakify(self)
     [[[self.homeTableView.didSelectRowAtIndexPathSignal reduceEach:^id (UITableView *tableView ,NSIndexPath *indexPath){
@@ -85,6 +94,9 @@
         @strongify(self)
         [self.navigationController pushViewController:[[DataSlotViewController alloc] init] animated:YES];
     }];
+    
+    RAC(self.homeTableView, reload) = [RACSignal return:[NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]]];
+//    RAC(self.homeTableView, reload) = [RACSignal interval:5 onScheduler:RACScheduler.mainThreadScheduler];
     
 }
 @end
