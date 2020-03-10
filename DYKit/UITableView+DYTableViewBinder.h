@@ -12,9 +12,6 @@
 
 @interface UITableView (DYTableViewBinder)
 
-#pragma 隐形代理
-@property (nonatomic,strong) DYTableViewAgent *dy_agent;
-
 @property (nonatomic, strong) id reload;
 
 @property (nonatomic, strong) id(^modelOfCellAtIndexPath)(NSIndexPath *indexPath);
