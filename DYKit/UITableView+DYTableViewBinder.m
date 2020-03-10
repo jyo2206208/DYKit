@@ -104,7 +104,7 @@
     if ([identifier isEqualToString:DY_DEFAULT_ID]) {
         [self registerClass:UITableViewCell.class forCellReuseIdentifier:identifier];
     } else {
-        if ([[NSBundle mainBundle] pathForResource:identifier ofType:@"nib"]) {
+        if ([[NSBundle mainBundle] pathForResource:identifier ofType:@"xib"]) {
             [self registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellReuseIdentifier:identifier];
         } else {
             [self registerClass:NSClassFromString(identifier) forCellReuseIdentifier:identifier];
