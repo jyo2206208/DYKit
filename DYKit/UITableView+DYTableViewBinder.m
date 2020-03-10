@@ -12,8 +12,20 @@
 
 @implementation UITableView (DYTableViewBinder)
 
-#pragma 隐形代理
-DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent)
+- (DYTableViewAgent *)dy_agent {
+    DYTableViewAgent *_agent = objc_getAssociatedObject(self, @selector(dy_agent));
+    if (!_agent) {
+        _agent = [DYTableViewAgent new];
+        self.dataSource = _agent;
+        self.delegate = _agent;
+        @weakify(self)
+        [[RACObserve(self, reload) skip:1] subscribeNext:^(id  _Nullable x) {
+            @strongify(self)
+            [self reloadData];
+        }];
+    }
+    return _agent;
+}
 
 - (void)setReload:(id)reload {
     [self willChangeValueForKey:@"reload"];
@@ -78,16 +90,6 @@ DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent)
 }
 
 - (UITableView*) addReuseIdentifier:(NSString *)identifier FromSlot:(SlotBlock)slotBlock withAssemblyBlock:(AssemblyBlock)cellBindBlock{
-    if (!self.dy_agent) {
-        self.dy_agent = [[DYTableViewAgent alloc] init];
-        self.dataSource = self.dy_agent;
-        self.delegate = self.dy_agent;
-        @weakify(self)
-        [[RACObserve(self, reload) skip:1] subscribeNext:^(id  _Nullable x) {
-            @strongify(self)
-            [self reloadData];
-        }];
-    }
     [self dyRegisterForCellReuseIdentifier:identifier];
     CellInfo *cellInfo = [[CellInfo alloc] init];
     cellInfo.reuseIdentifier = identifier;
