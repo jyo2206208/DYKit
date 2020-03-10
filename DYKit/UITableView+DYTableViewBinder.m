@@ -16,6 +16,7 @@
     DYTableViewAgent *_agent = objc_getAssociatedObject(self, @selector(dy_agent));
     if (!_agent) {
         _agent = [DYTableViewAgent new];
+        objc_setAssociatedObject(self, @selector(dy_agent), _agent, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         self.dataSource = _agent;
         self.delegate = _agent;
         @weakify(self)
