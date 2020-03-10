@@ -17,13 +17,17 @@
 
 #ifndef DYSYNTH_DYNAMIC_PROPERTY_OBJECT
 #define DYSYNTH_DYNAMIC_PROPERTY_OBJECT(_getter_, _setter_, _association_, _type_) \
-- (void)_setter_ : (_type_)object { \
+- (void)_setter_ : (_type_ *)object { \
 [self willChangeValueForKey:@#_getter_]; \
 objc_setAssociatedObject(self, _cmd, object, OBJC_ASSOCIATION_ ## _association_); \
 [self didChangeValueForKey:@#_getter_]; \
 } \
-- (_type_)_getter_ { \
-return objc_getAssociatedObject(self, @selector(_setter_:)); \
+- (_type_ *)_getter_ { \
+_type_ * _obj = objc_getAssociatedObject(self, @selector(_setter_:)); \
+if (!_obj) { \
+    _obj = [NSClassFromString(@#_type_) new];\
+} \
+return  _obj;\
 }
 #endif
 

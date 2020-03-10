@@ -13,8 +13,17 @@
 @implementation UITableView (DYTableViewBinder)
 
 #pragma 隐形代理
-DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent *)
-DYSYNTH_DYNAMIC_PROPERTY_OBJECT(reload, setReload, RETAIN, id)
+DYSYNTH_DYNAMIC_PROPERTY_OBJECT(dy_agent, setDy_agent, RETAIN, DYTableViewAgent)
+
+- (void)setReload:(id)reload {
+    [self willChangeValueForKey:@"reload"];
+    objc_setAssociatedObject(self, @selector(reload), reload, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self didChangeValueForKey:@"reload"];
+}
+
+- (id)reload {
+    return objc_getAssociatedObject(self, @selector(reload));
+}
 
 - (id (^)(NSIndexPath *))modelOfCellAtIndexPath {
     return self.dy_agent.modelOfCellAtIndexPath;
