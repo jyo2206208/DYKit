@@ -33,98 +33,98 @@ return  _obj;\
 
 @interface CellInfo : NSObject
 
-typedef void(^AssemblyBlock)(id cell,id model,NSIndexPath *indexPath);
-typedef BOOL(^SlotBlock)(NSIndexPath *indexPath, id model);
+typedef void(^AssemblyBlock)(id _Nonnull cell,id _Nullable model,NSIndexPath * _Nonnull indexPath);
+typedef BOOL(^SlotBlock)(NSIndexPath * _Nonnull indexPath, id _Nullable model);
 
-@property (nonatomic, copy) NSString *reuseIdentifier;
-@property (nonatomic, copy) SlotBlock slotBlock;
-@property (nonatomic, copy) AssemblyBlock cellBindBlock;
+@property (nonatomic, copy) NSString * _Nonnull reuseIdentifier;
+@property (nonatomic, copy) SlotBlock _Nullable slotBlock;
+@property (nonatomic, copy) AssemblyBlock _Nonnull cellBindBlock;
 
 @end
 
-@interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate>
+@interface DYTableViewAgent : NSObject <UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
-@property (nonatomic, strong) id reload;
+@property (nonatomic, strong) id _Nonnull reload;
 
-@property (nonatomic, strong, nonnull) id(^modelOfCellAtIndexPath)(NSIndexPath *indexPath);
-@property (nonatomic, strong) id(^modelOfHeaderAtSection)(NSInteger section);
-@property (nonatomic, strong) id(^modelOfFooterAtSection)(NSInteger section);
+@property (nonatomic, strong, nonnull) id _Nullable (^modelOfCellAtIndexPath)(NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, strong) id _Nullable (^ _Nullable modelOfHeaderAtSection)(NSInteger section);
+@property (nonatomic, strong) id _Nullable (^ _Nullable modelOfFooterAtSection)(NSInteger section);
 
-@property (nonatomic, copy) AssemblyBlock cellBindBlock;
-@property (nonatomic, strong) NSMutableArray<CellInfo*> *cellInfoList;
+@property (nonatomic, copy) AssemblyBlock _Nullable cellBindBlock;
+@property (nonatomic, strong) NSMutableArray<CellInfo*> * _Nullable cellInfoList;
 
 
-typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) CGFloatTableViewIndexPath heightForRowAtIndexPath;
-@property (nonatomic, copy) CGFloatTableViewIndexPath estimatedHeightForRowAtIndexPath;
+typedef CGFloat (^CGFloatTableViewIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) CGFloatTableViewIndexPath _Nullable heightForRowAtIndexPath;
+@property (nonatomic, copy) CGFloatTableViewIndexPath _Nullable estimatedHeightForRowAtIndexPath;
 
-typedef CGFloat (^CGFloatTableViewNSInteger)(UITableView *tableView,NSInteger section);
-@property (nonatomic, copy) CGFloatTableViewNSInteger heightForHeaderInSection;
-@property (nonatomic, copy) CGFloatTableViewNSInteger heightForFooterInSection;
-@property (nonatomic, copy) CGFloatTableViewNSInteger estimatedHeightForHeaderInSection;
-@property (nonatomic, copy) CGFloatTableViewNSInteger estimatedHeightForFooterInSection;
+typedef CGFloat (^CGFloatTableViewNSInteger)(UITableView * _Nonnull tableView,NSInteger section);
+@property (nonatomic, copy) CGFloatTableViewNSInteger _Nullable heightForHeaderInSection;
+@property (nonatomic, copy) CGFloatTableViewNSInteger _Nullable heightForFooterInSection;
+@property (nonatomic, copy) CGFloatTableViewNSInteger _Nullable estimatedHeightForHeaderInSection;
+@property (nonatomic, copy) CGFloatTableViewNSInteger _Nullable estimatedHeightForFooterInSection;
 
-typedef NSArray<UITableViewRowAction *> *(^EditActionsForRowAtIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) EditActionsForRowAtIndexPath editActionsForRowAtIndexPath;
+typedef NSArray<UITableViewRowAction *> *_Nonnull(^EditActionsForRowAtIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) EditActionsForRowAtIndexPath _Nullable editActionsForRowAtIndexPath;
 
-typedef BOOL (^BOOLTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) BOOLTableViewIndexPath shouldHighlightRowAtIndexPath;
-@property (nonatomic, copy) BOOLTableViewIndexPath canEditRowAtIndexPath;
-@property (nonatomic, copy) BOOLTableViewIndexPath shouldIndentWhileEditingRowAtIndexPath;
-@property (nonatomic, copy) BOOLTableViewIndexPath shouldShowMenuForRowAtIndexPath;
-@property (nonatomic, copy) BOOLTableViewIndexPath canFocusRowAtIndexPath;
+typedef BOOL (^BOOLTableViewIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) BOOLTableViewIndexPath _Nullable shouldHighlightRowAtIndexPath;
+@property (nonatomic, copy) BOOLTableViewIndexPath _Nullable canEditRowAtIndexPath;
+@property (nonatomic, copy) BOOLTableViewIndexPath _Nullable shouldIndentWhileEditingRowAtIndexPath;
+@property (nonatomic, copy) BOOLTableViewIndexPath _Nullable shouldShowMenuForRowAtIndexPath;
+@property (nonatomic, copy) BOOLTableViewIndexPath _Nullable canFocusRowAtIndexPath;
 
-typedef NSInteger (^NSIntegerTableViewIndexPath)(UITableView *tableView,NSInteger section);
-@property (nonatomic, copy) NSIntegerTableViewIndexPath numberOfRowsInSection;
+typedef NSInteger (^NSIntegerTableViewIndexPath)(UITableView * _Nonnull tableView,NSInteger section);
+@property (nonatomic, copy) NSIntegerTableViewIndexPath _Nonnull numberOfRowsInSection;
 
 //typedef UITableViewCell *(^UITableViewCellTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
 //@property (nonatomic, copy) UITableViewCellTableViewIndexPath cellForRowAtIndexPath;
 
-typedef NSInteger (^NSIntegerUITableView)(UITableView *tableView);
-@property (nonatomic, copy) NSIntegerUITableView numberOfSectionsInTableView;
+typedef NSInteger (^NSIntegerUITableView)(UITableView * _Nonnull tableView);
+@property (nonatomic, copy) NSIntegerUITableView _Nonnull numberOfSectionsInTableView;
 
-typedef NSString *(^NSStringTableViewNSInteger)(UITableView *tableView,NSInteger section);
-@property (nonatomic, copy) NSStringTableViewNSInteger titleForHeaderInSection;
-@property (nonatomic, copy) NSStringTableViewNSInteger titleForFooterInSection;
-
-
-@property (nonatomic, copy) BOOLTableViewIndexPath canMoveRowAtIndexPath;
-
-typedef NSArray<NSString *> *(^SectionIndexTitlesForTableView)(UITableView *tableView);
-@property (nonatomic, copy) SectionIndexTitlesForTableView sectionIndexTitlesForTableView;
-
-typedef NSInteger (^NSIntegerUITableViewNSStringNSInteger)(UITableView *tableView,NSString *title,NSInteger index);
-@property (nonatomic, copy) NSIntegerUITableViewNSStringNSInteger sectionForSectionIndexTitle;
-
-typedef UIView *(^UIViewTableViewHeaderFooterBlock)(UITableView *tableView,NSInteger section,id model);
-@property (nonatomic, copy) UIViewTableViewHeaderFooterBlock viewForHeaderInSection;
-@property (nonatomic, copy) UIViewTableViewHeaderFooterBlock viewForFooterInSection;
-
-typedef NSIndexPath *(^NSIndexPathUITableViewNSIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) NSIndexPathUITableViewNSIndexPath willSelectRowAtIndexPath;
-@property (nonatomic, copy) NSIndexPathUITableViewNSIndexPath willDeselectRowAtIndexPath;
-
-typedef UITableViewCellEditingStyle (^UITableViewCellEditingStyleUITableViewNSIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) UITableViewCellEditingStyleUITableViewNSIndexPath editingStyleForRowAtIndexPath;
-
-typedef NSString *(^NSStringTableViewIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) NSStringTableViewIndexPath titleForDeleteConfirmationButtonForRowAtIndexPath;
+typedef NSString *_Nonnull(^NSStringTableViewNSInteger)(UITableView * _Nonnull tableView,NSInteger section);
+@property (nonatomic, copy) NSStringTableViewNSInteger _Nullable titleForHeaderInSection;
+@property (nonatomic, copy) NSStringTableViewNSInteger _Nullable titleForFooterInSection;
 
 
-typedef NSIndexPath *(^NSIndexPathUITableViewNSIndexPathNSIndexPath)(UITableView *tableView,NSIndexPath *sourceIndexPath,NSIndexPath *proposedDestinationIndexPath);
-@property (nonatomic, copy) NSIndexPathUITableViewNSIndexPathNSIndexPath targetIndexPathForMoveFromRowAtIndexPath;
+@property (nonatomic, copy) BOOLTableViewIndexPath _Nonnull canMoveRowAtIndexPath;
 
-typedef NSInteger (^NSIntegerUITableViewNSIndexPath)(UITableView *tableView,NSIndexPath *indexPath);
-@property (nonatomic, copy) NSIntegerUITableViewNSIndexPath indentationLevelForRowAtIndexPath;
+typedef NSArray<NSString *> *_Nullable(^SectionIndexTitlesForTableView)(UITableView * _Nonnull tableView);
+@property (nonatomic, copy) SectionIndexTitlesForTableView _Nonnull sectionIndexTitlesForTableView;
 
-typedef BOOL (^BOOLUITableViewSELNSIndexPath)(UITableView *tableView,SEL action,NSIndexPath *indexPath);
-@property (nonatomic, copy) BOOLUITableViewSELNSIndexPath canPerformAction;
+typedef NSInteger (^NSIntegerUITableViewNSStringNSInteger)(UITableView * _Nonnull tableView,NSString * _Nullable title,NSInteger index);
+@property (nonatomic, copy) NSIntegerUITableViewNSStringNSInteger _Nonnull sectionForSectionIndexTitle;
 
-typedef BOOL (^BOOLUITableViewFocusUpdateContext)(UITableView *tableView,UITableViewFocusUpdateContext *context);
-@property (nonatomic, copy) BOOLUITableViewFocusUpdateContext shouldUpdateFocusInContext;
+typedef UIView *_Nullable(^UIViewTableViewHeaderFooterBlock)(UITableView * _Nonnull tableView,NSInteger section,id _Nullable model);
+@property (nonatomic, copy) UIViewTableViewHeaderFooterBlock _Nullable viewForHeaderInSection;
+@property (nonatomic, copy) UIViewTableViewHeaderFooterBlock _Nullable viewForFooterInSection;
 
-typedef NSIndexPath *(^NSIndexPathUITableView)(UITableView *tableView);
-@property (nonatomic, copy) NSIndexPathUITableView indexPathForPreferredFocusedViewInTableView;
+typedef NSIndexPath *_Nonnull(^NSIndexPathUITableViewNSIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) NSIndexPathUITableViewNSIndexPath _Nullable willSelectRowAtIndexPath;
+@property (nonatomic, copy) NSIndexPathUITableViewNSIndexPath _Nullable willDeselectRowAtIndexPath;
+
+typedef UITableViewCellEditingStyle (^UITableViewCellEditingStyleUITableViewNSIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) UITableViewCellEditingStyleUITableViewNSIndexPath _Nullable editingStyleForRowAtIndexPath;
+
+typedef NSString *_Nonnull(^NSStringTableViewIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) NSStringTableViewIndexPath _Nullable titleForDeleteConfirmationButtonForRowAtIndexPath;
+
+
+typedef NSIndexPath *_Nonnull(^NSIndexPathUITableViewNSIndexPathNSIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull sourceIndexPath,NSIndexPath * _Nonnull proposedDestinationIndexPath);
+@property (nonatomic, copy) NSIndexPathUITableViewNSIndexPathNSIndexPath _Nullable targetIndexPathForMoveFromRowAtIndexPath;
+
+typedef NSInteger (^NSIntegerUITableViewNSIndexPath)(UITableView * _Nonnull tableView,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) NSIntegerUITableViewNSIndexPath _Nullable indentationLevelForRowAtIndexPath;
+
+typedef BOOL (^BOOLUITableViewSELNSIndexPath)(UITableView * _Nonnull tableView,SEL _Nonnull action,NSIndexPath * _Nonnull indexPath);
+@property (nonatomic, copy) BOOLUITableViewSELNSIndexPath _Nullable canPerformAction;
+
+typedef BOOL (^BOOLUITableViewFocusUpdateContext)(UITableView * _Nonnull tableView,UITableViewFocusUpdateContext * _Nullable context);
+@property (nonatomic, copy) BOOLUITableViewFocusUpdateContext _Nullable shouldUpdateFocusInContext;
+
+typedef NSIndexPath *_Nonnull(^NSIndexPathUITableView)(UITableView * _Nonnull tableView);
+@property (nonatomic, copy) NSIndexPathUITableView _Nullable indexPathForPreferredFocusedViewInTableView;
 
 @end
 
