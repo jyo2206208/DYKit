@@ -144,6 +144,9 @@
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0){}
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0){}
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {}
+
 #pragma 自定义方法
 
 - (NSInteger)getFlattenRow:(UITableView *)tableView IndexPath:(NSIndexPath*) indexPath{

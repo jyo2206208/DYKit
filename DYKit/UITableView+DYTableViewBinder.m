@@ -224,6 +224,13 @@
     return [self.dy_agent rac_signalForSelector:@selector(tableView:willDisplayFooterView:forSection:)];
 }
 
+- (RACSignal*)scrollViewDidScrollSignal {
+    return [self.dy_agent rac_signalForSelector:@selector(scrollViewDidScroll:)];
+}
+- (RACSignal*)scrollViewWillBeginDraggingSignal {
+    return [self.dy_agent rac_signalForSelector:@selector(scrollViewWillBeginDragging:)];
+}
+
 #pragma DataSource方法
 - (RACSignal*)commitEditingStyleSignal{
     return [self.dy_agent rac_signalForSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)];

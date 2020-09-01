@@ -158,6 +158,9 @@
 - (RACSignal*)willDisplayHeaderViewSignal;
 - (RACSignal*)willDisplayFooterViewSignal;
 
+- (RACSignal*)scrollViewDidScrollSignal;
+- (RACSignal*)scrollViewWillBeginDraggingSignal;
+
 #pragma DataSource方法
 - (RACSignal*)commitEditingStyleSignal;
 - (RACSignal*)moveRowAtIndexPathSignal;
